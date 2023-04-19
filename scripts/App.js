@@ -4,19 +4,16 @@ class App {
     this.homePage = new HomePage()
   }
 
-  /**
-   * 
-   * @returns {Object | Array}
-   */
-  async getPhotographers() {
-    const photographersData = await this.dataApi.photographersFetch()
-    console.log(photographersData)
-    return photographersData
-  }
-  
   async init() {
-    const photographers = await this.getPhotographers();
-    this.homePage.displayData(photographers);
+    const photographersData = await this.dataApi.photographersFetch()
+
+    photographersData
+      .map(photographer => new PhotographerFactory(photographer, "photographers"))
+      .forEach(photographer => {
+        const Template          = new PhotographerCard(photographer)
+        const photographerModel = Template.createPhotographerCard();
+        this.homePage.displayData(photographerModel)
+      })
   }
 }
 const app = new App()
