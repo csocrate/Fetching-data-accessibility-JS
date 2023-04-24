@@ -8,10 +8,19 @@ class PhotographerCard {
   }
 
   createPhotographerCard() {
+
+    const a = document.createElement('a');
+    a.setAttribute('href', '#');
+    a.setAttribute('aria-label', this._photographer.name);
+
     const article = document.createElement( 'article' );
+
+    const div = document.createElement('div');
+    div.classList.add('img-container');
     
     const img = document.createElement( 'img' );
-    img.setAttribute("src", this._photographer.portrait)
+    img.setAttribute('src', this._photographer.portrait);
+    img.setAttribute('alt', '');
 
     const h2 = document.createElement( 'h2' );
     h2.textContent = this._photographer.name;
@@ -25,8 +34,11 @@ class PhotographerCard {
     const span = document.createElement( 'span' );
     span.textContent = `${this._photographer.price}€/jour`;
 
-    article.appendChild(img);
-    article.appendChild(h2);
+    div.appendChild(img);
+    a.appendChild(div);
+    a.appendChild(h2);
+
+    article.appendChild(a);
     article.appendChild(h3);
     article.appendChild(p);
     article.appendChild(span);
