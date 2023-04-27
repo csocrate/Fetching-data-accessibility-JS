@@ -9,8 +9,15 @@ class PhotographerCard {
 
   createPhotographerCard() {
 
+    //Gets photographer query by id
+    const params = new URLSearchParams({
+      id: this._photographer.id
+    })
+    params.get("id", this._photographer.id)
+    const photographerId = params.toString()
+
     const a = document.createElement('a');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', `/photographer.html?${photographerId}`);
     a.setAttribute('aria-label', this._photographer.name);
 
     const article = document.createElement( 'article' );
