@@ -2,6 +2,9 @@
     display: none;
 }
 
+/**
+  Banner
+  */
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -51,6 +54,42 @@
     border-radius: 5px;
     cursor: pointer;
 }
+/**
+  End Banner
+  */
+
+/**
+  Media
+  */
+.media_section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4rem;
+  margin: 1.5rem 6.25rem;
+  padding: 5rem 0;
+}
+
+.media {
+  width: 350px;
+  height: 350px;
+  border-radius: 8px;
+}
+
+.media img,
+.media video {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.media img {
+  object-fit: cover;
+}
+/**
+  End Media
+  */
 
 .modal {
     border-radius: 5px;
