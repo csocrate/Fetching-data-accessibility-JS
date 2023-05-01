@@ -9,11 +9,13 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/">
+        <img src="assets/images/logo.png" class="logo" alt="FishEye Home page">
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" aria-label="Contact Me" onclick="displayModal()">Contactez-moi</button>
       </div>
     </main>
     <div id="contact_modal">
@@ -31,7 +33,19 @@
 				</form>
 			</div>
 		</div>
+    <!-- Factories -->
+    <script src="scripts/factories/PhotographerFactory.js"></script>
+    <!-- Models -->
+    <script src="scripts/models/Photographer.js"></script>
+    <!-- Api -->
+    <script src="scripts/api/Api.js"></script>
+    <script src="scripts/api/DataApi.js"></script>
+    <!-- Templates -->
+    <script src="scripts/templates/PhotographerBanner.js"></script>
+    <!-- Pages -->
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+    <!-- Entry point -->
+    <script src="scripts/PhotographerApp.js"></script>
   </body>
 </html>

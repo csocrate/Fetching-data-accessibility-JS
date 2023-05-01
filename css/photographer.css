@@ -8,13 +8,44 @@
     margin: 0 100px;
 }
 
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 3rem;
+}
+
+.banner .description {
+  min-width: 33%;
+}
+
+.banner .description h1 {
+  font-size: 4em;
+  margin-right: 0;
+  margin-bottom: .875rem;
+  color: #D3573C;
+}
+
+.banner .description h2 {
+  font-size: 1.5em;
+}
+
+.banner .description p {
+  font-size: 1.125em;
+  color: #525252;
+}
+
+.banner .img-container {
+  margin: 0 0 0 auto;
+}
+
 .contact_button {
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 1.5rem .75rem;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;

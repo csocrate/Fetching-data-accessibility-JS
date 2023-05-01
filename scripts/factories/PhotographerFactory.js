@@ -1,6 +1,6 @@
 class PhotographerFactory {
   constructor(data, type) {
-    if (type === "photographers") {
+    if (type === "photographers" || type === "photographer") {
       return new Photographer(data)
     }
   }

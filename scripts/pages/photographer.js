@@ -1,1 +1,9 @@
-//Mettre le code JavaScript lié à la page photographer.html
+class PhotographerPage {
+  constructor() {
+    this.$photographHeader = document.querySelector(".photograph-header")
+  }
+
+  async displayData(photographerBanner) {
+    this.$photographHeader.appendChild(photographerBanner)
+  }
+}

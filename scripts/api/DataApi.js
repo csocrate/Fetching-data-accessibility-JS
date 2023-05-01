@@ -14,8 +14,8 @@ class DataApi extends Api {
   async photographersFetch() {
     return await this.get()
       .then(data => {
-        const photographers = data.photographers;
-        return photographers;
+        const photographers = data.photographers
+        return photographers
       })
   }
 }

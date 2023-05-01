@@ -1,4 +1,4 @@
-class App {
+class IndexApp {
   constructor() {
     this.dataApi = new DataApi("/data/photographers.json")
     this.homePage = new HomePage()
@@ -12,9 +12,10 @@ class App {
       .forEach(photographer => {
         const Template          = new PhotographerCard(photographer)
         const photographerModel = Template.createPhotographerCard();
+
         this.homePage.displayData(photographerModel)
       })
   }
 }
-const app = new App()
-app.init()
+const indexApp = new IndexApp()
+indexApp.init()
