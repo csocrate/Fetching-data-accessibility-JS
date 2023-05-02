@@ -87,8 +87,76 @@
 .media img {
   object-fit: cover;
 }
+
+.media > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.media h3 {
+  font-size: 1.35em;
+  font-weight: 400;
+  max-width: 80%;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  color: #901C1C;
+}
+
+.media .counter {
+  font-size: 1.2em;
+  color: #901C1C;
+}
+
+.counter  {
+  font-weight: 600;
+}
+
+.media .fa-heart {
+  font-size: 1.15em;
+  margin-left: .35rem;
+  color: #901C1C;
+}
 /**
   End Media
+  */
+
+/**
+  Photograph widget
+  */
+.photograph-widget > div {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  right: 325px;
+  bottom: 0;
+  width: 375px;
+  align-items: center;
+  background-color: hsl(11,63%,70%);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 1.25rem 1.5rem;  
+}
+
+.photograph-widget .counter,
+.photograph-widget .fa-heart,
+.photograph-widget p {
+  font-size: 1.25em;
+}
+
+.photograph-widget .fa-heart {
+  margin-left: .5rem;
+  color: #000;
+}
+
+.photograph-widget p {
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/**
+  End Photograph widget
   */
 
 .modal {

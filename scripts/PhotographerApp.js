@@ -19,6 +19,10 @@ class PhotographerApp {
           const Banner             = new PhotographerBanner(photographer)
           const photographerBanner = Banner.createPhotographerBanner()
           this.photographerPage.displayPhotographerData(photographerBanner)
+    
+          const Widget             = new PhotographerWidget(photographer)
+          const photographerWidget = Widget.createPhotographerWidget()
+          this.photographerPage.displayPhotograhWidget(photographerWidget)
         }
       })
 

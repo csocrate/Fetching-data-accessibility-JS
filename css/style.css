@@ -28,7 +28,17 @@ header {
 header,
 main {
   max-width: 1400px;
-  margin: 1.5rem auto;
+  margin-top: 1.5rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+header {
+  margin-bottom: 1.5rem;
+}
+
+main {
+  padding-bottom: 1.5rem;
 }
 
 h1 {
