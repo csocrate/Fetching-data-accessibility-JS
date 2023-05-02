@@ -16,23 +16,25 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" aria-label="Contact Me" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" aria-label="Contact Me">Contactez-moi</button>
       </div>
       <div class="media_section"></div>
       <div class="photograph-widget"></div>
     </main>
     <div id="contact_modal">
-			<div class="modal">
+			<div class="modal" role="dialog" aria-modal="true" aria-labelledby="contact_photographer">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <div>
+            <h2 id="contact_photographer">Contactez-moi</h2>
+          </div>
+          <img src="assets/icons/close.svg" class="close_modal" aria-label="close modal">
         </header>
 				<form>
 					<div>
 						<label>Prénom</label>
 						<input />
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -50,7 +52,7 @@
     <script src="scripts/templates/PhotographerWidget.js"></script>
     <!-- Pages -->
     <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/ContactForm.js"></script>
     <!-- Entry point -->
     <script src="scripts/PhotographerApp.js"></script>
   </body>

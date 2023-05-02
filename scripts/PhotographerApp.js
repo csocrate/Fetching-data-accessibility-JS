@@ -8,6 +8,9 @@ class PhotographerApp {
     const photographersData = await this.dataApi.photographersFetch()
     const MediaData         = await this.dataApi.mediaFetch()
 
+    const Form = new ContactForm()
+    Form.render()
+
     photographersData
       .map(photographer => new PhotographerFactory(photographer, "photographer"))
       .filter(photographer => {
@@ -22,7 +25,11 @@ class PhotographerApp {
     
           const Widget             = new PhotographerWidget(photographer)
           const photographerWidget = Widget.createPhotographerWidget()
-          this.photographerPage.displayPhotograhWidget(photographerWidget)
+          this.photographerPage.displayPhotograherDataWidget(photographerWidget)
+    
+          const Form               = new ContactForm(photographer)
+          const photographerName   = Form.createPhotographerName()
+          this.photographerPage.displayPhotograherDataModal(photographerName)
         }
       })
 
