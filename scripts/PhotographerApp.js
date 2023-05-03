@@ -29,7 +29,7 @@ class PhotographerApp {
     
           const Form               = new ContactForm(photographer)
           const photographerName   = Form.createPhotographerName()
-          this.photographerPage.displayPhotograherDataModal(photographerName)
+          photographerName
         }
       })
 

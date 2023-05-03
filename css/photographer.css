@@ -38,20 +38,38 @@
 .banner .img-container {
   margin: 0 0 0 auto;
 }
+/**
+  End Banner
+  */
 
+/**
+  Button
+  */
 .contact_button {
   font-size: 1.25em;
   font-weight: bold;
-  color: #ffffff;
+  width: 170px;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
   margin: 0 auto;
   padding: 1.5rem .75rem;
-  border: none;
-  background-color: #901C1C;
-  border-radius: 5px;
   cursor: pointer;
+  transition: .3s;
+  background-color: #901C1C;
+  color: #ffffff;
+}
+
+.contact_button:hover,
+.contact_button:focus {
+  background-color: hsl(11,63%,70%);
+}
+
+.modal .contact_button {
+  margin-left: 0;
 }
 /**
-  End Banner
+  End Button
   */
 
 /**
@@ -160,7 +178,10 @@
   */
 #contact_modal {
   display: none;
+  padding: 2rem 0;
+  overflow-y: auto;
 }
+
 .modal {
   border-radius: 5px;
   background-color: #DB8876;
@@ -169,7 +190,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 35px;
+  padding: 1.5rem 2.2rem;
   margin: auto;
 }
 
@@ -185,16 +206,18 @@
   cursor: pointer;
 }
 
-.modal header h2,
-.modal header h3 {
-  font-size: 64px;
+.modal header h2 {
+  font-size: 4em;
+  line-height: 1.1;
   font-weight: normal;
   text-align: left;
+  max-width: 500px;
   margin: 0;
 }
 
-.visible_modal {
-  position: relative;
+.visible_modal body > header,
+.visible_modal body > main {
+  overflow-y: hidden;
 }
 
 .visible_modal #contact_modal {
@@ -229,11 +252,15 @@ form div {
   margin-bottom: 26px;
 }
 
-form input {
+form input,
+textarea {
   width: 100%;
-  height: 68px;
   border: none;
   border-radius: 5px;
+}
+
+form input {
+  height: 68px;
 }
 /**
   End Modal Form
