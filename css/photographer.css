@@ -262,6 +262,25 @@ textarea {
 form input {
   height: 68px;
 }
+
+form input[type="text"],
+form input[type="email"],
+textarea {
+  font-size: 1.35em;
+}
+
+form input[data-error-visible="true"],
+form textarea[data-error-visible="true"] {
+  border: 2px solid #901C1C;
+  background: hsl(0deg 67% 95%);
+}
+
+form p {
+  display: none;
+  font-size: .975em;
+  font-weight: 600;
+  color: #901C1C;
+}
 /**
   End Modal Form
   */
