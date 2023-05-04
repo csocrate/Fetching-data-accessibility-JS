@@ -90,6 +90,13 @@
   border-radius: 5px;
 }
 
+.media a {
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
 .media img,
 .media video {
   width: 100%;

@@ -12,17 +12,6 @@ class MediaPortfolio {
     const mediaContent = document.createElement('div')
     mediaContent.classList.add('media')
 
-    const img = document.createElement('img')
-    img.setAttribute('src', `assets/medias/${this._media.image}`)
-    img.setAttribute('alt', this._media.title)
-
-    const video = document.createElement('video')
-    video.setAttribute('controls', '')
-
-    const source = document.createElement('source')
-    source.setAttribute('src', `assets/medias/${this._media.video}`)
-    source.setAttribute('type', 'video/mp4')
-
     const div = document.createElement('div')
 
     const h3 = document.createElement('h3')
@@ -37,20 +26,16 @@ class MediaPortfolio {
     const icon = document.createElement('i')
     icon.classList.add('fa','fa-heart')
 
-    const likesWidget = document.createElement('div')
+    const a    = document.createElement('a')
+    a.setAttribute('aria-label', `${this._media.title}, vue rapprochée`)
+    a.innerHTML = this._media.format
 
-    video.appendChild(source)
     likes.appendChild(span)
     likes.appendChild(icon)
     div.appendChild(h3)
-    div.appendChild(likes)
+    div.appendChild(likes)  
 
-    if (this._media.image !== undefined) {
-      mediaContent.appendChild(img)
-    } else {
-      mediaContent.appendChild(video)
-    }
-
+    mediaContent.appendChild(a)
     mediaContent.appendChild(div)
 
     return (mediaContent)

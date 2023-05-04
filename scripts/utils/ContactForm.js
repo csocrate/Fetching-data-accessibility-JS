@@ -22,6 +22,7 @@ class ContactForm {
       this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
       this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
       this.$contactModal.setAttribute('aria-hidden', 'false')
+      this.$contactModal.setAttribute('aria-modal', 'true')
 
       this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
       this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
@@ -38,6 +39,7 @@ class ContactForm {
         this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
         this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
         this.$contactModal.setAttribute('aria-hidden', 'true')
+        this.$contactModal.setAttribute('aria-modal', 'false')
       })
   }
 

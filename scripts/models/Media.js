@@ -22,12 +22,8 @@ class Media {
     return this._title
   }
 
-  get image() {
-    return this._image
-  }
-
-  get video() {
-    return this._video
+  get format() {
+    return this._image ? `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">` : `<video controls="" class="video_media"><source src="assets/medias/${this._video}" type="video/mp4"></video>`
   }
 
   get likes() {
