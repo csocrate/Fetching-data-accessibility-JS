@@ -11,7 +11,7 @@ class PhotographerApp {
     const Form = new ContactForm()
     Form.render()
 
-    const Box = new Lightbox()
+    const Box = new MediaLightbox()
     Box.render()
 
     photographersData
@@ -44,9 +44,13 @@ class PhotographerApp {
         const photographerId = params.get("id")
 
         if (media.photographerId == photographerId) {
-          const Portfolio = new MediaPortfolio(media)
-          const mediaPortfolio  = Portfolio.createMediaPortfolio()
+          const Portfolio      = new MediaPortfolio(media)
+          const mediaPortfolio = Portfolio.createMediaPortfolio()
           this.photographerPage.displayMediaData(mediaPortfolio)
+    
+          const Lightbox       = new MediaLightbox(media)
+          const mediaLightbox  = Lightbox.createMediaLightbox()
+          this.photographerPage.displayMediaDataSlideshow(mediaLightbox)
         }
       })
   }

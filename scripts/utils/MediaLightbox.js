@@ -1,5 +1,7 @@
-class Lightbox {
-  constructor() {
+class MediaLightbox {
+  constructor(media) {
+    this._media         = media
+
     this.$body          = document.querySelector('body')
     this.$openModal     = document.querySelectorAll('.media a')
     this.$closeModalBtn = document.querySelector('#lightbox_modal svg')
@@ -47,6 +49,19 @@ class Lightbox {
       this.$lightboxModal.setAttribute('aria-modal', 'false')
       this.$closeModalBtn.setAttribute('aria-expanded', 'false')
     })
+  }
+
+  createMediaLightbox() {
+    const div = document.createElement('div')
+    div.classList.add('carousel')
+
+    const p = document.createElement('p')
+    p.textContent = this._media.title
+
+    div.innerHTML = this._media.format
+    div.appendChild(p)
+
+    return (div)
   }
 
   render() {
