@@ -11,16 +11,16 @@ class DataApi extends Api {
    * 
    * @returns {Object | Array}
    */
-  async photographersFetch() {
-    return await this.get()
+  photographersFetch() {
+    return this.get()
       .then(data => {
         const photographers = data.photographers
         return photographers
       })
   }
 
-  async mediaFetch() {
-    return await this.get()
+  mediaFetch() {
+    return this.get()
       .then(data => {
         const media = data.media
         return media

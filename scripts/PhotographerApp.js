@@ -8,51 +8,52 @@ class PhotographerApp {
     const photographersData = await this.dataApi.photographersFetch()
     const MediaData         = await this.dataApi.mediaFetch()
 
-    const Form = new ContactForm()
-    Form.render()
+    Promise.all([
+      photographersData,
+      MediaData
+    ]).then((values)=> {
 
-    const Box = new MediaLightbox()
-    Box.render()
+      const contactForm = new ContactForm()
+      contactForm.init()
 
-    photographersData
-      .map(photographer => new PhotographerFactory(photographer, "photographer"))
-      .filter(photographer => {
+      const params         = (new URL(document.location)).searchParams
+      const photographerId = params.get("id")
 
-        const params = (new URL(document.location)).searchParams
-        const photographerId = params.get("id")        
+      values[0]
+        .map(photographer => new PhotographerFactory(photographer, "photographer"))
+        .filter(photographer => photographer.id == photographerId)
+        .forEach(photographer => {
 
-        if (photographer.id == photographerId) {
-          const Banner             = new PhotographerBanner(photographer)
-          const photographerBanner = Banner.createPhotographerBanner()
+          const banner             = new PhotographerBanner(photographer)
+          const photographerBanner = banner.createPhotographerBanner()
           this.photographerPage.displayPhotographerData(photographerBanner)
     
-          const Widget             = new PhotographerWidget(photographer)
-          const photographerWidget = Widget.createPhotographerWidget()
+          const widget             = new PhotographerWidget(photographer)
+          const photographerWidget = widget.createPhotographerWidget()
           this.photographerPage.displayPhotograherDataWidget(photographerWidget)
     
-          const Form               = new ContactForm(photographer)
-          const photographerName   = Form.createPhotographerName()
+          const form               = new ContactForm(photographer)
+          const photographerName   = form.createPhotographerName()
           photographerName
-        }
-      })
+        })
+  
+      values[1]
+        .map(media => new PhotographerFactory(media, "media"))
+        .filter(media => media.photographerId == photographerId)
+        .forEach(media => {
 
-    MediaData
-      .map(media => new PhotographerFactory(media, "media"))
-      .filter(media => {
-
-        const params = (new URL(document.location)).searchParams
-        const photographerId = params.get("id")
-
-        if (media.photographerId == photographerId) {
-          const Portfolio      = new MediaPortfolio(media)
-          const mediaPortfolio = Portfolio.createMediaPortfolio()
+          const portfolio      = new MediaPortfolio(media)
+          const mediaPortfolio = portfolio.createMediaPortfolio()
           this.photographerPage.displayMediaData(mediaPortfolio)
     
-          const Lightbox       = new MediaLightbox(media)
-          const mediaLightbox  = Lightbox.createMediaLightbox()
+          const lightbox       = new MediaLightbox(media)
+          const mediaLightbox  = lightbox.createMediaLightbox()
           this.photographerPage.displayMediaDataSlideshow(mediaLightbox)
-        }
-      })
+        })
+  
+      const medialightbox = new MediaLightbox()
+      medialightbox.init()
+    })
   }
 }
 const photographerApp = new PhotographerApp()

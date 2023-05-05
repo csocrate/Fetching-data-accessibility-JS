@@ -3,7 +3,7 @@ class MediaLightbox {
     this._media         = media
 
     this.$body          = document.querySelector('body')
-    this.$openModal     = document.querySelectorAll('.media a')
+    this.$mediaLinks    = document.querySelectorAll('.media a')
     this.$closeModalBtn = document.querySelector('#lightbox_modal svg')
     this.$lightboxModal = document.querySelector('#lightbox_modal')
   }
@@ -12,43 +12,34 @@ class MediaLightbox {
     return this._media
   }
 
-  displayModal() {
-    /**
-     * After DOM elements loaded
-     */
-    setTimeout(() => {
+  launchModal() {
+    this.$lightboxModal.style.display = "flex"
 
-      const mediaLinks    = document.querySelectorAll('.media a')
-      const lightboxModal = document.querySelector('#lightbox_modal')
-      mediaLinks.forEach((media) => media.addEventListener('click', () => {
+    this.$body.classList.add('visible_modal')
 
-        lightboxModal.style.display = "flex"
+    // ARIA
+    this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
+    this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
+    this.$lightboxModal.setAttribute('aria-hidden', 'false')
+    this.$lightboxModal.setAttribute('aria-modal', 'true')
+    this.$closeModalBtn.setAttribute('aria-expanded', 'true')
 
-        this.$body.classList.add('visible_modal')
-        this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
-        this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
-        lightboxModal.setAttribute('aria-hidden', 'false')
-        lightboxModal.setAttribute('aria-modal', 'true')
-  
-        this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
-        this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
-        this.$closeModalBtn.setAttribute('aria-expanded', 'true')
-      }))
-    },100)
+    // Attributes
+    this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
+    this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
   }
 
   closeModal() {
-    this.$closeModalBtn.addEventListener('click', () => {
+    this.$lightboxModal.style.display = 'none'
 
-      this.$lightboxModal.style.display = 'none'
+    this.$body.classList.remove('visible_modal')
 
-      this.$body.classList.remove('visible_modal')
-      this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
-      this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
-      this.$lightboxModal.setAttribute('aria-hidden', 'true')
-      this.$lightboxModal.setAttribute('aria-modal', 'false')
-      this.$closeModalBtn.setAttribute('aria-expanded', 'false')
-    })
+    // ARIA
+    this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
+    this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
+    this.$lightboxModal.setAttribute('aria-hidden', 'true')
+    this.$lightboxModal.setAttribute('aria-modal', 'false')
+    this.$closeModalBtn.setAttribute('aria-expanded', 'false')
   }
 
   createMediaLightbox() {
@@ -64,8 +55,8 @@ class MediaLightbox {
     return (div)
   }
 
-  render() {
-    this.displayModal()
-    this.closeModal()
+  init() {    
+    this.$mediaLinks.forEach((mediaLink) => mediaLink.addEventListener('click', () => this.launchModal()))
+    this.$closeModalBtn.addEventListener('click', () =>this.closeModal())
   }
 }

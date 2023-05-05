@@ -1,46 +1,45 @@
 class ContactForm {
   constructor(photographer) {
     this._photographer  = photographer
-    
-    this.$contactModal  = document.querySelector('#contact_modal')
+
+    this.$body          = document.querySelector('body')
     this.$openModalBtn  = document.querySelector('.photograph-header .contact_button')
     this.$closeModalBtn = document.querySelector('.close_modal')
+    this.$contactModal  = document.querySelector('#contact_modal')
     this.$form          = document.querySelector('form')
-    this.$body          = document.querySelector('body')
   }
 
   get photographer() {
     return this._photographer
   }
 
-  displayModal() {
-    this.$openModalBtn.addEventListener('click', () => {
+  launchModal() {
+    this.$contactModal.style.display = 'flex'
 
-      this.$contactModal.style.display = 'flex'
+    this.$body.classList.add('visible_modal')
 
-      this.$body.classList.add('visible_modal')
-      this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
-      this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
-      this.$contactModal.setAttribute('aria-hidden', 'false')
-      this.$contactModal.setAttribute('aria-modal', 'true')
+    // ARIA
+    this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
+    this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
+    this.$contactModal.setAttribute('aria-hidden', 'false')
+    this.$contactModal.setAttribute('aria-modal', 'true')
 
-      this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
-      this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
-      this.$closeModalBtn.setAttribute('aria-expanded', 'true')
-    })
+    // Attributes
+    this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
+    this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
+    this.$closeModalBtn.setAttribute('aria-expanded', 'true')
   }
 
   closeModal() {
-      this.$closeModalBtn.addEventListener('click', () => {
+    this.$contactModal.style.display = 'none'
 
-        this.$contactModal.style.display = 'none'
+    this.$body.classList.remove('visible_modal')
 
-        this.$body.classList.remove('visible_modal')
-        this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
-        this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
-        this.$contactModal.setAttribute('aria-hidden', 'true')
-        this.$contactModal.setAttribute('aria-modal', 'false')
-      })
+    // ARIA
+    this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
+    this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
+    this.$contactModal.setAttribute('aria-hidden', 'true')
+    this.$contactModal.setAttribute('aria-modal', 'false')
   }
 
   createPhotographerName() {
@@ -141,9 +140,9 @@ class ContactForm {
     })
   }
 
-  render() {
-    this.displayModal()
-    this.closeModal()
+  init() {
+    this.$openModalBtn.addEventListener('click', () => this.launchModal())
+    this.$closeModalBtn.addEventListener('click', () => this.closeModal())
     this.createContactForm()
     this.submitForm()
   }

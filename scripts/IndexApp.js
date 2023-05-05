@@ -1,6 +1,6 @@
 class IndexApp {
   constructor() {
-    this.dataApi = new DataApi("/data/photographers.json")
+    this.dataApi  = new DataApi("/data/photographers.json")
     this.homePage = new HomePage()
   }
 
@@ -10,8 +10,8 @@ class IndexApp {
     photographersData
       .map(photographer => new PhotographerFactory(photographer, "photographers"))
       .forEach(photographer => {
-        const Template          = new PhotographerCard(photographer)
-        const photographerModel = Template.createPhotographerCard();
+        const photographerCard  = new PhotographerCard(photographer)
+        const photographerModel = photographerCard.createPhotographerCard();
 
         this.homePage.displayData(photographerModel)
       })
