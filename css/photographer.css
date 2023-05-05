@@ -183,24 +183,59 @@
 /**
   Modal Form
   */
-#contact_modal {
+#contact_modal,
+#lightbox_modal {
   display: none;
   padding: 2rem 0;
   overflow-y: auto;
 }
 
-.modal {
-  border-radius: 5px;
-  background-color: #DB8876;
+.visible_modal body > header,
+.visible_modal body > main {
+  overflow-y: hidden;
+}
+
+.visible_modal #contact_modal,
+.visible_modal #lightbox_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.visible_modal #contact_modal {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.visible_modal #lightbox_modal {
+  background-color: #ffffff;
+}
+
+.visible_modal #contact_modal .modal {
   width: 35%;
+  background-color: #DB8876;
+}
+
+.visible_modal #lightbox_modal .modal {
+  width: 80%;
+  height: 80%;
+}
+
+.modal {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2.2rem;
+  border-radius: 5px;
   margin: auto;
+  padding: 1.5rem 2.2rem;
 }
 
+/* Contact Modal header */
 .modal header {
   justify-content: space-between;
   align-items: flex-start;
@@ -208,7 +243,14 @@
   height: auto;
 }
 
-.modal header img {
+/* Lightbox Modal header */
+.header_slideShow {
+  width: 100%;
+  text-align: right;
+}
+
+.header_slideShow svg,
+.close_modal {
   margin-top: .5rem;
   cursor: pointer;
 }
@@ -220,23 +262,6 @@
   text-align: left;
   max-width: 500px;
   margin: 0;
-}
-
-.visible_modal body > header,
-.visible_modal body > main {
-  overflow-y: hidden;
-}
-
-.visible_modal #contact_modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, .5);
 }
 
 form {

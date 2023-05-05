@@ -11,6 +11,9 @@ class PhotographerApp {
     const Form = new ContactForm()
     Form.render()
 
+    const Box = new Lightbox()
+    Box.render()
+
     photographersData
       .map(photographer => new PhotographerFactory(photographer, "photographer"))
       .filter(photographer => {
