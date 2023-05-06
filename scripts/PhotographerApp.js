@@ -13,9 +13,6 @@ class PhotographerApp {
       MediaData
     ]).then((values)=> {
 
-      const contactForm = new ContactForm()
-      contactForm.init()
-
       const params         = (new URL(document.location)).searchParams
       const photographerId = params.get("id")
 
@@ -32,9 +29,15 @@ class PhotographerApp {
           const photographerWidget = widget.createPhotographerWidget()
           this.photographerPage.displayPhotograherDataWidget(photographerWidget)
     
-          const form               = new ContactForm(photographer)
-          const photographerName   = form.createPhotographerName()
-          photographerName
+          const form               = new ContactForm(
+            "body", 
+            "#contact_modal", 
+            ".photograph-header .contact_button", 
+            ".close_modal",
+            photographer
+            )          
+          form.init()
+          form.createPhotographerName()
         })
   
       values[1]
@@ -46,13 +49,18 @@ class PhotographerApp {
           const mediaPortfolio = portfolio.createMediaPortfolio()
           this.photographerPage.displayMediaData(mediaPortfolio)
     
-          const lightbox       = new MediaLightbox(media)
+          const lightbox       = new MediaLightbox(
+            'body', 
+            '#lightbox_modal', 
+            '.media a', 
+            '#lightbox_modal svg',
+            media
+            )
           const mediaLightbox  = lightbox.createMediaLightbox()
           this.photographerPage.displayMediaDataSlideshow(mediaLightbox)
+
+          lightbox.init()
         })
-  
-      const medialightbox = new MediaLightbox()
-      medialightbox.init()
     })
   }
 }

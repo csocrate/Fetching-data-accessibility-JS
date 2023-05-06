@@ -1,49 +1,19 @@
-class ContactForm {
-  constructor(photographer) {
+class ContactForm extends Modal {
+  constructor(body, modal, launchingTarget, closingTarget, photographer) {
+
+    super(body, modal, launchingTarget, closingTarget)
+
     this._photographer  = photographer
 
-    this.$body          = document.querySelector('body')
-    this.$openModalBtn  = document.querySelector('.photograph-header .contact_button')
-    this.$closeModalBtn = document.querySelector('.close_modal')
-    this.$contactModal  = document.querySelector('#contact_modal')
-    this.$form          = document.querySelector('form')
+    this.$form = document.querySelector('form')
   }
 
   get photographer() {
     return this._photographer
   }
 
-  launchModal() {
-    this.$contactModal.style.display = 'flex'
-
-    this.$body.classList.add('visible_modal')
-
-    // ARIA
-    this.$body.querySelector('header').setAttribute('aria-hidden', 'true')
-    this.$body.querySelector('main').setAttribute('aria-hidden', 'true')
-    this.$contactModal.setAttribute('aria-hidden', 'false')
-    this.$contactModal.setAttribute('aria-modal', 'true')
-
-    // Attributes
-    this.$closeModalBtn.setAttribute('aria-label', 'Fermer le formulaire de contact')
-    this.$closeModalBtn.setAttribute('title', 'Fermer le formulaire de contact')
-    this.$closeModalBtn.setAttribute('aria-expanded', 'true')
-  }
-
-  closeModal() {
-    this.$contactModal.style.display = 'none'
-
-    this.$body.classList.remove('visible_modal')
-
-    // ARIA
-    this.$body.querySelector('header').setAttribute('aria-hidden', 'false')
-    this.$body.querySelector('main').setAttribute('aria-hidden', 'false')
-    this.$contactModal.setAttribute('aria-hidden', 'true')
-    this.$contactModal.setAttribute('aria-modal', 'false')
-  }
-
   createPhotographerName() {
-    this.$contactModal.querySelector('.modal h2').textContent += ` ${this._photographer.name}`
+    this.$modal.querySelector('.modal h2').textContent += ` ${this._photographer.name}`
   }
 
   createContactForm() {
@@ -81,55 +51,56 @@ class ContactForm {
     let result = true
 
     if (!firstname.value.length) {
-      firstname.dataset.errorVisible = "true"
+      firstname.dataset.errorVisible = 'true'
       firstname.setAttribute('aria-invalid', 'true')
-      this.$form.querySelector('input[id=firstname] ~ p').style.display = "block"
+      this.$form.querySelector('input[id=firstname] ~ p').style.display = 'block'
       result = false
     } else {
       console.log(`Prénom: ${firstname.value}`)
-      firstname.dataset.errorVisible = "false"
+      firstname.dataset.errorVisible = 'false'
       firstname.setAttribute('aria-invalid', 'false')
-      this.$form.querySelector('input[id=firstname] ~ p').style.display = "none"
+      this.$form.querySelector('input[id=firstname] ~ p').style.display = 'none'
     }
 
     if (!lastname.value.length) {
-      lastname.dataset.errorVisible = "true"
+      lastname.dataset.errorVisible = 'true'
       lastname.setAttribute('aria-invalid', 'true')
-      this.$form.querySelector('input[id=lastname] ~ p').style.display = "block"
+      this.$form.querySelector('input[id=lastname] ~ p').style.display = 'block'
       result = false
     } else {
       console.log(`Nom: ${lastname.value}`)
-      lastname.dataset.errorVisible = "false"
+      lastname.dataset.errorVisible = 'false'
       lastname.setAttribute('aria-invalid', 'false')
-      this.$form.querySelector('input[id=lastname] ~ p').style.display = "none"
+      this.$form.querySelector('input[id=lastname] ~ p').style.display = 'none'
     }
 
     if (!email.value.length) {
-      email.dataset.errorVisible = "true"
+      email.dataset.errorVisible = 'true'
       email.setAttribute('aria-invalid', 'true')
-      this.$form.querySelector('input[id=email] ~ p').style.display = "block"
+      this.$form.querySelector('input[id=email] ~ p').style.display = 'block'
       result = false
     } else {
       console.log(`Email: ${email.value}`)
-      email.dataset.errorVisible = "false"
+      email.dataset.errorVisible = 'false'
       email.setAttribute('aria-invalid', 'false')
-      this.$form.querySelector('input[id=email] ~ p').style.display = "none"
+      this.$form.querySelector('input[id=email] ~ p').style.display = 'none'
     }
 
     if (!message.value.length) {
-      message.dataset.errorVisible = "true"
+      message.dataset.errorVisible = 'true'
       message.setAttribute('aria-invalid', 'true')
-      this.$form.querySelector('textarea ~ p').style.display = "block"
+      this.$form.querySelector('textarea ~ p').style.display = 'block'
       result = false
     } else {
       console.log(`Message: ${message.value}`)
-      message.dataset.errorVisible = "false"
+      message.dataset.errorVisible = 'false'
       message.setAttribute('aria-invalid', 'false')
-      this.$form.querySelector('textarea ~ p').style.display = "none"
+      this.$form.querySelector('textarea ~ p').style.display = 'none'
     }
 
     if (result === true) {
-      console.log("Merci pour votre message.")
+      this.closeModal()
+      console.log('Merci pour votre message.')
     }
   }
   
@@ -141,8 +112,7 @@ class ContactForm {
   }
 
   init() {
-    this.$openModalBtn.addEventListener('click', () => this.launchModal())
-    this.$closeModalBtn.addEventListener('click', () => this.closeModal())
+    this.getModal()
     this.createContactForm()
     this.submitForm()
   }
