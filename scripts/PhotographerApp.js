@@ -49,14 +49,14 @@ class PhotographerApp {
           const mediaPortfolio = portfolio.createMediaPortfolio()
           this.photographerPage.displayMediaData(mediaPortfolio)
     
-          const lightbox       = new MediaLightbox(
+          const lightbox       = new LightboxModal(
             'body', 
             '#lightbox_modal', 
             '.media a', 
             '#lightbox_modal svg',
             media
             )
-          const mediaLightbox  = lightbox.createMediaLightbox()
+          const mediaLightbox  = lightbox.createLightboxModal()
           this.photographerPage.displayMediaDataSlideshow(mediaLightbox)
 
           lightbox.init()

@@ -3,7 +3,7 @@ class PhotographerPage {
     this.$photographHeader = document.querySelector(".photograph-header")
     this.$mediaSection     = document.querySelector(".media_section")
     this.$photographWidget = document.querySelector(".photograph-widget")
-    this.$mediaSlideshow   = document.querySelector(".media_slideshow")
+    this.$slidesContainer   = document.querySelector(".slides-container")
   }
 
   async displayPhotographerData(photographerBanner) {
@@ -19,6 +19,6 @@ class PhotographerPage {
   }
 
   async displayMediaDataSlideshow(mediaCarousel) {
-    this.$mediaSlideshow.appendChild(mediaCarousel)
+    this.$slidesContainer.appendChild(mediaCarousel)
   }
 }

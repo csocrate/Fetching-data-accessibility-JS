@@ -187,8 +187,16 @@
 #lightbox_modal {
   display: none;
   padding: 2rem 0;
+}
+
+#contact_modal {
   overflow-y: auto;
 }
+
+#lightbox_modal {
+  overflow: hidden;
+}
+
 
 .visible_modal body > header,
 .visible_modal body > main {
@@ -207,22 +215,13 @@
   width: 100%;
 }
 
-.visible_modal #contact_modal {
+#contact_modal {
   background-color: rgba(255, 255, 255, .5);
 }
 
-.visible_modal #lightbox_modal {
-  background-color: #ffffff;
-}
-
-.visible_modal #contact_modal .modal {
+#contact_modal .modal {
   width: 35%;
   background-color: #DB8876;
-}
-
-.visible_modal #lightbox_modal .modal {
-  width: 80%;
-  height: 80%;
 }
 
 .modal {
@@ -235,33 +234,27 @@
   padding: 1.5rem 2.2rem;
 }
 
-/* Contact Modal header */
-.modal header {
+#contact_modal header {
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   height: auto;
 }
 
-/* Lightbox Modal header */
-.header_slideShow {
-  width: 100%;
-  text-align: right;
-}
-
-.header_slideShow svg,
-.close_modal {
-  margin-top: .5rem;
-  cursor: pointer;
-}
-
-.modal header h2 {
+#contact_modal header h2 {
   font-size: 4em;
   line-height: 1.1;
   font-weight: normal;
   text-align: left;
   max-width: 500px;
   margin: 0;
+}
+
+/* All closing modal */
+.close-slideShow svg,
+.close_modal {
+  margin-top: .5rem;
+  cursor: pointer;
 }
 
 form {
@@ -315,4 +308,121 @@ form p {
 }
 /**
   End Modal Form
+  */
+
+/**
+  Lightbox Form
+  */
+/* body */
+.lightbox.visible_modal {
+  overflow: hidden;
+}
+
+#lightbox_modal {
+  background-color: #ffffff;
+}
+
+#lightbox_modal .modal {
+  position: relative;
+  width: 50%;
+  padding: 0;
+  max-width: calc(100vw - 5rem);
+  max-height: calc(100vh - 5rem);
+}
+
+.close-slideShow {
+  position: absolute;
+  top: 7px;
+  right: -60px;
+}
+
+.media_slideshow {
+  position: relative;
+  width: 100%;
+}
+
+.slide {
+  display: none;
+}
+
+.slide,
+.slide a {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  max-width: calc(100vw - 5rem);
+  max-height: calc(100vh - 5rem);
+}
+
+.slide a {
+  display: block;
+  overflow: auto;
+}
+
+.slide img,
+.slide video {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.slide img {
+  object-fit: cover;
+}
+
+.slide p {
+  font-size: 24px;
+  margin-top: 0.35rem;
+  color: #901C1C;
+}
+
+/* Previous and next controls button*/
+.previous-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.previous-btn {
+  transform: translate(-50px, -50px);
+}
+
+.next-btn {
+  right: -100px;
+  transform: translate(-50px, -50px);
+}
+
+.previous-btn span,
+.next-btn span {
+  display: block;
+  width: 2rem;
+  height: .375rem;
+  cursor: pointer;
+  background-color: #901C1C;
+}
+
+.previous-btn span:first-child {
+  transform: rotate(-45deg) translate(0, -8px);
+}
+
+.previous-btn span:last-child {
+  transform: rotate(45deg) translate(1px, 9px);
+}
+
+.next-btn span:first-child {
+  transform: rotate(45deg) translate(0, -8px);
+}
+
+.next-btn span:last-child {
+  transform: rotate(-45deg) translate(-1px, 9px);
+}
+/* Previous and next controls button*/
+
+/**
+  End Lightbox Form
   */

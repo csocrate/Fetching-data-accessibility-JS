@@ -2,7 +2,7 @@ class Modal {
   constructor(body, modal, launchingTarget, closingTarget) {
     this.$body            = document.querySelector(body)
     this.$modal           = document.querySelector(modal)
-    this.$launchingTarget = document.querySelector(launchingTarget)
+    this.$launchingTarget = document.querySelectorAll(launchingTarget)
     this.$closingTarget   = document.querySelector(closingTarget)
   }
 
@@ -11,10 +11,6 @@ class Modal {
   }
 
   launchModal() {
-    console.log(this.$body)
-    console.log(this.$modal)
-    console.log(this.$launchingTarget)
-    console.log(this.$closingTarget)
     this.$modal.style.display = 'flex'
 
     this.$body.classList.add('visible_modal')
@@ -44,7 +40,7 @@ class Modal {
   }
 
   getModal() {
-    this.$launchingTarget.addEventListener('click', () => this.launchModal())
+    this.$launchingTarget.forEach(btn => btn.addEventListener('click', () => this.launchModal()))
     this.$closingTarget.addEventListener('click', () => this.closeModal())
   }
 }
