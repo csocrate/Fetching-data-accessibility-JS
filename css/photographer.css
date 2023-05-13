@@ -136,6 +136,7 @@
 .media .fa-heart {
   font-size: 1.15em;
   margin-left: .35rem;
+  cursor: pointer;
   color: #901C1C;
 }
 /**
