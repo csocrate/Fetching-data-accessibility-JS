@@ -54,7 +54,7 @@ class PhotographerApp {
           const lightbox       = new LightboxModal(
             'body', 
             '#lightbox_modal', 
-            '.media a', 
+            '.media a',
             '#lightbox_modal svg',
             media
             );
@@ -63,31 +63,8 @@ class PhotographerApp {
           lightbox.init();
         })
 
-        /**
-         * Likes handleness
-         */
-        const likeIcons = document.querySelectorAll('.media[data-id] .fa-heart');
-           
-        likeIcons.forEach(likeIcon => {
-    
-          likeIcon.addEventListener('click', e => {
-            e.preventDefault();
-
-            const likes       = new Likes();            
-            const counterDom  = likeIcon.previousSibling;
-            const currentLike = parseInt(counterDom.textContent);
-            
-            likeIcon.classList.toggle('liked');
-      
-            if (!likeIcon.classList.contains('liked')) {                             
-              counterDom.textContent = currentLike + likes.handleLike('DISLIKE');
-              return counterDom.textContent;
-            } else {              
-              counterDom.textContent = currentLike + likes.handleLike('LIKE');
-              return counterDom.textContent;
-            }
-          })
-        })
+      const likes = new Likes();
+      likes.handleCounters();
     })
   }
 }
