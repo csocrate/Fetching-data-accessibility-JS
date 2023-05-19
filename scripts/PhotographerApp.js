@@ -38,7 +38,7 @@ class PhotographerApp {
             );       
           form.init();
           form.createPhotographerName();
-        })
+        });
   
       values[1]
         .map(media => new PhotographerFactory(media, 'media'))
@@ -49,20 +49,17 @@ class PhotographerApp {
           const portfolio      = new MediaPortfolio(media);
           const mediaPortfolio = portfolio.createMediaPortfolio();
           this.photographerPage.displayMediaData(mediaPortfolio);
-    
-          // Lightbox
-          const lightbox       = new LightboxModal(
-            'body', 
-            '#lightbox_modal', 
-            '.media a',
-            '#lightbox_modal svg',
-            media
-            );
-          const mediaLightbox  = lightbox.createLightboxModal();
-          this.photographerPage.displayMediaDataSlideshow(mediaLightbox);
-          lightbox.init();
-        })
-
+        });
+        
+      const lightboxModal  = new LightboxModal(
+        'body', 
+        '#lightbox_modal', 
+        '.media a',
+        '#lightbox_modal svg'
+        );
+      lightboxModal.init();
+      
+      // Likes counters
       const likes = new Likes();
       likes.handleCounters();
     })

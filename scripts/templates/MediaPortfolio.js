@@ -29,7 +29,8 @@ class MediaPortfolio {
 
     const a = document.createElement('a');
     a.setAttribute('aria-label', `${this._media.title}, vue rapprochée`);
-    a.innerHTML = this._media.format;
+    a.innerHTML = this._media.formatDom;
+    a.href       = this._media.format;
 
     likes.appendChild(span);
     likes.appendChild(icon);
