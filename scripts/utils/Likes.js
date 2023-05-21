@@ -40,9 +40,9 @@ class Likes {
           totalMediaLikes
         }
         
-        likeIcon.classList.toggle('liked');
+        const liked = likeIcon.toggleAttribute('data-liked');
   
-        if (!likeIcon.classList.contains('liked')) {                             
+        if (!liked) {                             
           counterDom.textContent      = currentLike + this.counter('DISLIKE');
           totalCounterDom.textContent = currentTotalCounter + this.counter('DISLIKE');
           return result

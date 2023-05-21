@@ -16,8 +16,8 @@ class LightboxModal extends Modal {
 
   disableMedia() {
     document.querySelector('a.active').classList.remove('active');
-    this.$lightboxContainer.querySelector('.slide').remove();
     this.$lightboxContainer.querySelector('.slide').classList.remove('update');
+    this.$lightboxContainer.querySelector('.slide').remove();
   }
   
   createSlide() {
@@ -144,29 +144,34 @@ class LightboxModal extends Modal {
 
   onKeyUpControls(e) {
     if (e.key === 'ArrowLeft') {
-      this.nextControl();
-    } else if (e.key === 'ArrowRight') {
       this.previousControl();
+    } else if (e.key === 'ArrowRight') {
+      this.nextControl();
     }
   }
 
   init() {
-    this.getModal(
-      this.$launchingTarget.forEach(link => link.addEventListener('click', (e) => {
-        e.preventDefault();
+    /**
+     * Update getModal()
+     */
+    super.getModal();
+    this.$launchingTarget.forEach(link => link.addEventListener('click', (e) => {
+      e.preventDefault();
 
-        this.$body.classList.add('lightbox');
+      this.$body.classList.add('lightbox');
 
-        link.classList.add('active');
-        this.createSlide(); 
-        this.showSlide();
+      link.classList.add('active');
+      this.createSlide(); 
+      this.showSlide();
 
-      })),
-      this.$closingTarget.addEventListener('click', () => {
-        this.disableMedia();
-      })
-    );
-
+    })),
+    this.$closingTarget.addEventListener('click', () => {
+      this.disableMedia();
+    })
+    
+    /**
+     * Handle lightbox control buttons
+     */
     this.$nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.nextControl();
@@ -177,6 +182,11 @@ class LightboxModal extends Modal {
       this.previousControl();
     });
 
-    document.addEventListener('keyup', e => this.onKeyUpControls(e));
+    /**
+     * Handle keyboard
+     */
+    document.addEventListener('keyup', e => {
+      this.onKeyUpControls(e);
+    });
   }
 }
