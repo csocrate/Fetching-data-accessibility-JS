@@ -1,10 +1,15 @@
 /**
   Banner
   */
+.photograph-header,
+.filter-bar,
+.media_section {
+  width: 90%;
+  margin: 0 auto;
+}
 .photograph-header {
   background-color: #FAFAFA;
   height: 300px;
-  margin: 0 100px;
 }
 
 .banner {
@@ -21,7 +26,6 @@
 
 .banner .description h1 {
   font-size: 4em;
-  margin-right: 0;
   margin-bottom: .875rem;
   color: #D3573C;
 }
@@ -30,8 +34,14 @@
   font-size: 1.5em;
 }
 
-.banner .description p {
+.banner .description p,
+label[for="orderBy"],
+.filter-bar select {
   font-size: 1.125em;
+}
+
+.banner .description p,
+label[for="orderBy"] {
   color: #525252;
 }
 
@@ -73,15 +83,81 @@
   */
 
 /**
+  Filter bar
+  */
+.filter-bar {
+  position: relative;
+  padding-top: 1.25rem;
+}
+
+.filter-bar > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  max-width: 250px;
+}
+
+.filter-bar label[for="orderBy"] {
+  font-weight: 600;
+  margin-right: 1.5rem;
+}
+
+.select-orderby {
+  /* display: none; */
+}
+
+.selected-option {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  line-height: 1.2;
+  width: 60%;
+  padding: .8rem;
+  color: #fff;
+  background-color: #901C1C;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 23px;
+  right: 20px;
+}
+
+.select-arrow.up {
+  transform: rotate(180deg);
+  top: 14px;
+}
+
+.select-arrow span {
+  display: block;
+  width: .775rem;
+  height: 0.175rem;
+  background-color: #fff;
+}
+
+.select-arrow span:first-child {
+  transform: rotate(45deg) translate(0, -4px);
+}
+
+.select-arrow span:last-child {
+  transform: rotate(-45deg) translate(1px, -7px);
+}
+/**
+  End Filter bar
+  */
+
+/**
   Media
   */
 .media_section {
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   gap: 4rem;
-  margin: 1.5rem 6.25rem;
-  padding: 5rem 0;
+  padding-top: 3.5rem;
+  padding-bottom: 5rem;
 }
 
 .media {
@@ -150,7 +226,7 @@
   display: flex;
   justify-content: space-between;
   position: fixed;
-  right: 325px;
+  right: 278px;
   bottom: 0;
   width: 375px;
   align-items: center;
@@ -393,18 +469,14 @@ form p {
   position: absolute;
   top: 50%;
   bottom: 50%;
+  transform: translate(-50px, -50px);
   border: none;
   padding: 0;
   background: none;
 }
 
-.previous-btn {
-  transform: translate(-50px, -50px);
-}
-
 .next-btn {
   right: -100px;
-  transform: translate(-50px, -50px);
 }
 
 .previous-btn span,
@@ -431,7 +503,7 @@ form p {
 .next-btn span:last-child {
   transform: rotate(-45deg) translate(-1px, 9px);
 }
-/* Previous and next controls button*/
+/* End Previous and next controls button*/
 
 /**
   End Lightbox Form

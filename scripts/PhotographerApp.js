@@ -62,6 +62,10 @@ class PhotographerApp {
       // Likes counters
       const likes = new Likes();
       likes.handleCounters();
+
+      // Sort select
+      const orderBy = new OrderBy();
+      orderBy.init();
     })
   }
 }

@@ -10,13 +10,33 @@
   </head>
   <body>
     <header>
-      <a href="/">
-        <img src="assets/images/logo.png" class="logo" alt="FishEye Home page">
-      </a>
+      <div class="site-header">
+        <a href="/">
+          <img src="assets/images/logo.png" class="logo" alt="FishEye Home page">
+        </a>
+      </div>
     </header>
     <main id="main">
       <div class="photograph-header">
         <button class="contact_button" aria-label="Contactez-moi">Contactez-moi</button>
+      </div>
+      <div class="filter-bar">
+        <div>
+          <label for="orderBy">
+            Trier par
+          </label>
+          <select class="select-orderby" name="orderBy" id="orderBy">
+            <option value="1">
+              Popularité
+            </option>
+            <option value="2">
+              Date
+            </option>
+            <option value="3">
+              Titre
+            </option>
+          </select>
+        </div>
       </div>
       <div class="media_section"></div>
       <div class="photograph-widget"></div>
@@ -70,6 +90,7 @@
     <script src="/scripts/pages/photographer.js"></script>
     <!-- Utils -->
     <script src="/scripts/utils/Likes.js"></script>
+    <script src="/scripts/utils/OrderBy.js"></script>
     <script src="/scripts/utils/Modal.js"></script>
     <script src="/scripts/utils/ContactForm.js"></script>
     <script src="/scripts/utils/LightboxModal.js"></script>
