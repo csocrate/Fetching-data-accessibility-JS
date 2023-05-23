@@ -17,8 +17,8 @@ class PhotographerApp {
       const photographerId = params.get('id');
 
       values[0]
-        .map(photographer => new PhotographerFactory(photographer, 'photographer'))
         .filter(photographer => photographer.id == photographerId)
+        .map(photographer => new PhotographerFactory(photographer, 'photographer'))
         .forEach(photographer => {
 
           const banner             = new PhotographerBanner(photographer);
@@ -41,8 +41,8 @@ class PhotographerApp {
         });
   
       values[1]
-        .map(media => new PhotographerFactory(media, 'media'))
         .filter(media => media.photographerId == photographerId)
+        .map(media => new PhotographerFactory(media, 'media'))
         .forEach(media => {
 
           // Media portfolio

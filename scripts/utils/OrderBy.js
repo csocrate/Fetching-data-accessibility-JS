@@ -1,7 +1,7 @@
 class OrderBy {
 
   constructor() {
-    this.$select  = document.querySelector('.select-orderby');
+    this.$select  = document.querySelector('.select-original');
     this.$options = Array.from(document.getElementsByTagName('option'));
   }
 
@@ -19,7 +19,31 @@ class OrderBy {
     arrow.appendChild(arrowLeft);
     arrow.appendChild(arrowRight);
     selectDiv.appendChild(arrow);
-    document.querySelector('.filter-bar > div').appendChild(selectDiv);
+
+    return selectDiv;
+  }
+
+  createOptionTemplates() {
+    const template = document.createElement('div');
+    template.classList.add('select-template');
+
+    for (let i = 0; i < this.$options.length; i++) {
+      const option = document.createElement('div');
+      template.appendChild(option)
+    }
+
+    return template;
+  }
+
+  displayTemplates() {
+    const selectedOption     = this.createSelectedOption();
+    const optionTemplates    = this.createOptionTemplates();
+    const templatesContainer = document.createElement('div');
+    templatesContainer.classList.add('templates');
+
+    templatesContainer.appendChild(selectedOption);
+    templatesContainer.appendChild(optionTemplates);
+    document.querySelector('.filter-bar > div').appendChild(templatesContainer);
   }
 
   setSelectedOption() {
@@ -29,33 +53,30 @@ class OrderBy {
     selectedOption.innerHTML = this.$select.options[index].textContent;
   }
 
-  createOptionTemplates() {
-    const template = document.createElement('div');
-    template.classList.add('select-template');
-
-    const optionsLength = this.$options.length;
-
-    for (let i = 0; i < optionsLength; i++) {
-      const option = document.createElement('div');
-      template.appendChild(option)
-    }
-
-    document.querySelector('.filter-bar > div').appendChild(template);
-  }
-
   setOptionTemplates() {
-    const optionTemplates = document.querySelectorAll('.select-template div');
+    const optionTemplates = Array.from(document.querySelectorAll('.select-template div'));
+    console.log(optionTemplates)
+
+    // Empty array to push all index of optionTemplates array on it
+    const indexes = [];
 
     optionTemplates.forEach( (optionTemplate, index) => {
       if (this.$options.length >= index ) {
         optionTemplate.innerHTML = this.$options[index].textContent;
       }
+
+      indexes.push(index);
     })
+
+    const isSelectedTemplateIndex = (el) => el === this.$select.selectedIndex;
+
+    const selectedTemplateIndex = indexes.findIndex(isSelectedTemplateIndex);
+    optionTemplates[selectedTemplateIndex].classList.add('selected-hidden');
   }
 
   init() {
-    this.createSelectedOption();
-    this.createOptionTemplates();
+    this.displayTemplates();
+    this.setSelectedOption();
     this.setOptionTemplates();
 
     this.$select.addEventListener('click', e => {
