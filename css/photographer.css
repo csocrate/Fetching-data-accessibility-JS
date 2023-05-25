@@ -116,6 +116,7 @@ label[for="orderBy"] {
   width: 70%;
   padding: .8rem;
   border-radius: 5px;
+  z-index: 100;
   background-color: #901C1C;
 }
 
@@ -123,8 +124,7 @@ label[for="orderBy"] {
   display: none;
 }
 
-.templates.overflow .select-template,
-.templates:hover .select-template {
+.templates.overflow .select-template {
   display: block;
 }
 
@@ -154,7 +154,7 @@ label[for="orderBy"] {
   right: 20px;
 }
 
-.select-arrow.up {
+.templates.overflow  .select-arrow {
   transform: rotate(180deg);
   top: 28px;
 }

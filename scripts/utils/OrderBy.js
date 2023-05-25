@@ -1,9 +1,12 @@
 class OrderBy {
 
   constructor() {
-    this.$select  = document.querySelector('.select-original');
-    this.$options = Array.from(document.getElementsByTagName('option'));
-  }  
+    this.$select      = document.querySelector('.select-original');
+    this.$options     = Array.from(document.getElementsByTagName('option'));
+    this.mediaSection = document.querySelector('.media_section');
+
+    this.init();
+  }
 
   createArrowIcon() {
     const arrow = document.createElement('div');
@@ -109,24 +112,27 @@ class OrderBy {
   }
 
   isSelectTemplateVisible(e) {
-    document.querySelector('.templates').classList.toggle('overflow');
+    if (document.querySelector('.templates').className !== 'templates') {
+      document.querySelector('.templates').classList.remove('overflow');
+    } else {
+      document.querySelector('.templates').classList.toggle('overflow');
+    }
   }
   
-  sortMedias() {
-    const mediaSection = document.querySelector('.media_section');
+  addOrderByDataAttribute() {
 
     if (this.$select.selectedIndex === 0) {
-      mediaSection.dataset.orderBy = 'popular';
+      this.mediaSection.dataset.orderBy = 'popular';
       console.log(this.$select.selectedIndex)
     } 
     
     if (this.$select.selectedIndex === 1) {
-      mediaSection.dataset.orderBy = 'recent';
+      this.mediaSection.dataset.orderBy = 'recent';
       console.log(this.$select.selectedIndex)
     } 
     
     if (this.$select.selectedIndex === 2) {
-      mediaSection.dataset.orderBy = 'alphabetical order';
+      this.mediaSection.dataset.orderBy = 'alphabetical order';
       console.log(this.$select.selectedIndex)
     }
   }
@@ -135,19 +141,17 @@ class OrderBy {
     this.displayTemplates();
     this.setSelectedOption();
     this.setOptionTemplates();
-    this.sortMedias();
+    this.addOrderByDataAttribute();
 
-    const mediaSection = document.querySelector('.media_section');
-
-    document.querySelector('.selected-option').addEventListener('click', (e) => {
-      document.querySelector('.select-arrow').classList.add('up');
+    document.querySelector('.selected-option').addEventListener('click', () => {
+      this.isSelectTemplateVisible();
     });
 
     document.querySelectorAll('.select-template div').forEach( optionTemplate => optionTemplate.addEventListener('click', (e) => {
       document.querySelector('.select-arrow').classList.remove('up');
       this.updateSelectedOptions(e);
-      this.isSelectTemplateVisible(e);
-      this.sortMedias();
+      this.isSelectTemplateVisible();
+      this.addOrderByDataAttribute();
     }));
   }
 }

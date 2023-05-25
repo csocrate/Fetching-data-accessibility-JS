@@ -1,40 +1,35 @@
 class PhotographerWidget {
-  constructor(photographer, media) {
-    this._photographer = photographer
-    this._media = media
+  constructor(photographer) {
+    this._photographer = photographer;
   }
 
   get photographer() {
-    return this._photographer
-  }
-
-  get media() {
-    return this._media
+    return this._photographer;
   }
 
 
   createPhotographerWidget() {
 
-    const div = document.createElement('div')
+    const div = document.createElement('div');
     
-    const totalLikes  = document.createElement('div')
+    const totalLikes  = document.createElement('div');
 
-    const span = document.createElement('span')
-    span.classList.add('counter')
-    span.textContent = '297 081'
+    const span = document.createElement('span');
+    span.classList.add('counter');
+    span.textContent = '';
     
-    const icon = document.createElement('i')
-    icon.classList.add('fa','fa-heart')
+    const icon = document.createElement('i');
+    icon.classList.add('fa','fa-heart');
 
-    const p = document.createElement('p')
-    p.textContent = `${this._photographer.price}€ / jour`
+    const p = document.createElement('p');
+    p.textContent = `${this._photographer.price}€ / jour`;
 
-    totalLikes.appendChild(span)
-    totalLikes.appendChild(icon)
+    totalLikes.appendChild(span);
+    totalLikes.appendChild(icon);
 
-    div.appendChild(totalLikes)
-    div.appendChild(p)
+    div.appendChild(totalLikes);
+    div.appendChild(p);
 
-    return (div)
+    return (div);
   }
 }

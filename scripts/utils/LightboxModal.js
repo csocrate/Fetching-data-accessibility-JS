@@ -35,7 +35,6 @@ class LightboxModal extends Modal {
   getModal() {
     super.getModal();
     this.$launchingTarget.forEach(link => link.addEventListener('click', () => {
-      // e.preventDefault();
 
       this.$body.classList.add('lightbox');
 
