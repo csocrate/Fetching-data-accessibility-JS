@@ -4,6 +4,7 @@ class Modal {
     this.$modal           = document.querySelector(modal);
     this.$launchingTarget = document.querySelectorAll(launchingTarget);
     this.$closingTarget   = document.querySelector(closingTarget);
+    this.getModal();
   }
 
   get body() {
@@ -44,6 +45,13 @@ class Modal {
   //     this.closeModal();
   //   }
   // }
+  onKeyUpModal(e) {
+    console.log(e.key)
+    if (e.key === 'Escape') {
+      console.log('escape done')
+      this.closeModal();
+    }
+  }
 
   getModal() {
     this.$launchingTarget.forEach(btn => btn.addEventListener('click', e => {

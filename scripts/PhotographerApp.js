@@ -55,7 +55,6 @@ class PhotographerApp {
       '.media a',
       '#lightbox_modal svg'
       );
-    lightboxModal.init();
     
     // Likes counters
     const likes = new Likes();
@@ -76,17 +75,17 @@ class PhotographerApp {
     const mediaSection = document.querySelector('.media_section');
     mediaSection.innerHTML = '';
 
-    if (mediaSection.dataset.orderBy == 'popular') {
+    if (mediaSection.dataset.orderBy === 'popular') {
 
       this.mediaData
         .sort((a,b) => b._likes - a._likes);
 
-    } else if (mediaSection.dataset.orderBy == 'recent') {
+    } else if (mediaSection.dataset.orderBy === 'recent') {
 
       this.mediaData
         .sort((a,b) => new Date(b._date) - new Date(a._date));  
 
-    } else if (mediaSection.dataset.orderBy == 'alphabetical order') {
+    } else if (mediaSection.dataset.orderBy === 'alphabetical order') {
       this.mediaData
         .sort((a,b) => {
           if (a._title < b._title) {

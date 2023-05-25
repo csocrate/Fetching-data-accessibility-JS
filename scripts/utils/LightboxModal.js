@@ -12,6 +12,41 @@ class LightboxModal extends Modal {
     this.$previousBtn       = document.querySelector('.previous-btn');
     this.$mediaLinks        = Array.from(document.querySelectorAll('.media a'));
     this.$lightboxContainer = document.querySelector(".lightbox");
+    
+    /**
+     * Handle lightbox control buttons
+     */
+     this.$nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.nextControl();
+    });
+
+    this.$previousBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.previousControl();
+    });
+
+    // Handle keyboard
+    document.addEventListener('keyup', e => {
+      this.onKeyUpControls(e);
+    });
+  }
+
+  getModal() {
+    super.getModal();
+    this.$launchingTarget.forEach(link => link.addEventListener('click', () => {
+      // e.preventDefault();
+
+      this.$body.classList.add('lightbox');
+
+      link.classList.add('active');
+      this.createSlide(); 
+      this.showSlide();
+
+    })),
+    this.$closingTarget.addEventListener('click', () => {
+      this.disableMedia();
+    })
   }
 
   disableMedia() {
@@ -143,50 +178,14 @@ class LightboxModal extends Modal {
   }
 
   onKeyUpControls(e) {
+    console.log(e.key)
     if (e.key === 'ArrowLeft') {
       this.previousControl();
     } else if (e.key === 'ArrowRight') {
       this.nextControl();
+    } else if (e.key === 'Escape') {
+      console.log('escape done')
+      this.closeModal();
     }
-  }
-
-  init() {
-    /**
-     * Update getModal()
-     */
-    super.getModal();
-    this.$launchingTarget.forEach(link => link.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      this.$body.classList.add('lightbox');
-
-      link.classList.add('active');
-      this.createSlide(); 
-      this.showSlide();
-
-    })),
-    this.$closingTarget.addEventListener('click', () => {
-      this.disableMedia();
-    })
-    
-    /**
-     * Handle lightbox control buttons
-     */
-    this.$nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.nextControl();
-    });
-
-    this.$previousBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.previousControl();
-    });
-
-    /**
-     * Handle keyboard
-     */
-    document.addEventListener('keyup', e => {
-      this.onKeyUpControls(e);
-    });
   }
 }
