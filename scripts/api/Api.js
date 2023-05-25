@@ -1,4 +1,6 @@
 class Api {
+  data =undefined;
+  
   /**
    * 
    * @param {string} url
@@ -20,5 +22,6 @@ class Api {
         }
         return response.json();
       })
+      .then(data => this.data = data)
   }
 }
