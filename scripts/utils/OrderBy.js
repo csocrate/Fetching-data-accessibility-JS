@@ -148,7 +148,6 @@ class OrderBy {
       this.updateSelectedOptions(e);
       this.isSelectTemplateVisible(e);
       this.sortMedias();
-      orderBy.init();
     }));
   }
 }
