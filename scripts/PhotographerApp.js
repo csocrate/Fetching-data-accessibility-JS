@@ -10,15 +10,10 @@ class PhotographerApp {
     const photographersData = await this.dataApi.photographersFetch();
     const mediaData         = await this.dataApi.mediaFetch();
 
-    // Sort select
-    const orderBy = new OrderBy();
-    orderBy.init();
-
     const params         = (new URL(document.location)).searchParams;
     const photographerId = params.get('id');
 
     let photographer = photographersData.find(photographer => photographer.id == photographerId)
-    console.log(photographer)
 
     if (photographer) {
       photographer             = new PhotographerFactory(photographer, 'photographer');
@@ -47,7 +42,9 @@ class PhotographerApp {
       .map(media => new PhotographerFactory(media, 'media'))
 
     this.displayMediaPortFolioData();
-    this.sortMedias();
+
+    const orderBy = new OrderBy();
+    this.sortMediasPortFolio();
       
     const lightboxModal  = new LightboxModal(
       'body', 
@@ -71,35 +68,49 @@ class PhotographerApp {
       });
   }
 
-  sortMedias() {
+  sortMediasPortFolio() {
+    const orderBySelect = document.querySelector('.select-original');
     const mediaSection = document.querySelector('.media_section');
     mediaSection.innerHTML = '';
 
-    if (mediaSection.dataset.orderBy === 'popular') {
+    if (orderBySelect.selectedIndex === 0) {
+      console.log(orderBySelect.selectedIndex === 0)
 
       this.mediaData
         .sort((a,b) => b._likes - a._likes);
 
-    } else if (mediaSection.dataset.orderBy === 'recent') {
-
-      this.mediaData
-        .sort((a,b) => new Date(b._date) - new Date(a._date));  
-
-    } else if (mediaSection.dataset.orderBy === 'alphabetical order') {
-      this.mediaData
-        .sort((a,b) => {
-          if (a._title < b._title) {
-            return -1;
-          }
-
-          if (a._title > b._title) {
-            return 1;
-          }
-
-          return 0;
-        });
     }
     this.displayMediaPortFolioData();
+
+    orderBySelect.addEventListener('change', () => {
+      mediaSection.innerHTML = '';
+
+      if (orderBySelect.selectedIndex === 0) {
+  
+        this.mediaData
+          .sort((a,b) => b._likes - a._likes);
+  
+      } else if (orderBySelect.selectedIndex === 1) {
+  
+        this.mediaData
+          .sort((a,b) => new Date(b._date) - new Date(a._date));  
+  
+      } else if (orderBySelect.selectedIndex === 2) {
+        this.mediaData
+          .sort((a,b) => {
+            if (a._title < b._title) {
+              return -1;
+            }
+  
+            if (a._title > b._title) {
+              return 1;
+            }
+  
+            return 0;
+          });
+      }
+      this.displayMediaPortFolioData();
+    })
   }
 }
 const photographerApp = new PhotographerApp();
