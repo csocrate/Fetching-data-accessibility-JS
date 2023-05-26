@@ -41,11 +41,7 @@ class LightboxModal extends Modal {
       link.classList.add('active');
       this.createSlide(); 
       this.showSlide();
-
-    })),
-    this.$closingTarget.addEventListener('click', () => {
-      this.disableMedia();
-    })
+    }));
   }
 
   disableMedia() {
@@ -176,15 +172,22 @@ class LightboxModal extends Modal {
     }
   }
 
-  onKeyUpControls(e) {
-    console.log(e.key)
-    if (e.key === 'ArrowLeft') {
-      this.previousControl();
-    } else if (e.key === 'ArrowRight') {
-      this.nextControl();
-    } else if (e.key === 'Escape') {
-      console.log('escape done')
-      this.closeModal();
+  onKeyUpModal(e) {
+    super.onKeyUpModal(e);
+    
+    if (this.$modal.style.display !== 'none') {
+      if (e.key === 'Escape') {
+        this.closeModal(e);
+      } else if (e.key === 'ArrowLeft') {
+        this.previousControl();
+      } else if (e.key === 'ArrowRight') {
+        this.nextControl();
+      }
     }
+  }
+
+  closeModal() {
+    super.closeModal();
+    this.disableMedia();
   }
 }

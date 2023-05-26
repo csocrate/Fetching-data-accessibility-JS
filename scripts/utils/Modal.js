@@ -7,10 +7,6 @@ class Modal {
     this.getModal();
   }
 
-  get body() {
-    return this.$body;
-  }
-
   launchModal() {
     this.$modal.style.display = 'flex';
 
@@ -40,16 +36,11 @@ class Modal {
     this.$closingTarget.setAttribute('aria-expanded', 'false');
   }
 
-  // onKeyUpModal(e) {
-  //   if (e.key === 'Escape') {
-  //     this.closeModal();
-  //   }
-  // }
   onKeyUpModal(e) {
-    console.log(e.key)
-    if (e.key === 'Escape') {
-      console.log('escape done')
-      this.closeModal();
+    if (this.$modal.style.display !== 'none') {
+      if (e.key === 'Escape') {
+        this.closeModal(e);
+      }
     }
   }
 
@@ -58,10 +49,14 @@ class Modal {
       e.preventDefault();
       this.launchModal();
     }));
+
     this.$closingTarget.addEventListener('click', e => {
       e.preventDefault();
       this.closeModal(e);
     });
-    // document.addEventListener('keyup', e => this.onKeyUpModal(e));
+
+    document.addEventListener('keyup', e => {
+      this.onKeyUpModal(e)
+    });
   }
 }
