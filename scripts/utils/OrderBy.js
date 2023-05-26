@@ -1,137 +1,67 @@
 class OrderBy {
 
   constructor() {
-    this.$select      = document.querySelector('.select-original');
     this.$options     = Array.from(document.getElementsByTagName('option'));
-    this.mediaSection = document.querySelector('.media_section');
+    this.selectBoxes  = new SelectBoxes();
+    this.selectBoxes;
 
     this.init();
   }
 
-  createArrowIcon() {
-    const arrow = document.createElement('div');
-    arrow.classList.add('select-arrow');
+  updateSelectedOptions() {
+    const customSelectedOption = document.querySelector('.selected-option');
 
-    const arrowLeft  = document.createElement('span');
-    const arrowRight = document.createElement('span');
-    
-    arrow.appendChild(arrowLeft);
-    arrow.appendChild(arrowRight);
+    this.$options
+      .forEach(option => {
+        if (option.selected) {
+          option.removeAttribute('selected')
+        }
+    });
 
-    return arrow;
-  }
-
-  createSelectedOption() {
-    const selectDiv = document.createElement('div');
-    selectDiv.classList.add('selected-option');
-
-    const arrow = this.createArrowIcon();
-    selectDiv.appendChild(arrow);
-
-    return selectDiv;
-  }
-
-  createOptionTemplates() {
-    const template = document.createElement('div');
-    template.classList.add('select-template');
-
-    for (let i = 0; i < this.$options.length; i++) {
-      const option = document.createElement('div');
-      template.appendChild(option)
-    }
-
-    return template;
-  }
-
-  displayTemplates() {
-    const selectedOptionTemplate = this.createSelectedOption();
-    const optionTemplates        = this.createOptionTemplates();
-    const templatesContainer     = document.createElement('div');
-    templatesContainer.classList.add('templates');
-
-    templatesContainer.appendChild(selectedOptionTemplate);
-    templatesContainer.appendChild(optionTemplates);
-    document.querySelector('.filter-bar > div').appendChild(templatesContainer);
-  }
-
-  setSelectedOption() {
-    const selectedOptionTemplate = document.querySelector('.selected-option');
-
-    const index = this.$select.selectedIndex;
-    selectedOptionTemplate.innerHTML += this.$select.options[index].textContent;
-  }
-
-  setOptionTemplates() {
-    const optionTemplates = Array.from(document.querySelectorAll('.select-template div'));
-
-    // Empty array to push all index of optionTemplates array on it
-    const indexes = [];
-
-    optionTemplates.forEach( (optionTemplate, index) => {
-      if (this.$options.length >= index ) {
-        optionTemplate.innerHTML += this.$options[index].textContent;
-      }
-
-      indexes.push(index);
-    })
-
-    const isSelectedTemplateIndex = (el) => el === this.$select.selectedIndex;
-
-    const selectedTemplateIndex = indexes.findIndex(isSelectedTemplateIndex);
-    optionTemplates[selectedTemplateIndex].classList.add('selected-hidden');
-  }
-
-  /**
-   * 
-   * @param {*} e 
-   */
-  updateSelectedOptions(e) {
-    // Selected option - template
-    const selectedOptionTemplate = document.querySelector('.selected-option');
-    selectedOptionTemplate.innerHTML = e.target.innerHTML;
-
-    const arrow = this.createArrowIcon();
-    selectedOptionTemplate.appendChild(arrow);
-
-    const optionTemplates = Array.from(document.querySelectorAll('.select-template div'));
-    optionTemplates
-      .filter(el => el.className === 'selected-hidden')                   
-      .map(el => el.removeAttribute('class'));
-    e.target.className = 'selected-hidden';
-
-    // Selected option - original
-    const options = Array.from(document.querySelectorAll('option'));
-    options.forEach(option => {
-      if (option.selected) {
-        option.removeAttribute('selected')
-      }
-    })
-    options
-      .filter(option => option.textContent === selectedOptionTemplate.textContent)
+    this.$options
+      .filter(option => option.textContent === customSelectedOption.textContent)
       .map(selectedOption => selectedOption.toggleAttribute('selected'));
   }
 
-  isSelectTemplateVisible(e) {
-    if (document.querySelector('.templates').className !== 'templates') {
-      document.querySelector('.templates').classList.remove('overflow');
+  updateCustomSelectedOptions(e) {
+    const customSelectedOption = document.querySelector('.selected-option');
+    const arrow                = this.selectBoxes.createArrowIcon();
+    const customOptions        = Array
+      .from(document.querySelectorAll('.select-template div'));
+
+    customSelectedOption.innerHTML = e.target.innerHTML;    
+    customSelectedOption.appendChild(arrow);  
+
+    customOptions
+      .filter(el => el.className === 'selected-hidden')         
+      .map(el => el.removeAttribute('class'));
+
+    e.target.className = 'selected-hidden';
+  }
+
+  isDropdownVisible() {
+    const customSelectContainer = document.querySelector('.templates');
+
+    if (customSelectContainer.className !== 'templates') {
+      customSelectContainer.classList.remove('overflow');
     } else {
-      document.querySelector('.templates').classList.toggle('overflow');
+      customSelectContainer.classList.toggle('overflow');
     }
   }
 
   init() {
-    this.displayTemplates();
-    this.setSelectedOption();
-    this.setOptionTemplates();
+    const customSelectedOption = document.querySelector('.selected-option');
+    const customOptions        = document.querySelectorAll('.select-template div');
 
-    document.querySelector('.selected-option').addEventListener('click', () => {
-      this.isSelectTemplateVisible();
+    customSelectedOption.addEventListener('click', () => {
+      this.isDropdownVisible();
     });
 
-    document.querySelectorAll('.select-template div').forEach( optionTemplate => optionTemplate.addEventListener('click', (e) => {
-      document.querySelector('.select-arrow').classList.remove('up');
-      this.updateSelectedOptions(e);
-      this.isSelectTemplateVisible();
+    customOptions
+      .forEach( customOption => customOption.addEventListener('click', (e) => {
+        this.updateCustomSelectedOptions(e);
+        this.updateSelectedOptions();
+        this.isDropdownVisible();
     }));
   }
 }

@@ -39,10 +39,10 @@ class PhotographerApp {
 
     this.mediaData = mediaData
       .filter(media => media.photographerId == photographerId)
-      .map(media => new PhotographerFactory(media, 'media'))
+      .map(media => new PhotographerFactory(media, 'media'));
 
     this.displayMediaPortFolioData();
-
+    
     new OrderBy();
     this.handleSortMedias();
       
@@ -68,6 +68,25 @@ class PhotographerApp {
       });
   }
 
+  handleSortMedias() {
+    this.selectedOptionByDefault();
+    this.observeSelectedOptionChange();
+  }
+
+  selectedOptionByDefault() {
+    const orderBySelect = document.querySelector('.select-original');
+
+    const mediaSection = document.querySelector('.media_section');
+    mediaSection.innerHTML = '';
+
+    if (orderBySelect.selectedIndex === 0) {
+
+      this.mediaData
+        .sort((a,b) => b._likes - a._likes);
+    }
+    this.displayMediaPortFolioData();
+  }
+
   observeSelectedOptionChange() {
     const orderBySelect = document.querySelector('.select-original');
 
@@ -86,7 +105,7 @@ class PhotographerApp {
             switch (mutation.attributeName) {
               case 'selected':
                 this.selectedOptionChange(mutation.target.selected);
-                console.log(mutation.target.selected)
+                // console.log(mutation.target.selected)
                 break;
             }
             break;
@@ -96,25 +115,6 @@ class PhotographerApp {
 
     const observer = new MutationObserver(optionSelected)
     observer.observe(orderBySelect, optionsObserver);
-  }
-
-  handleSortMedias() {
-    this.selectedOptionByDefault();
-    this.observeSelectedOptionChange();
-  }
-
-  selectedOptionByDefault() {
-    const orderBySelect = document.querySelector('.select-original');
-
-    const mediaSection = document.querySelector('.media_section');
-    mediaSection.innerHTML = '';
-
-    if (orderBySelect.selectedIndex === 0) {
-
-      this.mediaData
-        .sort((a,b) => b._likes - a._likes);
-    }
-    this.displayMediaPortFolioData();
   }
 
   selectedOptionChange() {
