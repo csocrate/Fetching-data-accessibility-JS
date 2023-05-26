@@ -118,30 +118,11 @@ class OrderBy {
       document.querySelector('.templates').classList.toggle('overflow');
     }
   }
-  
-  addOrderByDataAttribute() {
-
-    if (this.$select.selectedIndex === 0) {
-      this.mediaSection.dataset.orderBy = 'popular';
-      console.log(this.$select.selectedIndex)
-    } 
-    
-    if (this.$select.selectedIndex === 1) {
-      this.mediaSection.dataset.orderBy = 'recent';
-      console.log(this.$select.selectedIndex)
-    } 
-    
-    if (this.$select.selectedIndex === 2) {
-      this.mediaSection.dataset.orderBy = 'alphabetical order';
-      console.log(this.$select.selectedIndex)
-    }
-  }
 
   init() {
     this.displayTemplates();
     this.setSelectedOption();
     this.setOptionTemplates();
-    this.addOrderByDataAttribute();
 
     document.querySelector('.selected-option').addEventListener('click', () => {
       this.isSelectTemplateVisible();
@@ -151,7 +132,6 @@ class OrderBy {
       document.querySelector('.select-arrow').classList.remove('up');
       this.updateSelectedOptions(e);
       this.isSelectTemplateVisible();
-      this.addOrderByDataAttribute();
     }));
   }
 }
