@@ -5,7 +5,6 @@ class LightboxModal extends Modal {
     launchingTarget, 
     closingTarget
     ) {
-
     super(body, modal, launchingTarget, closingTarget);
 
     this.$nextBtn           = document.querySelector('.next-btn');
@@ -25,27 +24,24 @@ class LightboxModal extends Modal {
       e.preventDefault();
       this.previousControl();
     });
-
-    // Handle keyboard
-    document.addEventListener('keyup', e => {
-      this.onKeyUpControls(e);
-    });
   }
 
   getModal() {
     super.getModal();
-    this.$launchingTarget.forEach(link => link.addEventListener('click', () => {
 
-      this.$body.classList.add('lightbox');
+    this.$launchingTarget
+      .forEach(link => link.addEventListener('click', () => {
 
-      link.classList.add('active');
-      this.createSlide(); 
-      this.showSlide();
+        this.$body.classList.add('lightbox');
+
+        link.classList.add('active');
+        this.createSlide(); 
+        this.showSlide();
     }));
   }
 
   disableMedia() {
-    document.querySelector('a.active').classList.remove('active');
+    document.querySelector('.media a.active').classList.remove('active');
     this.$lightboxContainer.querySelector('.slide').classList.remove('update');
     this.$lightboxContainer.querySelector('.slide').remove();
   }
@@ -54,27 +50,30 @@ class LightboxModal extends Modal {
     const slideDom = document.createElement('div');
     slideDom.classList.add('slide');
     
-    this.$mediaLinks.filter(el => el.querySelector('img'))
-                    .forEach( el => {
-                      el.dataset.media = 'image';
-                    });
+    this.$mediaLinks
+      .filter(el => el.querySelector('img'))
+      .forEach( el => {
+        el.dataset.media = 'image';
+      });
 
-    this.$mediaLinks.filter(el => el.querySelector('video'))
-                    .forEach( el => {
-                      el.dataset.media = 'video';
-                    });
+    this.$mediaLinks
+      .filter(el => el.querySelector('video'))
+      .forEach( el => {
+        el.dataset.media = 'video';
+      });
     
-    this.$mediaLinks.forEach(link => {
-      if (link.classList.contains('active')) {
-  
-        if (link.getAttribute('data-media') === 'image') {
-          slideDom.innerHTML = '<img src"#" class="img_media" alt><p></p>';
-        }
+    this.$mediaLinks
+      .forEach(link => {
+        if (link.classList.contains('active')) {
     
-        if (link.getAttribute('data-media') === 'video') {
-          slideDom.innerHTML = '<video controls="" class="video_media"><source src"#" type="video/mp4"></video><p></p>';
+          if (link.getAttribute('data-media') === 'image') {
+            slideDom.innerHTML = '<img src"#" class="img_media" alt><p></p>';
+          }
+      
+          if (link.getAttribute('data-media') === 'video') {
+            slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><p></p>';
+          }
         }
-      }
     })
   this.$lightboxContainer.prepend(slideDom);
   }
@@ -83,7 +82,7 @@ class LightboxModal extends Modal {
 
     for (const child of document.querySelector('a.active').childNodes) {
       const newSrc  = document.querySelector('.active').href;
-      const caption = document.querySelector('.active ~ div > h3').textContent;
+      const caption = document.querySelector('.active ~ figcaption').textContent;
 
       if (child.tagName === 'IMG') {
         const newAlt  = document.querySelector('.active img').alt;
@@ -102,7 +101,7 @@ class LightboxModal extends Modal {
 
   updateToVideo() {
     const slideDom = this.$lightboxContainer.querySelector('.slide.update');
-    slideDom.innerHTML = '<video controls="" class="video_media"><source src"#" type="video/mp4"></video><p></p>';
+    slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><p></p>';
   }
 
   updateToImage() {
@@ -119,11 +118,20 @@ class LightboxModal extends Modal {
     const firstLink = this.$mediaLinks[0];
 
     if (lastLink.classList.contains('active')) {
-      this.$mediaLinks.find(el => el === lastLink).classList.remove('active');
-      this.$mediaLinks.find(el => el === firstLink).classList.add('active');
+      this.$mediaLinks
+        .find(el => el === lastLink)
+        .classList.remove('active');
+
+      this.$mediaLinks
+        .find(el => el === firstLink)
+        .classList.add('active');
+
       this.showSlide();
+
     } else {
-      const index       = this.$mediaLinks.findIndex(el => el.className === 'active');
+      const index = this.$mediaLinks
+        .findIndex(el => el.className === 'active');
+
       const currentLink = this.$mediaLinks[index];
       const nextLink    = this.$mediaLinks[index + 1];
 
@@ -135,8 +143,12 @@ class LightboxModal extends Modal {
         this.updateToImage();
       } 
 
-      this.$mediaLinks.find(el => el === currentLink).classList.remove('active');
-      this.$mediaLinks.find(el => el === nextLink).classList.add('active');
+      this.$mediaLinks
+        .find(el => el === currentLink).classList.remove('active');
+
+      this.$mediaLinks
+        .find(el => el === nextLink).classList.add('active');
+
       this.showSlide();
     }
   }
@@ -146,13 +158,18 @@ class LightboxModal extends Modal {
       this.$lightboxContainer.querySelector('.slide').classList.add('update'); 
     }
 
-    const lastLink    = this.$mediaLinks[this.$mediaLinks.length -1];
-    const firstLink   = this.$mediaLinks[0];
+    const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];
+    const firstLink = this.$mediaLinks[0];
 
     if (firstLink.classList.contains('active')) {
-      this.$mediaLinks.find(el => el === firstLink).classList.remove('active');
-      this.$mediaLinks.find(el => el === lastLink).classList.add('active');
+      this.$mediaLinks
+        .find(el => el === firstLink).classList.remove('active');
+
+      this.$mediaLinks
+        .find(el => el === lastLink).classList.add('active');
+
       this.showSlide();
+
     } else {
       const index        = this.$mediaLinks.findIndex(el => el.className === 'active');
       const currentLink  = this.$mediaLinks[index];
@@ -166,8 +183,13 @@ class LightboxModal extends Modal {
         this.updateToImage();
       } 
 
-      this.$mediaLinks.find(el => el === currentLink).classList.remove('active');
-      this.$mediaLinks.find(el => el === previousLink).classList.add('active');
+      this.$mediaLinks
+        .find(el => el === currentLink)
+        .classList.remove('active');
+      this.$mediaLinks
+        .find(el => el === previousLink)
+        .classList.add('active');
+
       this.showSlide();
     }
   }

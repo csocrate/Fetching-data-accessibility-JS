@@ -5,11 +5,19 @@ class ContactForm extends Modal {
 
     this._photographer  = photographer;
 
-    this.$form = document.querySelector('form');
+    this.$form = document.querySelector('form');    
   }
 
   get photographer() {
     return this._photographer;
+  }
+
+  launchModal() {
+    super.launchModal();
+    this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
+    this.$closingTarget.setAttribute('title', 'Fermer le formulaire de contact');
+    
+    this.keepFocusOnModal();
   }
 
   createPhotographerName() {
@@ -33,7 +41,7 @@ class ContactForm extends Modal {
       </label>
       <input type='email' name='email' id='email' autocomplete='email' aria-required='true'>
       <p>Le champ email doit être renseigné</p>
-      <label for=''>
+      <label for='message'>
         Votre message
       </label>
       <textarea name='message' id='message' cols='30' rows='10' autocomplete='on' aria-required='true'></textarea>
@@ -109,6 +117,34 @@ class ContactForm extends Modal {
       e.preventDefault();
       this.isInputNotEmpty();
     })
+  }
+
+  keepFocusOnModal() {
+    const outsideFocus             = '[href], button, select';
+    const outsideFocusElements     = this.$modal.querySelectorAll(outsideFocus);
+    const firstOutsideFocusElement = outsideFocusElements[0];
+    const lastOutsideFocusElement  = outsideFocusElements[outsideFocusElements.length -1];
+
+    document.addEventListener('keydown', e => {
+      // console.log(e.key)
+      let isTab = e.key === 'Tab' || e.code === 9;
+      if(!isTab) {
+        return;
+      } else {
+        // Boolean on element that currently has focus
+        if (document.activeElement === firstOutsideFocusElement) {
+          lastOutsideFocusElement.focus();
+          e.preventDefault();
+        } else {
+          if (document.activeElement === lastOutsideFocusElement) {
+            firstOutsideFocusElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
+
+    firstOutsideFocusElement.focus();    
   }
 
   init() {

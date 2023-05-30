@@ -23,7 +23,7 @@ class Media {
   }
 
   get formatDom() {
-    return this._image ? `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">` : `<video controls="" class="video_media"><source src="assets/medias/${this._video}" type="video/mp4"></video>`
+    return this._image ? `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">` : `<video controls class="video_media"><source src="assets/medias/${this._video}" type="video/mp4"></video>`
   }
 
   get format() {

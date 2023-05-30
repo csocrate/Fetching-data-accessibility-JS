@@ -18,7 +18,7 @@ class PhotographerWidget {
     span.classList.add('counter');
     span.textContent = '';
     
-    const icon = document.createElement('i');
+    const icon = document.createElement('span');
     icon.classList.add('fa','fa-heart');
 
     const p = document.createElement('p');

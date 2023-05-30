@@ -13,10 +13,10 @@ class MediaPortfolio {
     mediaContent.classList.add('media');
     mediaContent.dataset.id = this._media.id;
 
-    const div = document.createElement('div');
+    const figure = document.createElement('figure');
 
-    const h3 = document.createElement('h3');
-    h3.textContent = this._media.title;
+    const figcaption = document.createElement('figcaption');  
+    figcaption.textContent = this._media.title;
     
     const likes = document.createElement('div');
     
@@ -24,21 +24,22 @@ class MediaPortfolio {
     span.classList.add('counter');
     span.textContent = this._media.likes;
     
-    const icon = document.createElement('i');
+    const icon = document.createElement('span');
     icon.classList.add('fa','fa-heart');
+    icon.setAttribute('tabindex', '0');
 
     const a = document.createElement('a');
     a.setAttribute('aria-label', `${this._media.title}, vue rapprochée`);
     a.innerHTML = this._media.formatDom;
-    a.href       = this._media.format;
+    a.href      = this._media.format;
 
+    figure.appendChild(a);
+    figure.appendChild(figcaption);
     likes.appendChild(span);
     likes.appendChild(icon);
-    div.appendChild(h3);
-    div.appendChild(likes); 
 
-    mediaContent.appendChild(a);
-    mediaContent.appendChild(div);
+    mediaContent.appendChild(figure);
+    mediaContent.appendChild(likes);
 
     return (mediaContent);
   }

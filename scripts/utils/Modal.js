@@ -15,12 +15,10 @@ class Modal {
     // ARIA
     this.$body.querySelector('header').setAttribute('aria-hidden', 'true');
     this.$body.querySelector('main').setAttribute('aria-hidden', 'true');
+    
     this.$modal.setAttribute('aria-hidden', 'false');
     this.$modal.setAttribute('aria-modal', 'true');
-    this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
     this.$closingTarget.setAttribute('aria-expanded', 'true');
-
-    this.$closingTarget.setAttribute('title', 'Fermer le formulaire de contact');
   }
 
   closeModal() {
@@ -45,9 +43,10 @@ class Modal {
   }
 
   getModal() {
-    this.$launchingTarget.forEach(btn => btn.addEventListener('click', e => {
-      e.preventDefault();
-      this.launchModal();
+    this.$launchingTarget
+      .forEach(btn => btn.addEventListener('click', e => {
+        e.preventDefault();
+        this.launchModal();
     }));
 
     this.$closingTarget.addEventListener('click', e => {
