@@ -12,12 +12,20 @@ class ContactForm extends Modal {
     return this._photographer;
   }
 
+  // getModal() {
+  //   super.getModal();
+  //   document.removeEventListener('keyup', e => {
+  //     this.onKeyUpModal(e)
+  //   },
+  //   true);
+  // }
+
   launchModal() {
     super.launchModal();
     this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
     this.$closingTarget.setAttribute('title', 'Fermer le formulaire de contact');
-    
-    this.keepFocusOnModal();
+
+    this.keepFocusInsideModal() ;
   }
 
   createPhotographerName() {
@@ -109,6 +117,8 @@ class ContactForm extends Modal {
     if (result === true) {
       this.closeModal()
       console.log('Merci pour votre message.');
+    } else {
+      this.keepFocusInsideModal();
     }
   }
   
@@ -119,32 +129,61 @@ class ContactForm extends Modal {
     })
   }
 
-  keepFocusOnModal() {
-    const outsideFocus             = '[href], button, select';
-    const outsideFocusElements     = this.$modal.querySelectorAll(outsideFocus);
-    const firstOutsideFocusElement = outsideFocusElements[0];
-    const lastOutsideFocusElement  = outsideFocusElements[outsideFocusElements.length -1];
+  keepFocusInsideModal() {
+    const formElements            = 'input[type=text], input[type=email], textarea, button[type=submit]';
+    const insideFocusElements     = Array
+      .from(this.$modal.querySelectorAll(formElements));
 
-    document.addEventListener('keydown', e => {
-      // console.log(e.key)
+    const firstInsideFocusElement = insideFocusElements[0];
+    const lastInsideFocusElement  = insideFocusElements[insideFocusElements.length -1];
+    
+    this.$modal
+      .focus();    
+    
+    // this.getModal();
+    
+    this.$modal.addEventListener('keydown', e => {;
+      
       let isTab = e.key === 'Tab' || e.code === 9;
-      if(!isTab) {
+      let isEsc = e.key === 'Escape';
+
+      if (!isTab) {
         return;
-      } else {
-        // Boolean on element that currently has focus
-        if (document.activeElement === firstOutsideFocusElement) {
-          lastOutsideFocusElement.focus();
-          e.preventDefault();
-        } else {
-          if (document.activeElement === lastOutsideFocusElement) {
-            firstOutsideFocusElement.focus();
+      }
+
+      // if (!isTab || !isEsc) {
+      //   return;
+      // }
+
+      // if (this.$modal.style.display !== 'none') {
+      //   if (isEsc) {
+      //     this.closeModal(e);
+      //   }
+      // }
+  
+      if (isTab) {
+      
+        if (e.shiftKey) {
+          // Boolean on element that currently has focus
+          if (document.activeElement === firstInsideFocusElement) {
+            lastInsideFocusElement.focus();
             e.preventDefault();
+          } 
+          else {
+            if (document.activeElement === lastInsideFocusElement) {
+              firstInsideFocusElement.focus();
+              e.preventDefault();
+            }
           }
+        }
+
+        if (document.activeElement === lastInsideFocusElement) {
+          firstInsideFocusElement.focus();
+          e.preventDefault();
         }
       }
     });
-
-    firstOutsideFocusElement.focus();    
+    firstInsideFocusElement.focus();
   }
 
   init() {
