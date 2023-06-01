@@ -12,14 +12,6 @@ class ContactForm extends Modal {
     return this._photographer;
   }
 
-  // getModal() {
-  //   super.getModal();
-  //   document.removeEventListener('keyup', e => {
-  //     this.onKeyUpModal(e)
-  //   },
-  //   true);
-  // }
-
   launchModal() {
     super.launchModal();
     this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
@@ -137,53 +129,29 @@ class ContactForm extends Modal {
     const firstInsideFocusElement = insideFocusElements[0];
     const lastInsideFocusElement  = insideFocusElements[insideFocusElements.length -1];
     
-    this.$modal
-      .focus();    
+    if (this.$body.classList.contains('visible_modal')) {
+      this.$modal.focus();
+    }    
     
-    // this.getModal();
-    
-    this.$modal.addEventListener('keydown', e => {;
+    this.$modal.addEventListener('keydown', e => {
+
+      if (this.$modal.style.display !== 'none') {
       
-      let isTab = e.key === 'Tab' || e.code === 9;
-      let isEsc = e.key === 'Escape';
-
-      if (!isTab) {
-        return;
-      }
-
-      // if (!isTab || !isEsc) {
-      //   return;
-      // }
-
-      // if (this.$modal.style.display !== 'none') {
-      //   if (isEsc) {
-      //     this.closeModal(e);
-      //   }
-      // }
-  
-      if (isTab) {
-      
-        if (e.shiftKey) {
-          // Boolean on element that currently has focus
-          if (document.activeElement === firstInsideFocusElement) {
-            lastInsideFocusElement.focus();
-            e.preventDefault();
-          } 
-          else {
-            if (document.activeElement === lastInsideFocusElement) {
-              firstInsideFocusElement.focus();
-              e.preventDefault();
-            }
-          }
+        let isTab = e.key === 'Tab' || e.code === 9;
+        
+        if (!isTab) {
+          return;
         }
-
-        if (document.activeElement === lastInsideFocusElement) {
-          firstInsideFocusElement.focus();
-          e.preventDefault();
+    
+        if (isTab) {  
+          if (document.activeElement === lastInsideFocusElement) {
+            firstInsideFocusElement.focus();
+            e.preventDefault();
+          }
         }
       }
     });
-    firstInsideFocusElement.focus();
+    // firstInsideFocusElement.focus();
   }
 
   init() {

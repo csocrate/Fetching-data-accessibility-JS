@@ -1,6 +1,6 @@
 class SelectBoxes {
   constructor() {
-    this.$select      = document.querySelector('.select-original');
+    this.$select      = document.querySelector('.select-native');
     this.$options     = Array.from(document.getElementsByTagName('option'));
 
     this.init();
@@ -73,9 +73,9 @@ class SelectBoxes {
       indexes.push(index);
     })
 
-    const originalSelectedIndex = (el) => el === this.$select.selectedIndex;
+    const nativeSelectedIndex = (el) => el === this.$select.selectedIndex;
 
-    const customSelectedIndex = indexes.findIndex(originalSelectedIndex);
+    const customSelectedIndex = indexes.findIndex(nativeSelectedIndex);
     customOptions[customSelectedIndex].classList.add('selected-hidden');
   }
 

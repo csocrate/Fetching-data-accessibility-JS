@@ -30,7 +30,7 @@
           <label for="orderBy">
             Trier par
           </label>
-          <select class="select-original" name="orderBy" id="orderBy">
+          <select id="orderBy" name="orderBy" class="select-native" aria-expanded="false">
             <option value="1" selected>
               Popularité
             </option>
@@ -61,24 +61,25 @@
 			</div>
 		</div>
     <div id="lightbox_modal" role="dialog" tabindex="-1" aria-hidden="true" aria-label="image vue rapprochée">
-      <div class="modal">
-          <div class="lightbox">
-            <button class="previous-btn" aria-label="précédent">
-              <span></span>
-              <span></span>
-            </button>
-            <button class="next-btn" aria-label="suivant">
-              <span></span>
-              <span></span>
-            </button>
-            <div class="close_lightbox-modal" tabindex="0">
-              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="closeBtn">
-                <title id="closeBtn">Fermer la lightbox</title>
-                <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
-              </svg>              
+      <div>
+        <div class="modal">
+            <div class="lightbox">
+              <button class="previous-btn" aria-label="précédent">
+                <span></span>
+                <span></span>
+              </button>
+              <button class="next-btn" aria-label="suivant">
+                <span></span>
+                <span></span>
+              </button>
+              <div class="close_lightbox-modal" tabindex="0">
+                <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="closeBtn">
+                  <title id="closeBtn">Fermer la lightbox</title>
+                  <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
+                </svg>              
+              </div>
             </div>
-          </div>
-      </div>
+        </div></div>
     </div>
     <!-- Factories -->
     <script src="scripts/factories/PhotographerFactory.js"></script>

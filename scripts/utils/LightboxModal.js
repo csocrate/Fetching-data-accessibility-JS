@@ -23,7 +23,7 @@ class LightboxModal extends Modal {
     this.$previousBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.previousControl();
-    });
+    });    
   }
 
   getModal() {
@@ -41,13 +41,25 @@ class LightboxModal extends Modal {
   }
 
   disableMedia() {
-    document.querySelector('.media a.active').classList.remove('active');
-    this.$lightboxContainer.querySelector('.slide').classList.remove('update');
-    this.$lightboxContainer.querySelector('.slide').remove();
+    const slide = this.$lightboxContainer.querySelector('.slide');
+
+    this.$mediaLinks
+      .forEach(mediaLink => {
+        if (mediaLink.classList.contains('active')) {
+          mediaLink.classList.remove('active');
+        }
+      });      
+
+    if (document.contains(slide)) {
+      if (slide.classList.contains('update')) {
+        slide.classList.remove('update');
+      }
+      slide.remove();
+    }
   }
   
   createSlide() {
-    const slideDom = document.createElement('div');
+    const slideDom = document.createElement('figure');
     slideDom.classList.add('slide');
     
     this.$mediaLinks
@@ -67,11 +79,11 @@ class LightboxModal extends Modal {
         if (link.classList.contains('active')) {
     
           if (link.getAttribute('data-media') === 'image') {
-            slideDom.innerHTML = '<img src"#" class="img_media" alt><p></p>';
+            slideDom.innerHTML = '<img src"#" class="img_media" alt><figcaption></figcaption>';
           }
       
           if (link.getAttribute('data-media') === 'video') {
-            slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><p></p>';
+            slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><figcaption></figcaption>';
           }
         }
     })
@@ -80,38 +92,58 @@ class LightboxModal extends Modal {
 
   showSlide() {
 
-    for (const child of document.querySelector('a.active').childNodes) {
-      const newSrc  = document.querySelector('.active').href;
-      const caption = document.querySelector('.active ~ figcaption').textContent;
+    const mediaLink   = this.$mediaLinks
+      .find(el => el.classList.contains('active'));
 
-      if (child.tagName === 'IMG') {
-        const newAlt  = document.querySelector('.active img').alt;
+    const figCaption  = mediaLink.nextElementSibling;
 
-        document.querySelector('.slide img').src = newSrc;
-        document.querySelector('.slide img').alt = newAlt;
-        document.querySelector('.slide p').textContent = caption;
+    for (const child of mediaLink.childNodes) {
+      
+      const newSrc  = mediaLink.href;
+      const caption = figCaption.textContent;
+      const slide   = this.$lightboxContainer.querySelector('.slide');
 
-      } else if (child.tagName === 'VIDEO') {
+      if (document.contains(slide)) {
 
-        document.querySelector('.slide video source').src = newSrc;
-        document.querySelector('.slide video ~ p').textContent = caption;
+        if (child.tagName === 'IMG') {
+          const newAlt  = document.querySelector('.active img').alt;
+  
+          slide.querySelector('img').src = newSrc;
+          slide.querySelector('img').alt = newAlt;
+          slide.querySelector('figcaption').textContent = caption;
+  
+        } else if (child.tagName === 'VIDEO') {
+  
+          slide.querySelector('video source').src = newSrc;
+          slide.querySelector('video ~ figcaption').textContent = caption;
+        }
       }
     }
   }
 
   updateToVideo() {
-    const slideDom = this.$lightboxContainer.querySelector('.slide.update');
-    slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><p></p>';
+    const updatedSlide = this.$lightboxContainer.querySelector('.slide.update');
+
+    if (document.contains(updatedSlide)) {
+      updatedSlide.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><figcaption></figcaption>';
+    }
   }
 
   updateToImage() {
-    const slideDom = this.$lightboxContainer.querySelector('.slide.update');
-    slideDom.innerHTML = '<img src"#" class="img_media" alt><p></p>';
+    const updatedSlide = this.$lightboxContainer.querySelector('.slide.update');
+
+    if (document.contains(updatedSlide)) {
+      updatedSlide.innerHTML = '<img src"#" class="img_media" alt><figcaption></figcaption>';
+    }
   }
 
   nextControl() {
-    if (!document.querySelector('.slide').classList.contains('update')) {
-      this.$lightboxContainer.querySelector('.slide').classList.add('update'); 
+    const slide = this.$lightboxContainer.querySelector('.slide');
+
+    if (document.contains(slide)) {
+      if (!slide.classList.contains('update')) {
+        slide.classList.add('update'); 
+      }
     }
 
     const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];
@@ -154,8 +186,12 @@ class LightboxModal extends Modal {
   }
 
   previousControl() {
-    if (!document.querySelector('.slide').classList.contains('update')) {
-      this.$lightboxContainer.querySelector('.slide').classList.add('update'); 
+    const slide = this.$lightboxContainer.querySelector('.slide');
+
+    if (document.contains(slide)) {
+      if (!slide.classList.contains('update')) {
+        slide.classList.add('update'); 
+      }
     }
 
     const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];

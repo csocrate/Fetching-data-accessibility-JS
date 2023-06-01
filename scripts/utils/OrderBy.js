@@ -3,7 +3,7 @@ class OrderBy {
   constructor(medias) {
     this._medias          = medias;
 
-    this.$select          = document.querySelector('.select-original');    
+    this.$select          = document.querySelector('.select-native');    
     this.$options         = Array.from(document.getElementsByTagName('option'));
     
     this.selectBoxes      = new SelectBoxes();
