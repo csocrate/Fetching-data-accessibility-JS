@@ -23,7 +23,7 @@ class LightboxModal extends Modal {
     this.$previousBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.previousControl();
-    });    
+    });
   }
 
   getModal() {
@@ -149,6 +149,12 @@ class LightboxModal extends Modal {
     const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];
     const firstLink = this.$mediaLinks[0];
 
+    const index = this.$mediaLinks
+      .findIndex(el => el.className === 'active');
+
+    const currentLink = this.$mediaLinks[index];
+    const nextLink    = index === this.$mediaLinks.length -1 ? firstLink : this.$mediaLinks[index + 1];
+
     if (lastLink.classList.contains('active')) {
       this.$mediaLinks
         .find(el => el === lastLink)
@@ -158,31 +164,21 @@ class LightboxModal extends Modal {
         .find(el => el === firstLink)
         .classList.add('active');
 
-      this.showSlide();
-
     } else {
-      const index = this.$mediaLinks
-        .findIndex(el => el.className === 'active');
-
-      const currentLink = this.$mediaLinks[index];
-      const nextLink    = this.$mediaLinks[index + 1];
-
-      if (nextLink.getAttribute('data-media') !== 'image') {
-        this.updateToVideo();
-      } 
-
-      if (nextLink.getAttribute('data-media') !== 'video') {
-        this.updateToImage();
-      } 
-
       this.$mediaLinks
         .find(el => el === currentLink).classList.remove('active');
 
       this.$mediaLinks
         .find(el => el === nextLink).classList.add('active');
-
-      this.showSlide();
     }
+
+    if (nextLink.getAttribute('data-media') !== 'image') {
+      this.updateToVideo();
+    } else if (nextLink.getAttribute('data-media') !== 'video') {
+      this.updateToImage();
+    }
+
+    this.showSlide();
   }
 
   previousControl() {
@@ -194,8 +190,14 @@ class LightboxModal extends Modal {
       }
     }
 
-    const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];
-    const firstLink = this.$mediaLinks[0];
+    const lastLink     = this.$mediaLinks[this.$mediaLinks.length -1];
+    const firstLink    = this.$mediaLinks[0];
+
+    const index        = this.$mediaLinks
+      .findIndex(el => el.className === 'active');
+
+    const currentLink  = this.$mediaLinks[index];
+    const previousLink = index === 0 ? lastLink : this.$mediaLinks[index - 1];
 
     if (firstLink.classList.contains('active')) {
       this.$mediaLinks
@@ -204,30 +206,22 @@ class LightboxModal extends Modal {
       this.$mediaLinks
         .find(el => el === lastLink).classList.add('active');
 
-      this.showSlide();
-
     } else {
-      const index        = this.$mediaLinks.findIndex(el => el.className === 'active');
-      const currentLink  = this.$mediaLinks[index];
-      const previousLink = this.$mediaLinks[index - 1];
-
-      if (previousLink.getAttribute('data-media') !== 'image') {
-        this.updateToVideo();
-      } 
-
-      if (previousLink.getAttribute('data-media') !== 'video') {
-        this.updateToImage();
-      } 
-
       this.$mediaLinks
         .find(el => el === currentLink)
         .classList.remove('active');
       this.$mediaLinks
         .find(el => el === previousLink)
         .classList.add('active');
-
-      this.showSlide();
     }
+
+    if (previousLink.getAttribute('data-media') !== 'image') {
+      this.updateToVideo();
+    } else if (previousLink.getAttribute('data-media') !== 'video') {
+      this.updateToImage();
+    } 
+
+    this.showSlide();
   }
 
   onKeyUpModal(e) {

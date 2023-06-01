@@ -109,6 +109,11 @@ class ContactForm extends Modal {
     if (result === true) {
       this.closeModal()
       console.log('Merci pour votre message.');
+
+      // To free focus on modal
+      const logoLink = document.querySelector('.site-header a')
+      logoLink.focus();
+
     } else {
       this.keepFocusInsideModal();
     }
@@ -151,7 +156,6 @@ class ContactForm extends Modal {
         }
       }
     });
-    // firstInsideFocusElement.focus();
   }
 
   init() {
