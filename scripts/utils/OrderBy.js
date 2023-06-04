@@ -17,28 +17,28 @@ class OrderBy {
   }
 
   updateSelectedOptions() {
-    const customSelectedOption = document.querySelector('.selected-option');
+    const selectedCustomOption = document.querySelector('.selected_custom-option');
 
     this.$options
       .forEach(option => {
-        if (option.selected) {
+        if (option.selected && option.hasAttribute('selected')) {
           option.removeAttribute('selected')
         }
     });
 
     this.$options
-      .filter(option => option.textContent === customSelectedOption.textContent)
+      .filter(option => option.textContent === selectedCustomOption.textContent)
       .map(selectedOption => selectedOption.toggleAttribute('selected'));
   }
 
-  updateCustomSelectedOptions(e) {
-    const customSelectedOption = document.querySelector('.selected-option');
+  updateselectedCustomOptions(e) {
+    const selectedCustomOption = document.querySelector('.selected_custom-option');
     const arrow                = this.selectBoxes.createArrowIcon();
     const customOptions        = Array
-      .from(document.querySelectorAll('.select-template div'));
+      .from(document.querySelectorAll('.custom-options div'));
 
-    customSelectedOption.innerHTML = e.target.innerHTML;    
-    customSelectedOption.appendChild(arrow);  
+    selectedCustomOption.innerHTML = e.target.innerHTML;
+    selectedCustomOption.appendChild(arrow);  
 
     customOptions
       .filter(el => el.className === 'selected-hidden')         
@@ -48,12 +48,12 @@ class OrderBy {
   }
 
   isDropdownVisible() {
-    const customSelectContainer = document.querySelector('.templates');
+    const customSelect = document.querySelector('.select-custom');
 
-    if (customSelectContainer.className !== 'templates') {
-      customSelectContainer.classList.remove('overflow');
+    if (customSelect.className !== 'select-custom') {
+      customSelect.classList.remove('overflow');
     } else {
-      customSelectContainer.classList.toggle('overflow');
+      customSelect.classList.toggle('overflow');
     }
   }
 
@@ -88,11 +88,10 @@ class OrderBy {
     const optionSelected = (mutationList) => {
       mutationList.forEach((mutation) => {
         switch (mutation.type) {
-          case "attributes":
+          case 'attributes':
             switch (mutation.attributeName) {
               case 'selected':
                 this.selectedOptionChange(mutation.target.selected);
-                // console.log(mutation.target.selected)
                 break;
             }
             break;
@@ -151,21 +150,120 @@ class OrderBy {
       });
   }
 
-  init() {
-    const customSelectedOption = document.querySelector('.selected-option');
-    const customOptions        = document.querySelectorAll('.select-template div');
+  syncSelectWithCustomSelect(option) {
+    const selectedCustomOption = document.querySelector('.selected_custom-option');
+    const arrow                = this.selectBoxes.createArrowIcon();
+    const customOptions        = Array
+      .from(document.querySelectorAll('.custom-options div'));
 
-    customSelectedOption.addEventListener('click', () => {
+    selectedCustomOption.textContent = option.textContent;
+    selectedCustomOption.appendChild(arrow);
+
+    customOptions
+      .forEach(customOption => {
+
+        if( customOption.hasAttribute('class')) {
+          customOption.removeAttribute('class');
+        }
+
+        customOption.innerHTML = '';
+      });
+
+    this.selectBoxes.setCustomOptions();
+  }
+
+  useSelectWithKeyboard(e) {
+    if (e.defaultPrevented) {
+      return; // Do nothing if the event was already processed
+    }
+
+    const firstOption          = this.$select[0];
+    const lastOption           = this.$select[this.$select.length -1];
+    const selectedIndex        = this.$select.selectedIndex;
+    const selectedOption       = this.$select[this.$select.selectedIndex];
+
+    const downOption = selectedIndex === lastOption ? firstOption : this.$select[selectedIndex + 1];
+
+    const upOption   = selectedIndex === 0 ? lastOption : this.$select[selectedIndex - 1];
+
+    if (e.key === 'ArrowDown') {
+
+      if (lastOption.hasAttribute('selected')) {
+
+        this.$options
+          .find(option => option === lastOption)
+          .removeAttribute('selected');
+  
+        this.$options
+          .find(option => option === firstOption)
+          .setAttribute('selected', '');
+
+        this.syncSelectWithCustomSelect(firstOption);
+
+      } else {
+        this.$options
+          .find(option => option === selectedOption)
+          .removeAttribute('selected');
+  
+        this.$options
+          .find(option => option === downOption)
+          .setAttribute('selected', '');
+
+        this.syncSelectWithCustomSelect(downOption);
+      }
+    } else if (e.key === 'ArrowUp') {
+
+      if (firstOption.hasAttribute('selected')) {
+
+        this.$options
+          .find(option => option === firstOption)
+          .removeAttribute('selected');
+  
+        this.$options
+          .find(option => option === lastOption)
+          .setAttribute('selected', '');
+
+        this.syncSelectWithCustomSelect(lastOption);
+
+      } else {
+        this.$options
+          .find(option => option === selectedOption).removeAttribute('selected');
+  
+        this.$options
+          .find(option => option === upOption).setAttribute('selected', '');
+
+        this.syncSelectWithCustomSelect(upOption);
+      }
+    } else if (e.key === 'Enter') {
+      this.isDropdownVisible();
+    } else if (e.key === 'Escape') {
+      this.$select.blur();
+      this.isDropdownVisible();
+    }
+
+    e.preventDefault();
+  }
+
+  init() {
+    const selectedCustomOption = document.querySelector('.selected_custom-option');
+    const customOptions        = Array.from(document.querySelectorAll('.custom-options div'));
+
+    selectedCustomOption.addEventListener('click', () => {
       this.isDropdownVisible();
     });
 
     customOptions
       .forEach( customOption => customOption.addEventListener('click', (e) => {
-        this.updateCustomSelectedOptions(e);
+        this.updateselectedCustomOptions(e);
         this.updateSelectedOptions();
         this.isDropdownVisible();
     }));
 
     this.handleMediasSort();
+
+    this.$select.addEventListener('keydown', e => {
+      this.useSelectWithKeyboard(e);
+    },
+    true);
   }
 }

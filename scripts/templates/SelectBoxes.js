@@ -19,19 +19,35 @@ class SelectBoxes {
     return arrow;
   }
 
-  createCustomSelectedOption() {
-    const customSelectedOption = document.createElement('div');
-    customSelectedOption.classList.add('selected-option');
+  addArrowToNativeSelect() {
+    const selectBoxesContainer = document.querySelector('.filter-bar > div')
+    const arrow                = this.createArrowIcon();
+    arrow.setAttribute('aria-hidden', 'true');
+
+    selectBoxesContainer.prepend(arrow);
+  }
+
+  createCustomSelect() {
+    const customSelect = document.createElement('div');
+    customSelect.classList.add('select-custom');
+    customSelect.setAttribute('aria-hidden', 'true');
+
+    return customSelect;
+  }
+
+  createSelectedCustomOption() {
+    const selectedCustomOption = document.createElement('div');
+    selectedCustomOption.classList.add('selected_custom-option');
 
     const arrow = this.createArrowIcon();
-    customSelectedOption.appendChild(arrow);
+    selectedCustomOption.appendChild(arrow);
 
-    return customSelectedOption;
+    return selectedCustomOption;
   }
 
   createCustomOptions() {
     const customOptions = document.createElement('div');
-    customOptions.classList.add('select-template');
+    customOptions.classList.add('custom-options');
 
     for (let i = 0; i < this.$options.length; i++) {
       const option = document.createElement('div');
@@ -42,25 +58,26 @@ class SelectBoxes {
   }
 
   displayCustomSelect() {
-    const createCustomSelectedOption = this.createCustomSelectedOption();
-    const createCustomOptions        = this.createCustomOptions();
-    const customSelectContainer      = document.createElement('div');
-    customSelectContainer.classList.add('templates');
+    const selectedCustomOption = this.createSelectedCustomOption();
+    const customOptions        = this.createCustomOptions();
+    const customSelect         = this.createCustomSelect();
+    const selectBoxesContainer = document.querySelector('.filter-bar > div')
 
-    customSelectContainer.appendChild(createCustomSelectedOption);
-    customSelectContainer.appendChild(createCustomOptions);
-    document.querySelector('.filter-bar > div').appendChild(customSelectContainer);
+    customSelect.appendChild(selectedCustomOption);
+    customSelect.appendChild(customOptions);
+    selectBoxesContainer.appendChild(customSelect);
   }
 
-  setCustomSelectedOption() {
-    const customSelectedOption = document.querySelector('.selected-option');
-
-    const index = this.$select.selectedIndex;
-    customSelectedOption.innerHTML += this.$select.options[index].textContent;
+  setselectedCustomOption() {
+    const selectedCustomOption = document.querySelector('.selected_custom-option');
+    const index                = this.$select.selectedIndex;
+    const selectedNativeOption = this.$select.options[index];
+        
+    selectedCustomOption.innerHTML += selectedNativeOption.textContent;
   }
 
   setCustomOptions() {
-    const customOptions = Array.from(document.querySelectorAll('.select-template div'));
+    const customOptions = Array.from(document.querySelectorAll('.custom-options div'));
 
     // Empty array to push all index of customOptions array on it
     const indexes = [];
@@ -81,7 +98,8 @@ class SelectBoxes {
 
   init() {
     this.displayCustomSelect();
-    this.setCustomSelectedOption();
+    this.setselectedCustomOption();
     this.setCustomOptions();
+    this.addArrowToNativeSelect();
   }
 }

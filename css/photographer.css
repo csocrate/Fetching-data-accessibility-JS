@@ -92,41 +92,82 @@ label[for="orderBy"] {
   padding-top: 1.25rem;
 }
 
+/* Select boxes*/
 .filter-bar > div {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
-  max-width: 260px;
+  max-width: 300px;
 }
 
 .filter-bar label[for="orderBy"] {
   font-weight: 600;
-  width: 35%;
   margin-right: 1.5rem;
 }
 
-.filter-bar .templates {
-  position: absolute;
-  top: -100%;
-  left: 90px;
-  width: 70%;
+.select-native,
+.select-custom {
+  width: 170px;
+  height: 70px;
   padding: .8rem;
   border-radius: 5px;
-  z-index: 100;
   background-color: #901C1C;
 }
 
-.select-template  {
-  display: none;
+.select-native {
+  font-weight: 600;
+  line-height: 1.2;
+  padding-left: 1.6rem;
+  appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  color: #fff;
 }
 
-.templates.overflow .select-template {
+.select-custom {
+  position: absolute;
+  top: 0;
+  left: 95px;
+  z-index: 100;
+}
+
+.select-custom.overflow {
+  height: 170px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.select-custom.overflow::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  display: block;
+  width: 140px;
+  height: 1px;
+  background-color: #fff;
+}
+
+.select-custom.overflow::after {
+  content: "";
+  position: absolute;
+  bottom: 35%;
+  display: block;
+  width: 140px;
+  height: 1px;
+  background-color: #fff;
+}
+
+.custom-options  {
+  display: none;
+  /* position: relative; */
+}
+
+.select-custom.overflow .custom-options {
   display: block;
 }
 
-.selected-option,
-.select-template div {
+.selected_custom-option,
+.custom-options div {
   font-size: 1.1em;
   font-weight: 600;
   line-height: 1.2;
@@ -136,22 +177,30 @@ label[for="orderBy"] {
   cursor: pointer;
 }
 
-.select-template div:first-child  {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+.custom-options div:last-child  {
+  margin-top: .4rem;
 }
 
-.select-template .selected-hidden {
+.custom-options .selected-hidden {
   display: none;
 }
 
 .select-arrow {
   position: absolute;
+}
+
+/* *Arrow icon for native select */
+.filter-bar > div > .select-arrow {
+  right: 54px;
+}
+
+/* *Arrow icon for custom select */
+.selected_custom-option .select-arrow {
   top: 35px;
   right: 20px;
 }
 
-.templates.overflow  .select-arrow {
+.select-custom.overflow  .select-arrow {
   transform: rotate(180deg);
   top: 28px;
 }
@@ -159,7 +208,7 @@ label[for="orderBy"] {
 .select-arrow span {
   display: block;
   width: .775rem;
-  height: 0.175rem;
+  height: .175rem;
   background-color: #fff;
 }
 
@@ -507,7 +556,7 @@ form p {
 
 .slide p {
   font-size: 24px;
-  margin-top: 0.35rem;
+  margin-top: .35rem;
   color: #901C1C;
 }
 
