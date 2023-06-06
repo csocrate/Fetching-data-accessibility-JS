@@ -1,4 +1,10 @@
-class ContactForm extends Modal {
+/**
+ * ------------------------------------------------------------
+ * Fisheye utils/ContactForm.js
+ * ------------------------------------------------------------
+ */
+
+ class ContactForm extends Modal {
   constructor(body, modal, launchingTarget, closingTarget, photographer) {
 
     super(body, modal, launchingTarget, closingTarget);
@@ -12,6 +18,10 @@ class ContactForm extends Modal {
     return this._photographer;
   }
 
+  /**
+   * Opens modal, add attributes and keep focus inside modal
+   * @see keepFocusInsideModal()
+   */
   launchModal() {
     super.launchModal();
     this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
@@ -20,11 +30,20 @@ class ContactForm extends Modal {
     this.keepFocusInsideModal() ;
   }
 
+  /**
+   * Adds photographer's name in banner
+   */
   createPhotographerName() {
     this.$modal.querySelector('.modal h2').textContent += ` ${this._photographer.name}`;
   }
 
+  /**
+   * Template contact form
+   * With error messages
+   */
   createContactForm() {
+    const fieldsContainer = this.$form.querySelector('div');
+
     const contactForm = `
       <label for='firstname'>
         Prénom
@@ -47,9 +66,18 @@ class ContactForm extends Modal {
       <textarea name='message' id='message' cols='30' rows='10' autocomplete='on' aria-required='true'></textarea>
       <p>Le champ message doit être renseigné</p>`;
 
-    this.$form.querySelector('div').innerHTML = contactForm;
+    fieldsContainer.innerHTML = contactForm;
   }
 
+  /**
+   * Check if fields are valid
+   * If not, errors message will appear on form submission
+   * Aria attributes depends on result about form submission
+   * The focus is keep inside modal if result is false
+   * If result is true, success message on console
+   * then focus cis put on logo
+   * @see keepFocusInsideModal()
+   */
   isInputNotEmpty() {
     const firstname = this.$form.firstname;
     const lastname  = this.$form.lastname;
@@ -119,13 +147,22 @@ class ContactForm extends Modal {
     }
   }
   
+/**
+ * Handle implementation form inputs and user responses
+ * when submit event is fires
+ */
   submitForm() {
     this.$form.addEventListener('submit', (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Prevent the form being submitted
       this.isInputNotEmpty();
     })
   }
 
+  /**
+   * Focus is keep between first and last form elements
+   * Until successfull submission
+   * Using Tab key
+   */
   keepFocusInsideModal() {
     const formElements            = 'input[type=text], input[type=email], textarea, button[type=submit]';
     const insideFocusElements     = Array
@@ -151,7 +188,7 @@ class ContactForm extends Modal {
         if (isTab) {  
           if (document.activeElement === lastInsideFocusElement) {
             firstInsideFocusElement.focus();
-            e.preventDefault();
+            e.preventDefault(); // Prevent losing focus
           }
         }
       }
