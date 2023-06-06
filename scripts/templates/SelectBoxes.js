@@ -1,11 +1,21 @@
+/**
+ * ------------------------------------------------------------
+ * Fisheye templates/SelectBoxes.js
+ * ------------------------------------------------------------
+ */
+
 class SelectBoxes {
   constructor() {
-    this.$select      = document.querySelector('.select-native');
-    this.$options     = Array.from(document.getElementsByTagName('option'));
+    this.$select  = document.querySelector('.select-native');
+    this.$options = Array.from(document.getElementsByTagName('option'));
 
     this.init();
   }
 
+  /**
+   * Custom select's arrow icon for both select boxes
+   * @returns {HTMLElement} - arrow
+   */
   createArrowIcon() {
     const arrow = document.createElement('div');
     arrow.classList.add('select-arrow');
@@ -19,7 +29,10 @@ class SelectBoxes {
     return arrow;
   }
 
-  addArrowToNativeSelect() {
+  /**
+   * For select that must have same arrow icon as custom select
+   */
+  addArrowToSelect() {
     const selectBoxesContainer = document.querySelector('.filter-bar > div')
     const arrow                = this.createArrowIcon();
     arrow.setAttribute('aria-hidden', 'true');
@@ -27,6 +40,9 @@ class SelectBoxes {
     selectBoxesContainer.prepend(arrow);
   }
 
+  /**
+   * @returns {HTMLElement} - customSelect
+   */
   createCustomSelect() {
     const customSelect = document.createElement('div');
     customSelect.classList.add('select-custom');
@@ -35,6 +51,10 @@ class SelectBoxes {
     return customSelect;
   }
 
+  /**
+   * Selected option for custom select
+   * @returns {HTMLElement} - selectedCustomOption
+   */
   createSelectedCustomOption() {
     const selectedCustomOption = document.createElement('div');
     selectedCustomOption.classList.add('selected_custom-option');
@@ -45,6 +65,10 @@ class SelectBoxes {
     return selectedCustomOption;
   }
 
+  /**
+   * Options for custom select
+   * @returns {HTMLElement} - customOptions
+   */
   createCustomOptions() {
     const customOptions = document.createElement('div');
     customOptions.classList.add('custom-options');
@@ -57,6 +81,9 @@ class SelectBoxes {
     return customOptions;
   }
 
+  /**
+   * Custom select with empty elements
+   */
   displayCustomSelect() {
     const selectedCustomOption = this.createSelectedCustomOption();
     const customOptions        = this.createCustomOptions();
@@ -68,14 +95,22 @@ class SelectBoxes {
     selectBoxesContainer.appendChild(customSelect);
   }
 
+  /**
+   * Custom select will have same selected option 
+   * as the native
+   */
   setselectedCustomOption() {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
     const index                = this.$select.selectedIndex;
-    const selectedNativeOption = this.$select.options[index];
+    const selectedOption       = this.$select.options[index];
         
-    selectedCustomOption.innerHTML += selectedNativeOption.textContent;
+    selectedCustomOption.innerHTML += selectedOption.textContent;
   }
 
+  /**
+   * Custom select will have same options
+   * as the native
+   */
   setCustomOptions() {
     const customOptions = Array.from(document.querySelectorAll('.custom-options div'));
 
@@ -100,6 +135,6 @@ class SelectBoxes {
     this.displayCustomSelect();
     this.setselectedCustomOption();
     this.setCustomOptions();
-    this.addArrowToNativeSelect();
+    this.addArrowToSelect();
   }
 }

@@ -1,5 +1,10 @@
-class OrderBy {
+/**
+ * ------------------------------------------------------------
+ * Fisheye utils/OrderBy.js
+ * ------------------------------------------------------------
+ */
 
+class OrderBy {
   constructor(medias) {
     this._medias          = medias;
 
@@ -16,7 +21,11 @@ class OrderBy {
     return this._medias;
   }
 
-  updateSelectedOptions() {
+  /**
+   * When click on one of the custom options: 
+   * Native select will have same selected option as the custom
+   */
+  updateSelectedOption() {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
 
     this.$options
@@ -31,7 +40,11 @@ class OrderBy {
       .map(selectedOption => selectedOption.toggleAttribute('selected'));
   }
 
-  updateselectedCustomOptions(e) {
+  /**
+   * When click on one of the custom options: 
+   * Custom select will have a selected option updated
+   */
+  updateselectedCustomOption(e) {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
     const arrow                = this.selectBoxes.createArrowIcon();
     const customOptions        = Array
@@ -41,13 +54,16 @@ class OrderBy {
     selectedCustomOption.appendChild(arrow);  
 
     customOptions
-      .filter(el => el.className === 'selected-hidden')         
-      .map(el => el.removeAttribute('class'));
+      .filter(customOption => customOption.className === 'selected-hidden')         
+      .map(customOption => customOption.removeAttribute('class'));
 
     e.target.className = 'selected-hidden';
   }
 
-  isDropdownVisible() {
+  /**
+   * Shows or hide custom options list
+   */
+  isCustomOptionsListVisible() {
     const customSelect = document.querySelector('.select-custom');
 
     if (customSelect.className !== 'select-custom') {
@@ -62,6 +78,10 @@ class OrderBy {
     this.observeSelectedOptionChange();
   }
 
+  /**
+   * Inits medias displaying
+   * By the default selected option
+   */
   selectedOptionByDefault() {
         
     this.resetMediasDisplay();
@@ -75,6 +95,12 @@ class OrderBy {
     this.displayMediaPortFolioData();
   }
 
+  /**
+   * Uses MutationObserver to watch for changes
+   * Being made to select box
+   * A way then to update medias displaying sorted by selected index
+   * @see selectedOptionChange()
+   */
   observeSelectedOptionChange() {
 
     // Describe which DOM mutations should be reported to mutationObserver's callback
@@ -103,6 +129,10 @@ class OrderBy {
     observer.observe(this.$select, optionsObserver);
   }
 
+  /**
+   * Sorts medias by selected index updated
+   * About select box
+   */
   selectedOptionChange() {
 
     this.resetMediasDisplay();
@@ -135,11 +165,18 @@ class OrderBy {
     this.displayMediaPortFolioData();
   }
 
+  /**
+   * Cleans medias section
+   * Before update medias displaying
+   */
   resetMediasDisplay() {
     const mediaSection = document.querySelector('.media_section');
     mediaSection.innerHTML = '';
   }
 
+  /**
+   * Medias displaying will be updated by sort
+   */
   displayMediaPortFolioData() {
     this._medias
       .forEach(media => {
@@ -150,6 +187,11 @@ class OrderBy {
       });
   }
 
+  /**
+   * When select is used with keyboard, this syncs select box with custom select
+   * And keeps custom appareance for users using keyboard with ou without assistive technologies
+   * @param {HTMLElement} option - option element
+   */
   syncSelectWithCustomSelect(option) {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
     const arrow                = this.selectBoxes.createArrowIcon();
@@ -172,15 +214,25 @@ class OrderBy {
     this.selectBoxes.setCustomOptions();
   }
 
-  useSelectWithKeyboard(e) {
-    if (e.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
+  /**
+   * @typedef {object} KeyboardEvent
+   */
 
-    const firstOption          = this.$select[0];
-    const lastOption           = this.$select[this.$select.length -1];
-    const selectedIndex        = this.$select.selectedIndex;
-    const selectedOption       = this.$select[this.$select.selectedIndex];
+  /**
+   * With keyboard allows navigate or select with Arrow keys,
+   * display or select with Enter and cancel with Escape
+   * @see syncSelectWithCustomSelect(option)
+   * @param {KeyboardEvent} e 
+   * @returns - Do nothing if the event was already processed
+   */
+  useSelectWithKeyboard(e) {
+    
+    const customSelect   = document.querySelector('.select-custom');
+
+    const firstOption    = this.$select[0];
+    const lastOption     = this.$select[this.$select.length -1];
+    const selectedIndex  = this.$select.selectedIndex;
+    const selectedOption = this.$select[this.$select.selectedIndex];
 
     const downOption = selectedIndex === lastOption ? firstOption : this.$select[selectedIndex + 1];
 
@@ -211,6 +263,9 @@ class OrderBy {
 
         this.syncSelectWithCustomSelect(downOption);
       }
+
+      e.preventDefault();
+
     } else if (e.key === 'ArrowUp') {
 
       if (firstOption.hasAttribute('selected')) {
@@ -234,14 +289,20 @@ class OrderBy {
 
         this.syncSelectWithCustomSelect(upOption);
       }
-    } else if (e.key === 'Enter') {
-      this.isDropdownVisible();
-    } else if (e.key === 'Escape') {
-      this.$select.blur();
-      this.isDropdownVisible();
-    }
 
-    e.preventDefault();
+      e.preventDefault();
+
+    } else if (e.key === 'Enter') {
+      // Shows custom options list 
+      this.isCustomOptionsListVisible();
+
+      e.preventDefault(); // prevent select action  on Enter key
+      e.stopPropagation(); // stop prevent select action  on Enter key
+
+    } else if (e.key === 'Tab') {
+        // Hides custom options list
+        customSelect.classList.remove('overflow');
+    }
   }
 
   init() {
@@ -249,21 +310,20 @@ class OrderBy {
     const customOptions        = Array.from(document.querySelectorAll('.custom-options div'));
 
     selectedCustomOption.addEventListener('click', () => {
-      this.isDropdownVisible();
+      this.isCustomOptionsListVisible();
     });
 
     customOptions
       .forEach( customOption => customOption.addEventListener('click', (e) => {
-        this.updateselectedCustomOptions(e);
-        this.updateSelectedOptions();
-        this.isDropdownVisible();
+        this.updateselectedCustomOption(e);
+        this.updateSelectedOption();
+        this.isCustomOptionsListVisible();
     }));
 
     this.handleMediasSort();
 
     this.$select.addEventListener('keydown', e => {
       this.useSelectWithKeyboard(e);
-    },
-    true);
+    });
   }
 }
