@@ -1,4 +1,10 @@
-class Likes {
+/**
+ * ------------------------------------------------------------
+ * Fisheye utils/Likes.js
+ * ------------------------------------------------------------
+ */
+
+ class Likes {
   constructor() {
     this._counter     = 0;
     this.$countersDom = document.querySelectorAll('.media .counter');
@@ -7,6 +13,10 @@ class Likes {
     this.onKeyEnterLikeIcon();
   }
 
+  /**
+   * Returns a number according to action value
+   * @returns {number}
+   */
   counter(action) {
     if (action === 'LIKE') {
       this._counter = 1;
@@ -16,6 +26,10 @@ class Likes {
     return this._counter;
   }
 
+  /**
+   * Handle total counters on photographer widget
+   * Handle toggle "like" on media by user
+   */
   handleCounters() {
     // Gets origin total likes
     const totalCounterDom       = document.querySelector('.photograph-widget .counter');
@@ -58,6 +72,9 @@ class Likes {
     });
   }
 
+  /**
+   * Using Keyboard to like or dislike media
+   */
   onKeyEnterLikeIcon() {
     this.$likeIcons
       .forEach(likeIcon => {

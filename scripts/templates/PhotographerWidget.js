@@ -1,4 +1,13 @@
-class PhotographerWidget {
+/**
+ * ------------------------------------------------------------
+ * Fisheye templates/PhotographerWidget.js
+ * ------------------------------------------------------------
+ */
+
+ class PhotographerWidget {
+   /**
+    * @param {Object} photographer - list of objects from .json file
+    */
   constructor(photographer) {
     this._photographer = photographer;
   }
@@ -7,7 +16,10 @@ class PhotographerWidget {
     return this._photographer;
   }
 
-
+  /**
+   * Template photographer widget
+   * @returns {HTMLElement} - div (photographer widget container)
+   */
   createPhotographerWidget() {
 
     const div = document.createElement('div');
