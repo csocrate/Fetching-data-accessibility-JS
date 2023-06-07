@@ -1,4 +1,13 @@
-class PhotographerBanner {
+/**
+ * ------------------------------------------------------------
+ * Fisheye templates/PhotographerBanner.js
+ * ------------------------------------------------------------
+ */
+
+ class PhotographerBanner {
+   /**
+    * @param {Object} photographer - list of objects from .json file
+    */
   constructor(photographer) {
     this._photographer = photographer
   }
@@ -7,6 +16,10 @@ class PhotographerBanner {
     return this._photographer
   }
 
+  /**
+   * Returns photographer banner template
+   * @returns {HTMLElement} - banner
+   */
   createPhotographerBanner() {
 
     const description = document.createElement('div')

@@ -17,7 +17,7 @@
   }
 
   /**
-   * Template photographer widget
+   * Returns photographer widget template
    * @returns {HTMLElement} - div (photographer widget container)
    */
   createPhotographerWidget() {

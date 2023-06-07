@@ -1,4 +1,13 @@
-class MediaPortfolio {
+/**
+ * ------------------------------------------------------------
+ * Fisheye templates/MediaPortfolio.js
+ * ------------------------------------------------------------
+ */
+
+ class MediaPortfolio {
+   /**
+   * @param {Object} medias - list of objects from .json file
+    */
   constructor(media) {
     this._media = media;
   }
@@ -7,6 +16,10 @@ class MediaPortfolio {
     return this._media;
   }
 
+  /**
+   * Returns Media card template
+   * @returns {HTMLElement} - mediaContent
+   */
   createMediaPortfolio() {
 
     const mediaContent = document.createElement('div');

@@ -13,7 +13,7 @@ class SelectBoxes {
   }
 
   /**
-   * Custom select's arrow icon for both select boxes
+   * Returns custom select's arrow icon for both select boxes
    * @returns {HTMLElement} - arrow
    */
   createArrowIcon() {
@@ -41,6 +41,7 @@ class SelectBoxes {
   }
 
   /**
+   * Returns custom select
    * @returns {HTMLElement} - customSelect
    */
   createCustomSelect() {
@@ -52,7 +53,7 @@ class SelectBoxes {
   }
 
   /**
-   * Selected option for custom select
+   * Returns selected option for custom select
    * @returns {HTMLElement} - selectedCustomOption
    */
   createSelectedCustomOption() {
@@ -66,7 +67,7 @@ class SelectBoxes {
   }
 
   /**
-   * Options for custom select
+   * Returns options for custom select
    * @returns {HTMLElement} - customOptions
    */
   createCustomOptions() {

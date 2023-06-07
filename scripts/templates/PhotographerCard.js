@@ -1,5 +1,14 @@
-class PhotographerCard {
-  constructor(photographer) {
+/**
+ * ------------------------------------------------------------
+ * Fisheye templates/PhotographerCard.js
+ * ------------------------------------------------------------
+ */
+
+ class PhotographerCard {
+  /**
+   * @param {Object} photographer - list of objects from .json file
+   */
+ constructor(photographer) {
     this._photographer = photographer
   }
 
@@ -7,6 +16,10 @@ class PhotographerCard {
     return this._photographer
   }
 
+  /**
+   * Returns photographer card template
+   * @returns {HTMLElement} - article
+   */
   createPhotographerCard() {
 
     const a = document.createElement('a');
