@@ -5,6 +5,10 @@
  */
 
  class Likes {
+
+   /**
+    * @see onKeyEnterLikeIcon()
+    */
   constructor() {
     this._counter     = 0;
     this.$countersDom = document.querySelectorAll('.media .counter');

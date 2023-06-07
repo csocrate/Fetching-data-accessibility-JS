@@ -1,4 +1,17 @@
-class Modal {
+/**
+ * ------------------------------------------------------------
+ * Fisheye utils/Modal.js
+ * ------------------------------------------------------------
+ */
+
+ class Modal {
+   /**
+    * @param {HTMLElement} body - body element
+    * @param {HTMLElement} modal - modal element
+    * @param {HTMLElement} launchingTarget - trigger element that opens modal
+    * @param {HTMLElement} closingTarget - trigger element that close modal
+    * @see getModal()
+    */
   constructor(body, modal, launchingTarget, closingTarget) {
     this.$body            = document.querySelector(body);
     this.$modal           = document.querySelector(modal);
@@ -7,6 +20,9 @@ class Modal {
     this.getModal();
   }
 
+  /**
+   * Opens modal, adds attributes
+   */
   launchModal() {
     this.$modal.style.display = 'flex';
 
@@ -21,6 +37,9 @@ class Modal {
     this.$closingTarget.setAttribute('aria-expanded', 'true');
   }
 
+  /**
+   * Closes modal, updates attribute
+   */
   closeModal() {
     this.$modal.style.display = 'none';
 
@@ -34,6 +53,11 @@ class Modal {
     this.$closingTarget.setAttribute('aria-expanded', 'false');
   }
 
+  /**
+   * Closes modal with keyboard event
+   * @see closeModal()
+   * @param {KeyboardEvent} e 
+   */
   onKeyUpModal(e) {
     if (this.$modal.style.display !== 'none') {
       if (e.key === 'Escape') {
@@ -42,6 +66,13 @@ class Modal {
     }
   }
 
+  /**
+   * Opens and closes modal with mouse event
+   * Closes modal with keyboard event
+   * @see launchModal()
+   * @see closeModal()
+   * @see onKeyUpModal()
+   */
   getModal() {
     this.$launchingTarget
       .forEach(btn => btn.addEventListener('click', e => {
