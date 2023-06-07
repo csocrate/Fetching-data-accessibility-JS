@@ -1,21 +1,28 @@
-class IndexApp {
+/**
+ * ------------------------------------------------------------
+ * Fisheye IndexApp.js
+ * ------------------------------------------------------------
+ */
+
+ class IndexApp {
   constructor() {
-    this.dataApi  = new DataApi("/data/photographers.json")
-    this.homePage = new HomePage()
+    this.dataApi  = new DataApi("/data/photographers.json");
+    this.homePage = new HomePage();
   }
 
   async init() {
-    const photographersData = await this.dataApi.photographersFetch()
+    const photographersData = await this.dataApi.photographersFetch();
 
     photographersData
       .map(photographer => new PhotographerFactory(photographer, "photographers"))
       .forEach(photographer => {
-        const photographerCard  = new PhotographerCard(photographer)
-        const photographerModel = photographerCard.createPhotographerCard();
+        const card             = new PhotographerCard(photographer);
+        const photographerCard = card.createPhotographerCard();
 
-        this.homePage.displayData(photographerModel)
+        // Displays photographer card with data on homepage
+        this.homePage.displayData(photographerCard);
       })
   }
 }
-const indexApp = new IndexApp()
-indexApp.init()
+const indexApp = new IndexApp();
+indexApp.init();

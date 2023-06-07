@@ -1,4 +1,10 @@
-class PhotographerApp {
+/**
+ * ------------------------------------------------------------
+ * Fisheye PhotographerApp.js
+ * ------------------------------------------------------------
+ */
+
+ class PhotographerApp {
   mediaData = undefined;
 
   constructor() {
@@ -18,13 +24,15 @@ class PhotographerApp {
     if (photographer) {
       photographer             = new PhotographerFactory(photographer, 'photographer');
 
-      const banner             = new PhotographerBanner(photographer);
-      const photographerBanner = banner.createPhotographerBanner();
-      this.photographerPage.displayPhotographerData(photographerBanner);
+      // Displays photographer banner with data on photographer page
+      const photographerBanner = new PhotographerBanner(photographer);
+      const banner             = photographerBanner.createPhotographerBanner();
+      this.photographerPage.displayPhotographerData(banner);
 
-      const widget             = new PhotographerWidget(photographer);
-      const photographerWidget = widget.createPhotographerWidget();
-      this.photographerPage.displayPhotograherDataWidget(photographerWidget);
+      // Displays photographer widget with data on photographer page
+      const photographerWidget = new PhotographerWidget(photographer);
+      const widget             = photographerWidget.createPhotographerWidget();
+      this.photographerPage.displayPhotograherDataWidget(widget);
   
       const form               = new ContactForm(
         'body', 
@@ -61,10 +69,10 @@ class PhotographerApp {
   displayMediaPortFolioData() {
     this.mediaData
       .forEach(media => {
-        // Media portfolio
-        const portfolio      = new MediaPortfolio(media);
-        const mediaPortfolio = portfolio.createMediaPortfolio();
-        this.photographerPage.displayMediaData(mediaPortfolio);
+        // Displays photographer's medias with data on photographer page
+        const mediaPortfolio = new MediaPortfolio(media);
+        const portfolio      = mediaPortfolio.createMediaPortfolio();
+        this.photographerPage.displayMediaData(portfolio);
       });
   }
 }
