@@ -1,4 +1,17 @@
-class LightboxModal extends Modal {
+/**
+ * ------------------------------------------------------------
+ * Fisheye utils/LightboxModal.js
+ * ------------------------------------------------------------
+ */
+
+ class LightboxModal extends Modal {
+  /**
+   * 
+   * @param {HTMLElement} body - body element
+   * @param {HTMLElement} modal - modal element
+   * @param {HTMLElement} launchingTarget - trigger element that opens modal
+   * @param {HTMLElement} closingTarget - trigger element that close modal
+   */
   constructor(
     body, 
     modal, 
@@ -13,19 +26,28 @@ class LightboxModal extends Modal {
     this.$lightboxContainer = document.querySelector(".lightbox");
     
     /**
-     * Handle lightbox control buttons
+     * @see nextControl()
      */
      this.$nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.nextControl();
     });
 
+    /**
+     * @see previousControl()
+     */
     this.$previousBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.previousControl();
     });
   }
 
+  /**
+   * Update getModal() method defined on the parent object
+   * To Create lightbox container and its contents
+   * @see createSlide()
+   * @see showSlide()
+   */
   getModal() {
     super.getModal();
 
@@ -40,6 +62,10 @@ class LightboxModal extends Modal {
     }));
   }
 
+  /**
+   * When lightbox modal will be closed, 
+   * cleans all that display slide
+   */
   disableMedia() {
     const slide = this.$lightboxContainer.querySelector('.slide');
 
@@ -58,6 +84,9 @@ class LightboxModal extends Modal {
     }
   }
   
+  /**
+   * Template slide
+   */
   createSlide() {
     const slideDom = document.createElement('figure');
     slideDom.classList.add('slide');
@@ -79,7 +108,7 @@ class LightboxModal extends Modal {
         if (link.classList.contains('active')) {
     
           if (link.getAttribute('data-media') === 'image') {
-            slideDom.innerHTML = '<img src"#" class="img_media" alt><figcaption></figcaption>';
+            slideDom.innerHTML = '<img src="#" class="img_media" alt><figcaption></figcaption>';
           }
       
           if (link.getAttribute('data-media') === 'video') {
@@ -90,6 +119,9 @@ class LightboxModal extends Modal {
   this.$lightboxContainer.prepend(slideDom);
   }
 
+  /**
+   * Sets media's source, media's name and caption
+   */
   showSlide() {
 
     const mediaLink   = this.$mediaLinks
@@ -121,6 +153,9 @@ class LightboxModal extends Modal {
     }
   }
 
+  /**
+   * Changes current media for video when slide is updated on controls
+   */
   updateToVideo() {
     const updatedSlide = this.$lightboxContainer.querySelector('.slide.update');
 
@@ -129,6 +164,9 @@ class LightboxModal extends Modal {
     }
   }
 
+  /**
+   * Changes current media for image when slide is updated on controls
+   */
   updateToImage() {
     const updatedSlide = this.$lightboxContainer.querySelector('.slide.update');
 
@@ -137,6 +175,12 @@ class LightboxModal extends Modal {
     }
   }
 
+  /**
+   * Handle next control on lightbox
+   * @see updateToVideo()
+   * @see updateToImage()
+   * @see showSlide()
+   */
   nextControl() {
     const slide = this.$lightboxContainer.querySelector('.slide');
 
@@ -181,6 +225,12 @@ class LightboxModal extends Modal {
     this.showSlide();
   }
 
+  /**
+   * Handle previous control on lightbox
+   * @see updateToVideo()
+   * @see updateToImage()
+   * @see showSlide()
+   */
   previousControl() {
     const slide = this.$lightboxContainer.querySelector('.slide');
 
@@ -224,12 +274,18 @@ class LightboxModal extends Modal {
     this.showSlide();
   }
 
+  /**
+   * @see closeModal()
+   * @see nextControl()
+   * @see previousControl()
+   * @param {KeyboardEvent} e 
+   */
   onKeyUpModal(e) {
     super.onKeyUpModal(e);
     
     if (this.$modal.style.display !== 'none') {
       if (e.key === 'Escape') {
-        this.closeModal(e);
+        this.closeModal();
       } else if (e.key === 'ArrowLeft') {
         this.previousControl();
       } else if (e.key === 'ArrowRight') {
@@ -238,6 +294,10 @@ class LightboxModal extends Modal {
     }
   }
 
+  /**
+   * Update closeModal() method defined on the parent object
+   * @see disableMedia()
+   */
   closeModal() {
     super.closeModal();
     this.disableMedia();

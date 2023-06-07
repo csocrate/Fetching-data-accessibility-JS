@@ -5,9 +5,12 @@
  */
 
 class OrderBy {
+  /**
+   * @param {Object} medias - list of objects from .json file
+   */
   constructor(medias) {
     this._medias          = medias;
-
+    
     this.$select          = document.querySelector('.select-native');    
     this.$options         = Array.from(document.getElementsByTagName('option'));
     

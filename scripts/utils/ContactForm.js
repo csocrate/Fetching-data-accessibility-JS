@@ -5,6 +5,13 @@
  */
 
  class ContactForm extends Modal {
+   /**
+    * @param {HTMLElement} body - body element
+    * @param {HTMLElement} modal - modal element
+    * @param {HTMLElement} launchingTarget - trigger element that opens modal
+    * @param {HTMLElement} closingTarget - trigger element that close modal
+    * @param {Object} photographer - list of objects from .json file
+    */
   constructor(body, modal, launchingTarget, closingTarget, photographer) {
 
     super(body, modal, launchingTarget, closingTarget);
