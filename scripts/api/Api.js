@@ -1,16 +1,22 @@
-class Api {
+/**
+ * ------------------------------------------------------------
+ * Fisheye api/Api.js
+ * ------------------------------------------------------------
+ */
+
+ class Api {
   data =undefined;
   
   /**
-   * 
-   * @param {string} url
+   * Gets data from the URL
+   * @param {string} url - URL to the path from json file
    */
   constructor(url) {
     this._url = url
   }
 
   /**
-   * 
+   * Returns data from the URL
    * @returns {object} Promise
    */
   async get() {
