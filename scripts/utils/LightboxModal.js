@@ -3,10 +3,13 @@
  * Fisheye utils/LightboxModal.js
  * ------------------------------------------------------------
  */
-
+ 
+/**
+ * @extends Modal
+ */
  class LightboxModal extends Modal {
   /**
-   * 
+   * Create a lightbox modal
    * @param {HTMLElement} body - body element
    * @param {HTMLElement} modal - modal element
    * @param {HTMLElement} launchingTarget - trigger element that opens modal

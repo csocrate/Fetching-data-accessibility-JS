@@ -4,7 +4,7 @@
  * ------------------------------------------------------------
  */
 
- class Modal {
+class Modal {
    /**
     * @param {HTMLElement} body - body element
     * @param {HTMLElement} modal - modal element

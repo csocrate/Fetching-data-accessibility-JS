@@ -4,8 +4,13 @@
  * ------------------------------------------------------------
  */
 
- class ContactForm extends Modal {
+ /**
+ * @extends Modal
+ * @see Photographer
+ */
+  class ContactForm extends Modal {
    /**
+    * Create a contact form modal
     * @param {HTMLElement} body - body element
     * @param {HTMLElement} modal - modal element
     * @param {HTMLElement} launchingTarget - trigger element that opens modal
@@ -21,6 +26,7 @@
     this.$form = document.querySelector('form');    
   }
 
+  // Gets photographer's properties
   get photographer() {
     return this._photographer;
   }
