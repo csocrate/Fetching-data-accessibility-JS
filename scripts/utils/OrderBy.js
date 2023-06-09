@@ -4,7 +4,7 @@
  * ------------------------------------------------------------
  */
 
-class OrderBy {
+ class OrderBy {
   /**
    * @param {Object} medias - list of objects from .json file
    */
@@ -106,7 +106,7 @@ class OrderBy {
    */
   observeSelectedOptionChange() {
 
-    // Describe which DOM mutations should be reported to mutationObserver's callback
+    // Describes which DOM mutations should be reported to mutationObserver's callback
     const optionsObserver = {
       subtree: true,
       attributeOldValue: true,
@@ -115,20 +115,19 @@ class OrderBy {
 
     // MutationObserver's callback
     const optionSelected = (mutationList) => {
-      mutationList.forEach((mutation) => {
-        switch (mutation.type) {
-          case 'attributes':
-            switch (mutation.attributeName) {
-              case 'selected':
-                this.selectedOptionChange(mutation.target.selected);
-                break;
-            }
-            break;
-        }
-      });
+
+      // Finds mutation about selected attribute
+      const mutation = mutationList.find(mutation => mutation.type === 'attributes'
+        && mutation.attributeName === 'selected'
+        && mutation.target.selected);
+
+      if (mutation) {
+        this.selectedOptionChange(mutation.target.selected);
+      }
     }
 
-    const observer = new MutationObserver(optionSelected)
+    const observer = new MutationObserver(optionSelected);
+    // Observes mutation on selected option
     observer.observe(this.$select, optionsObserver);
   }
 
@@ -165,7 +164,12 @@ class OrderBy {
           return 0;
         });
     }
+
     this.displayMediaPortFolioData();
+    
+    // Likes counters
+    const likes = new Likes();
+    likes.handleCounters();
   }
 
   /**
@@ -327,6 +331,36 @@ class OrderBy {
 
     this.$select.addEventListener('keydown', e => {
       this.useSelectWithKeyboard(e);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     });
   }
 }
