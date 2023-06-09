@@ -37,7 +37,14 @@
 
   // Gets media image and media title or media video with HTML markup
   get formatDom() {
-    return this._image ? `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">` : `<video controls class="video_media"><source src="assets/medias/${this._video}" type="video/mp4"></video>`
+    const imgDom   = `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">`;
+    const videoDom = `
+      <video class="video_media">
+        <source src="assets/medias/${this._video}" type="video/mp4">
+        <p>Votre navigateur ne prend pas en charge les vidéos HTML5</p>
+      </video>`;
+
+    return this._image ? imgDom : videoDom;
   }
 
   // Gets media image or media video with path
