@@ -4,7 +4,7 @@
  * ------------------------------------------------------------
  */
 
- class PhotographerApp {
+class PhotographerApp {
   mediaData = undefined;
 
   constructor() {
@@ -16,10 +16,11 @@
     const photographersData = await this.dataApi.photographersFetch();
     const mediaData         = await this.dataApi.mediaFetch();
 
-    const params         = (new URL(document.location)).searchParams;
-    const photographerId = params.get('id');
+    const params            = (new URL(document.location)).searchParams;
+    const photographerId    = params.get('id');
 
-    let photographer = photographersData.find(photographer => photographer.id == photographerId)
+    let photographer = photographersData
+      .find(photographer => photographer.id == photographerId)
 
     if (photographer) {
       photographer             = new PhotographerFactory(photographer, 'photographer');
@@ -54,7 +55,8 @@
     // Medias sort
     new OrderBy(this.mediaData);
       
-    const lightboxModal  = new LightboxModal(
+    // Lightbox modal
+    new LightboxModal(
       'body', 
       '#lightbox_modal', 
       '.media a',

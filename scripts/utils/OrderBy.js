@@ -330,37 +330,7 @@
     this.handleMediasSort();
 
     this.$select.addEventListener('keydown', e => {
-      this.useSelectWithKeyboard(e);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
+      this.useSelectWithKeyboard(e);    
     });
   }
 }
