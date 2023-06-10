@@ -4,17 +4,17 @@
  * ------------------------------------------------------------
  */
 
- class OrderBy {
+class OrderBy {
   /**
    * @param {Object} medias - list of objects from .json file
    */
   constructor(medias) {
-    this._medias          = medias;
-    
-    this.$select          = document.querySelector('.select-native');    
-    this.$options         = Array.from(document.getElementsByTagName('option'));
-    
-    this.selectBoxes      = new SelectBoxes();
+    this._medias = medias;
+
+    this.$select = document.querySelector('.select-native');
+    this.$options = Array.from(document.getElementsByTagName('option'));
+
+    this.selectBoxes = new SelectBoxes();
     this.photographerPage = new PhotographerPage();
 
     this.init();
@@ -36,7 +36,7 @@
         if (option.selected && option.hasAttribute('selected')) {
           option.removeAttribute('selected')
         }
-    });
+      });
 
     this.$options
       .filter(option => option.textContent === selectedCustomOption.textContent)
@@ -49,15 +49,15 @@
    */
   updateselectedCustomOption(e) {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
-    const arrow                = this.selectBoxes.createArrowIcon();
-    const customOptions        = Array
+    const arrow = this.selectBoxes.createArrowIcon();
+    const customOptions = Array
       .from(document.querySelectorAll('.custom-options div'));
 
     selectedCustomOption.innerHTML = e.target.innerHTML;
-    selectedCustomOption.appendChild(arrow);  
+    selectedCustomOption.appendChild(arrow);
 
     customOptions
-      .filter(customOption => customOption.className === 'selected-hidden')         
+      .filter(customOption => customOption.className === 'selected-hidden')
       .map(customOption => customOption.removeAttribute('class'));
 
     e.target.className = 'selected-hidden';
@@ -86,15 +86,15 @@
    * By the default selected option
    */
   selectedOptionByDefault() {
-        
+
     this.resetMediasDisplay();
-    
-    if (this.$select.selectedIndex === 0) {      
+
+    if (this.$select.selectedIndex === 0) {
 
       this._medias
-        .sort((a,b) => b.likes - a.likes);
+        .sort((a, b) => b.likes - a.likes);
     }
-    
+
     this.displayMediaPortFolioData();
   }
 
@@ -142,17 +142,17 @@
     if (this.$select.selectedIndex === 0) {
 
       this._medias
-        .sort((a,b) => b.likes - a.likes);
+        .sort((a, b) => b.likes - a.likes);
 
     } else if (this.$select.selectedIndex === 1) {
 
       this._medias
-        .sort((a,b) => new Date(b.date) - new Date(a.date));  
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     } else if (this.$select.selectedIndex === 2) {
 
       this._medias
-        .sort((a,b) => {
+        .sort((a, b) => {
           if (a.title < b.title) {
             return -1;
           }
@@ -164,20 +164,20 @@
           return 0;
         });
     }
-    
-    this.displayMediaPortFolioData();    
-    
+
+    this.displayMediaPortFolioData();
+
     // Likes counters
     const likes = new Likes();
     likes.handleCounters();
 
     // Lightbox modal
     new LightboxModal(
-      'body', 
-      '#lightbox_modal', 
+      'body',
+      '#lightbox_modal',
       '.media a',
       '#lightbox_modal svg'
-      );
+    );
   }
 
   /**
@@ -196,7 +196,7 @@
     this._medias
       .forEach(media => {
         // Media portfolio
-        const portfolio      = new MediaPortfolio(media);
+        const portfolio = new MediaPortfolio(media);
         const mediaPortfolio = portfolio.createMediaPortfolio();
         this.photographerPage.displayMediaData(mediaPortfolio);
       });
@@ -209,8 +209,8 @@
    */
   syncSelectWithCustomSelect(option) {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
-    const arrow                = this.selectBoxes.createArrowIcon();
-    const customOptions        = Array
+    const arrow = this.selectBoxes.createArrowIcon();
+    const customOptions = Array
       .from(document.querySelectorAll('.custom-options div'));
 
     selectedCustomOption.textContent = option.textContent;
@@ -219,7 +219,7 @@
     customOptions
       .forEach(customOption => {
 
-        if( customOption.hasAttribute('class')) {
+        if (customOption.hasAttribute('class')) {
           customOption.removeAttribute('class');
         }
 
@@ -241,17 +241,17 @@
    * @returns - Do nothing if the event was already processed
    */
   useSelectWithKeyboard(e) {
-    
-    const customSelect   = document.querySelector('.select-custom');
 
-    const firstOption    = this.$select[0];
-    const lastOption     = this.$select[this.$select.length -1];
-    const selectedIndex  = this.$select.selectedIndex;
+    const customSelect = document.querySelector('.select-custom');
+
+    const firstOption = this.$select[0];
+    const lastOption = this.$select[this.$select.length - 1];
+    const selectedIndex = this.$select.selectedIndex;
     const selectedOption = this.$select[this.$select.selectedIndex];
 
     const downOption = selectedIndex === lastOption ? firstOption : this.$select[selectedIndex + 1];
 
-    const upOption   = selectedIndex === 0 ? lastOption : this.$select[selectedIndex - 1];
+    const upOption = selectedIndex === 0 ? lastOption : this.$select[selectedIndex - 1];
 
     if (e.key === 'ArrowDown') {
 
@@ -260,7 +260,7 @@
         this.$options
           .find(option => option === lastOption)
           .removeAttribute('selected');
-  
+
         this.$options
           .find(option => option === firstOption)
           .setAttribute('selected', '');
@@ -271,7 +271,7 @@
         this.$options
           .find(option => option === selectedOption)
           .removeAttribute('selected');
-  
+
         this.$options
           .find(option => option === downOption)
           .setAttribute('selected', '');
@@ -288,7 +288,7 @@
         this.$options
           .find(option => option === firstOption)
           .removeAttribute('selected');
-  
+
         this.$options
           .find(option => option === lastOption)
           .setAttribute('selected', '');
@@ -298,7 +298,7 @@
       } else {
         this.$options
           .find(option => option === selectedOption).removeAttribute('selected');
-  
+
         this.$options
           .find(option => option === upOption).setAttribute('selected', '');
 
@@ -315,30 +315,30 @@
       // e.stopPropagation(); // stop prevent select action  on Enter key
 
     } else if (e.key === 'Tab') {
-        // Hides custom options list
-        customSelect.classList.remove('overflow');
+      // Hides custom options list
+      customSelect.classList.remove('overflow');
     }
   }
 
   init() {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
-    const customOptions        = Array.from(document.querySelectorAll('.custom-options div'));
+    const customOptions = Array.from(document.querySelectorAll('.custom-options div'));
 
     selectedCustomOption.addEventListener('click', () => {
       this.isCustomOptionsListVisible();
     });
 
     customOptions
-      .forEach( customOption => customOption.addEventListener('click', (e) => {
+      .forEach(customOption => customOption.addEventListener('click', (e) => {
         this.updateselectedCustomOption(e);
         this.updateSelectedOption();
         this.isCustomOptionsListVisible();
-    }));
+      }));
 
     this.handleMediasSort();
 
     this.$select.addEventListener('keydown', e => {
-      this.useSelectWithKeyboard(e);    
+      this.useSelectWithKeyboard(e);
     });
   }
 }

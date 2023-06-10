@@ -4,9 +4,9 @@
  * ------------------------------------------------------------
  */
 
- class HomePage {
+class HomePage {
   constructor() {
-    this.$photographerSection = document.querySelector(".photographer_section")
+    this.$photographerSection = document.querySelector('.photographer_section');
   }
 
   /**

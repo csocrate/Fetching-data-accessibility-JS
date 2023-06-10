@@ -4,15 +4,15 @@
  * ------------------------------------------------------------
  */
 
- class Api {
-  data =undefined;
-  
+class Api {
+  data = undefined;
+
   /**
    * Gets data from the URL
    * @param {string} url - URL to the path from json file
    */
   constructor(url) {
-    this._url = url
+    this._url = url;
   }
 
   /**

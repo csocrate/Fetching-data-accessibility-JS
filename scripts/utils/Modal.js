@@ -5,18 +5,18 @@
  */
 
 class Modal {
-   /**
-    * @param {HTMLElement} body - body element
-    * @param {HTMLElement} modal - modal element
-    * @param {HTMLElement} launchingTarget - trigger element that opens modal
-    * @param {HTMLElement} closingTarget - trigger element that close modal
-    * @see getModal()
-    */
+  /**
+   * @param {HTMLElement} body - body element
+   * @param {HTMLElement} modal - modal element
+   * @param {HTMLElement} launchingTarget - trigger element that opens modal
+   * @param {HTMLElement} closingTarget - trigger element that close modal
+   * @see getModal()
+   */
   constructor(body, modal, launchingTarget, closingTarget) {
-    this.$body            = document.querySelector(body);
-    this.$modal           = document.querySelector(modal);
+    this.$body = document.querySelector(body);
+    this.$modal = document.querySelector(modal);
     this.$launchingTarget = document.querySelectorAll(launchingTarget);
-    this.$closingTarget   = document.querySelector(closingTarget);
+    this.$closingTarget = document.querySelector(closingTarget);
     this.getModal();
   }
 
@@ -31,7 +31,7 @@ class Modal {
     // ARIA
     this.$body.querySelector('header').setAttribute('aria-hidden', 'true');
     this.$body.querySelector('main').setAttribute('aria-hidden', 'true');
-    
+
     this.$modal.setAttribute('aria-hidden', 'false');
     this.$modal.setAttribute('aria-modal', 'true');
     this.$closingTarget.setAttribute('aria-expanded', 'true');
@@ -78,7 +78,7 @@ class Modal {
       .forEach(btn => btn.addEventListener('click', e => {
         e.preventDefault();
         this.launchModal();
-    }));
+      }));
 
     this.$closingTarget.addEventListener('click', e => {
       e.preventDefault();

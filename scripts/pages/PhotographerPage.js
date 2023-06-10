@@ -4,11 +4,11 @@
  * ------------------------------------------------------------
  */
 
- class PhotographerPage {
+class PhotographerPage {
   constructor() {
-    this.$photographHeader  = document.querySelector(".photograph-header");
-    this.$mediaSection      = document.querySelector(".media_section");
-    this.$photographWidget  = document.querySelector(".photograph-widget");
+    this.$photographHeader = document.querySelector('.photograph-header');
+    this.$mediaSection = document.querySelector('.media_section');
+    this.$photographWidget = document.querySelector('.photograph-widget');
   }
 
   /**
@@ -34,7 +34,7 @@
    * With data
    * @param {HTMLElement} photographerWidget 
    */
-   async displayPhotograherDataWidget(photographerWidget) {
+  async displayPhotograherDataWidget(photographerWidget) {
     this.$photographWidget.appendChild(photographerWidget);
   }
 }

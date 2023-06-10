@@ -4,10 +4,10 @@
  * ------------------------------------------------------------
  */
 
- class PhotographerBanner {
-   /**
-    * @param {Object} photographer - list of objects from .json file
-    */
+class PhotographerBanner {
+  /**
+   * @param {Object} photographer - list of objects from .json file
+   */
   constructor(photographer) {
     this._photographer = photographer
   }
@@ -28,19 +28,19 @@
     const h1 = document.createElement('h1')
     h1.textContent = this._photographer.name
 
-    const h2 = document.createElement( 'h2' );
+    const h2 = document.createElement('h2');
     h2.classList.add('photographer-location')
     h2.textContent = `${this._photographer.city}, ${this._photographer.country}`;
 
-    const p = document.createElement( 'p' )
+    const p = document.createElement('p')
     p.textContent = this._photographer.tagline
 
     const contactButton = document.querySelector('.contact_button')
 
     const imgContainer = document.createElement('div');
     imgContainer.classList.add('img-container');
-    
-    const img = document.createElement( 'img' );
+
+    const img = document.createElement('img');
     img.setAttribute('src', this._photographer.portrait);
     img.setAttribute('alt', this._photographer.name);
 

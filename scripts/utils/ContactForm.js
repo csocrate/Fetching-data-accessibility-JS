@@ -4,26 +4,26 @@
  * ------------------------------------------------------------
  */
 
- /**
- * @extends Modal
- * @see Photographer
- */
-  class ContactForm extends Modal {
-   /**
-    * Create a contact form modal
-    * @param {HTMLElement} body - body element
-    * @param {HTMLElement} modal - modal element
-    * @param {HTMLElement} launchingTarget - trigger element that opens modal
-    * @param {HTMLElement} closingTarget - trigger element that close modal
-    * @param {Object} photographer - list of objects from .json file
-    */
+/**
+* @extends Modal
+* @see Photographer
+*/
+class ContactForm extends Modal {
+  /**
+   * Create a contact form modal
+   * @param {HTMLElement} body - body element
+   * @param {HTMLElement} modal - modal element
+   * @param {HTMLElement} launchingTarget - trigger element that opens modal
+   * @param {HTMLElement} closingTarget - trigger element that close modal
+   * @param {Object} photographer - list of objects from .json file
+   */
   constructor(body, modal, launchingTarget, closingTarget, photographer) {
 
     super(body, modal, launchingTarget, closingTarget);
 
-    this._photographer  = photographer;
+    this._photographer = photographer;
 
-    this.$form = document.querySelector('form');    
+    this.$form = document.querySelector('form');
   }
 
   // Gets photographer's properties
@@ -40,7 +40,7 @@
     this.$closingTarget.setAttribute('aria-label', 'Fermer le formulaire de contact');
     this.$closingTarget.setAttribute('title', 'Fermer le formulaire de contact');
 
-    this.keepFocusInsideModal() ;
+    this.keepFocusInsideModal();
   }
 
   /**
@@ -93,9 +93,9 @@
    */
   isInputNotEmpty() {
     const firstname = this.$form.firstname;
-    const lastname  = this.$form.lastname;
-    const email     = this.$form.email;
-    const message   = this.$form.message;
+    const lastname = this.$form.lastname;
+    const email = this.$form.email;
+    const message = this.$form.message;
 
     let result = true;
 
@@ -159,11 +159,11 @@
       this.keepFocusInsideModal();
     }
   }
-  
-/**
- * Handle implementation form inputs and user responses
- * when submit event is fires
- */
+
+  /**
+   * Handle implementation form inputs and user responses
+   * when submit event is fires
+   */
   submitForm() {
     this.$form.addEventListener('submit', (e) => {
       e.preventDefault(); // Prevent the form being submitted
@@ -177,28 +177,28 @@
    * Using Tab key
    */
   keepFocusInsideModal() {
-    const formElements            = 'input[type=text], input[type=email], textarea, button[type=submit]';
-    const insideFocusElements     = Array
+    const formElements = 'input[type=text], input[type=email], textarea, button[type=submit]';
+    const insideFocusElements = Array
       .from(this.$modal.querySelectorAll(formElements));
 
     const firstInsideFocusElement = insideFocusElements[0];
-    const lastInsideFocusElement  = insideFocusElements[insideFocusElements.length -1];
-    
+    const lastInsideFocusElement = insideFocusElements[insideFocusElements.length - 1];
+
     if (this.$body.classList.contains('visible_modal')) {
       this.$modal.focus();
-    }    
-    
+    }
+
     this.$modal.addEventListener('keydown', e => {
 
       if (this.$modal.style.display !== 'none') {
-      
+
         let isTab = e.key === 'Tab' || e.code === 9;
-        
+
         if (!isTab) {
           return;
         }
-    
-        if (isTab) {  
+
+        if (isTab) {
           if (document.activeElement === lastInsideFocusElement) {
             firstInsideFocusElement.focus();
             e.preventDefault(); // Prevent losing focus

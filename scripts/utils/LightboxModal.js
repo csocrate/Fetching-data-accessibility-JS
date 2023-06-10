@@ -3,11 +3,11 @@
  * Fisheye utils/LightboxModal.js
  * ------------------------------------------------------------
  */
- 
+
 /**
  * @extends Modal
  */
- class LightboxModal extends Modal {
+class LightboxModal extends Modal {
   /**
    * Create a lightbox modal
    * @param {HTMLElement} body - body element
@@ -16,22 +16,22 @@
    * @param {HTMLElement} closingTarget - trigger element that close modal
    */
   constructor(
-    body, 
-    modal, 
-    launchingTarget, 
+    body,
+    modal,
+    launchingTarget,
     closingTarget
-    ) {
+  ) {
     super(body, modal, launchingTarget, closingTarget);
 
-    this.$nextBtn           = document.querySelector('.next-btn');
-    this.$previousBtn       = document.querySelector('.previous-btn');
-    this.$mediaLinks        = Array.from(document.querySelectorAll('.media a'));
-    this.$lightboxContainer = document.querySelector(".modal .lightbox");
-    
+    this.$nextBtn = document.querySelector('.next-btn');
+    this.$previousBtn = document.querySelector('.previous-btn');
+    this.$mediaLinks = Array.from(document.querySelectorAll('.media a'));
+    this.$lightboxContainer = document.querySelector('.modal .lightbox');
+
     /**
      * @see nextControl()
      */
-     this.$nextBtn.addEventListener('click', (e) => {
+    this.$nextBtn.addEventListener('click', (e) => {
       e.preventDefault();
       this.nextControl();
     });
@@ -60,9 +60,9 @@
         this.$body.classList.add('lightbox');
 
         link.classList.add('active');
-        this.createSlide(); 
+        this.createSlide();
         this.showSlide();
-    }));
+      }));
   }
 
   /**
@@ -77,7 +77,7 @@
         if (mediaLink.classList.contains('active')) {
           mediaLink.classList.remove('active');
         }
-      });      
+      });
 
     if (document.contains(slide)) {
       if (slide.classList.contains('update')) {
@@ -86,39 +86,39 @@
       slide.remove();
     }
   }
-  
+
   /**
    * Template slide
    */
   createSlide() {
     const slideDom = document.createElement('figure');
     slideDom.classList.add('slide');
-    
+
     this.$mediaLinks
       .filter(el => el.querySelector('img'))
-      .forEach( el => {
+      .forEach(el => {
         el.dataset.media = 'image';
       });
 
     this.$mediaLinks
       .filter(el => el.querySelector('video'))
-      .forEach( el => {
+      .forEach(el => {
         el.dataset.media = 'video';
       });
-    
+
     this.$mediaLinks
       .forEach(link => {
         if (link.classList.contains('active')) {
-    
+
           if (link.getAttribute('data-media') === 'image') {
             slideDom.innerHTML = '<img src="#" class="img_media" alt><figcaption></figcaption>';
           }
-      
+
           if (link.getAttribute('data-media') === 'video') {
             slideDom.innerHTML = '<video controls class="video_media"><source src"#" type="video/mp4"></video><figcaption></figcaption>';
           }
         }
-    })
+      })
     this.$lightboxContainer.prepend(slideDom);
   }
 
@@ -127,28 +127,28 @@
    */
   showSlide() {
 
-    const mediaLink   = this.$mediaLinks
+    const mediaLink = this.$mediaLinks
       .find(el => el.classList.contains('active'));
 
-    const figCaption  = mediaLink.nextElementSibling;
+    const figCaption = mediaLink.nextElementSibling;
 
     for (const child of mediaLink.childNodes) {
-      
-      const newSrc  = mediaLink.href;
+
+      const newSrc = mediaLink.href;
       const caption = figCaption.textContent;
-      const slide   = this.$lightboxContainer.querySelector('.slide');
+      const slide = this.$lightboxContainer.querySelector('.slide');
 
       if (document.contains(slide)) {
 
         if (child.tagName === 'IMG') {
-          const newAlt  = document.querySelector('.active img').alt;
-  
+          const newAlt = document.querySelector('.active img').alt;
+
           slide.querySelector('img').src = newSrc;
           slide.querySelector('img').alt = newAlt;
           slide.querySelector('figcaption').textContent = caption;
-  
+
         } else if (child.tagName === 'VIDEO') {
-  
+
           slide.querySelector('video source').src = newSrc;
           slide.querySelector('video ~ figcaption').textContent = caption;
         }
@@ -189,18 +189,18 @@
 
     if (document.contains(slide)) {
       if (!slide.classList.contains('update')) {
-        slide.classList.add('update'); 
+        slide.classList.add('update');
       }
     }
 
-    const lastLink  = this.$mediaLinks[this.$mediaLinks.length -1];
+    const lastLink = this.$mediaLinks[this.$mediaLinks.length - 1];
     const firstLink = this.$mediaLinks[0];
 
     const index = this.$mediaLinks
       .findIndex(el => el.className === 'active');
 
     const currentLink = this.$mediaLinks[index];
-    const nextLink    = index === this.$mediaLinks.length -1 ? firstLink : this.$mediaLinks[index + 1];
+    const nextLink = index === this.$mediaLinks.length - 1 ? firstLink : this.$mediaLinks[index + 1];
 
     if (lastLink.classList.contains('active')) {
       this.$mediaLinks
@@ -239,17 +239,17 @@
 
     if (document.contains(slide)) {
       if (!slide.classList.contains('update')) {
-        slide.classList.add('update'); 
+        slide.classList.add('update');
       }
     }
 
-    const lastLink     = this.$mediaLinks[this.$mediaLinks.length -1];
-    const firstLink    = this.$mediaLinks[0];
+    const lastLink = this.$mediaLinks[this.$mediaLinks.length - 1];
+    const firstLink = this.$mediaLinks[0];
 
-    const index        = this.$mediaLinks
+    const index = this.$mediaLinks
       .findIndex(el => el.className === 'active');
 
-    const currentLink  = this.$mediaLinks[index];
+    const currentLink = this.$mediaLinks[index];
     const previousLink = index === 0 ? lastLink : this.$mediaLinks[index - 1];
 
     if (firstLink.classList.contains('active')) {
@@ -272,7 +272,7 @@
       this.updateToVideo();
     } else if (previousLink.getAttribute('data-media') !== 'video') {
       this.updateToImage();
-    } 
+    }
 
     this.showSlide();
   }
@@ -285,7 +285,7 @@
    */
   onKeyUpModal(e) {
     super.onKeyUpModal(e);
-    
+
     if (this.$modal.style.display !== 'none') {
       if (e.key === 'Escape') {
         this.closeModal();

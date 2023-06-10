@@ -4,10 +4,10 @@
  * ------------------------------------------------------------
  */
 
- /**
- * @extends Api
- */
- class DataApi extends Api {
+/**
+* @extends Api
+*/
+class DataApi extends Api {
   /**
    * Gets data photographers from the URL
    * Gets data media from the URL
@@ -21,19 +21,19 @@
    * Returns data photographers from the URL
    * @async
    * @returns {Object} this.data.photographers
-   */  
+   */
   async photographersFetch() {
     if (!this.data) {
       await this.get();
     }
     return this.data.photographers;
   }
-  
+
   /**
    * Returns data media from the URL
    * @async
    * @returns {Object} this.data.media
-   */  
+   */
   async mediaFetch() {
     if (!this.data) {
       await this.get();

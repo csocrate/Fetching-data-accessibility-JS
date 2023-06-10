@@ -4,19 +4,19 @@
  * ------------------------------------------------------------
  */
 
- class Photographer {
+class Photographer {
   /**
    * To create getters of photographers properties
    * @param {Object} data - list of objects from .json file
    */
- constructor(data) {
-    this._name     = data.name
-    this._id       = data.id
+  constructor(data) {
+    this._name = data.name
+    this._id = data.id
     this._portrait = data.portrait
-    this._city     = data.city
-    this._country  = data.country
-    this._tagline  = data.tagline
-    this._price    = data.price
+    this._city = data.city
+    this._country = data.country
+    this._tagline = data.tagline
+    this._price = data.price
   }
 
   // Gets photographer name

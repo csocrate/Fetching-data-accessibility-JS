@@ -4,16 +4,16 @@
  * ------------------------------------------------------------
  */
 
- class Likes {
+class Likes {
 
-   /**
-    * @see onKeyEnterLikeIcon()
-    */
+  /**
+   * @see onKeyEnterLikeIcon()
+   */
   constructor() {
-    this._counter     = 0;
+    this._counter = 0;
     this.$countersDom = document.querySelectorAll('.media .counter');
-    this.$likeIcons   = document.querySelectorAll('.media[data-id] .fa-heart');
-    
+    this.$likeIcons = document.querySelectorAll('.media[data-id] .fa-heart');
+
     this.onKeyEnterLikeIcon();
   }
 
@@ -36,13 +36,13 @@
    */
   handleCounters() {
     // Gets origin total likes
-    const totalCounterDom       = document.querySelector('.photograph-widget .counter');
-    const arrayCounters         = Array
-                                    .from(this.$countersDom, el => el.textContent)
-                                    .map(el => parseInt(el, 10));
-    
+    const totalCounterDom = document.querySelector('.photograph-widget .counter');
+    const arrayCounters = Array
+      .from(this.$countersDom, el => el.textContent)
+      .map(el => parseInt(el, 10));
+
     totalCounterDom.textContent = arrayCounters.reduce((a, b) => a + b, 0);
-      
+
     // Returns media likes and total media likes on repectives DOM counters
     this.$likeIcons
       .forEach(likeIcon => {
@@ -52,28 +52,28 @@
         likeIcon.addEventListener('click', e => {
           e.preventDefault();
 
-          const currentLike         = parseInt(counterDom.textContent);
+          const currentLike = parseInt(counterDom.textContent);
           const currentTotalCounter = parseInt(totalCounterDom.textContent);
-          const mediaLikes          = counterDom.textContent;
-          const totalMediaLikes     = totalCounterDom.textContent;
-          const result              = {
+          const mediaLikes = counterDom.textContent;
+          const totalMediaLikes = totalCounterDom.textContent;
+          const result = {
             mediaLikes,
             totalMediaLikes
           }
-          
+
           const liked = likeIcon.toggleAttribute('data-liked');
-    
-          if (!liked) {                             
-            counterDom.textContent      = currentLike + this.counter('DISLIKE');
+
+          if (!liked) {
+            counterDom.textContent = currentLike + this.counter('DISLIKE');
             totalCounterDom.textContent = currentTotalCounter + this.counter('DISLIKE');
             return result
-          } else {              
-            counterDom.textContent      = currentLike + this.counter('LIKE');
+          } else {
+            counterDom.textContent = currentLike + this.counter('LIKE');
             totalCounterDom.textContent = currentTotalCounter + this.counter('LIKE');
             return result
           }
         })
-    });
+      });
   }
 
   /**

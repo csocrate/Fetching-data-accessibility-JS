@@ -4,10 +4,10 @@
  * ------------------------------------------------------------
  */
 
- class MediaPortfolio {
-   /**
-   * @param {Object} medias - list of objects from .json file
-    */
+class MediaPortfolio {
+  /**
+  * @param {Object} medias - list of objects from .json file
+   */
   constructor(media) {
     this._media = media;
   }
@@ -28,23 +28,23 @@
 
     const figure = document.createElement('figure');
 
-    const figcaption = document.createElement('figcaption');  
+    const figcaption = document.createElement('figcaption');
     figcaption.textContent = this._media.title;
-    
+
     const likes = document.createElement('div');
-    
+
     const span = document.createElement('span');
     span.classList.add('counter');
     span.textContent = this._media.likes;
-    
+
     const icon = document.createElement('span');
-    icon.classList.add('fa','fa-heart');
+    icon.classList.add('fa', 'fa-heart');
     icon.setAttribute('tabindex', '0');
 
     const a = document.createElement('a');
     a.setAttribute('aria-label', `${this._media.title}, vue rapprochée`);
     a.innerHTML = this._media.formatDom;
-    a.href      = this._media.format;
+    a.href = this._media.format;
 
     figure.appendChild(a);
     figure.appendChild(figcaption);

@@ -4,20 +4,20 @@
  * ------------------------------------------------------------
  */
 
- class Media {
-   /**
-    * To create getters of media properties
-    * @param {Object} data - list of objects from .json file
-    */
+class Media {
+  /**
+   * To create getters of media properties
+   * @param {Object} data - list of objects from .json file
+   */
   constructor(data) {
-    this._id             = data.id
+    this._id = data.id
     this._photographerId = data.photographerId
-    this._title          = data.title
-    this._image          = data.image
-    this._video          = data.video
-    this._likes          = data.likes
-    this._date           = data.date
-    this._price          = data.price
+    this._title = data.title
+    this._image = data.image
+    this._video = data.video
+    this._likes = data.likes
+    this._date = data.date
+    this._price = data.price
   }
 
   // Gets media id
@@ -37,7 +37,7 @@
 
   // Gets media image and media title or media video with HTML markup
   get formatDom() {
-    const imgDom   = `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">`;
+    const imgDom = `<img src="assets/medias/${this._image}" class="img_media" alt="${this._title}">`;
     const videoDom = `
       <video class="video_media">
         <source src="assets/medias/${this._video}" type="video/mp4">

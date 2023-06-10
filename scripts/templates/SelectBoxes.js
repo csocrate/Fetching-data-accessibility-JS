@@ -6,7 +6,7 @@
 
 class SelectBoxes {
   constructor() {
-    this.$select  = document.querySelector('.select-native');
+    this.$select = document.querySelector('.select-native');
     this.$options = Array.from(document.getElementsByTagName('option'));
 
     this.init();
@@ -20,9 +20,9 @@ class SelectBoxes {
     const arrow = document.createElement('div');
     arrow.classList.add('select-arrow');
 
-    const arrowLeft  = document.createElement('span');
+    const arrowLeft = document.createElement('span');
     const arrowRight = document.createElement('span');
-    
+
     arrow.appendChild(arrowLeft);
     arrow.appendChild(arrowRight);
 
@@ -34,7 +34,7 @@ class SelectBoxes {
    */
   addArrowToSelect() {
     const selectBoxesContainer = document.querySelector('.filter-bar > div')
-    const arrow                = this.createArrowIcon();
+    const arrow = this.createArrowIcon();
     arrow.setAttribute('aria-hidden', 'true');
 
     selectBoxesContainer.prepend(arrow);
@@ -87,8 +87,8 @@ class SelectBoxes {
    */
   displayCustomSelect() {
     const selectedCustomOption = this.createSelectedCustomOption();
-    const customOptions        = this.createCustomOptions();
-    const customSelect         = this.createCustomSelect();
+    const customOptions = this.createCustomOptions();
+    const customSelect = this.createCustomSelect();
     const selectBoxesContainer = document.querySelector('.filter-bar > div')
 
     customSelect.appendChild(selectedCustomOption);
@@ -102,9 +102,9 @@ class SelectBoxes {
    */
   setselectedCustomOption() {
     const selectedCustomOption = document.querySelector('.selected_custom-option');
-    const index                = this.$select.selectedIndex;
-    const selectedOption       = this.$select.options[index];
-        
+    const index = this.$select.selectedIndex;
+    const selectedOption = this.$select.options[index];
+
     selectedCustomOption.innerHTML += selectedOption.textContent;
   }
 
@@ -118,8 +118,8 @@ class SelectBoxes {
     // Empty array to push all index of customOptions array on it
     const indexes = [];
 
-    customOptions.forEach( (optionTemplate, index) => {
-      if (this.$options.length >= index ) {
+    customOptions.forEach((optionTemplate, index) => {
+      if (this.$options.length >= index) {
         optionTemplate.innerHTML += this.$options[index].textContent;
       }
 
