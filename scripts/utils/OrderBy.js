@@ -164,12 +164,20 @@
           return 0;
         });
     }
-
-    this.displayMediaPortFolioData();
+    
+    this.displayMediaPortFolioData();    
     
     // Likes counters
     const likes = new Likes();
     likes.handleCounters();
+
+    // Lightbox modal
+    new LightboxModal(
+      'body', 
+      '#lightbox_modal', 
+      '.media a',
+      '#lightbox_modal svg'
+      );
   }
 
   /**
@@ -304,7 +312,7 @@
       this.isCustomOptionsListVisible();
 
       e.preventDefault(); // prevent select action  on Enter key
-      e.stopPropagation(); // stop prevent select action  on Enter key
+      // e.stopPropagation(); // stop prevent select action  on Enter key
 
     } else if (e.key === 'Tab') {
         // Hides custom options list

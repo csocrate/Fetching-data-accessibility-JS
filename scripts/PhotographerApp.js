@@ -44,7 +44,7 @@ class PhotographerApp {
         );       
       form.init();
       form.createPhotographerName();
-    }      
+    }
 
     this.mediaData = mediaData
       .filter(media => media.photographerId == photographerId)
@@ -54,6 +54,10 @@ class PhotographerApp {
     
     // Medias sort
     new OrderBy(this.mediaData);
+    
+    // Likes counters
+    const likes = new Likes();
+    likes.handleCounters();
       
     // Lightbox modal
     new LightboxModal(
@@ -62,10 +66,6 @@ class PhotographerApp {
       '.media a',
       '#lightbox_modal svg'
       );
-    
-    // Likes counters
-    const likes = new Likes();
-    likes.handleCounters();
   }
 
   displayMediaPortFolioData() {

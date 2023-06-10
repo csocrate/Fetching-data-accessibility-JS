@@ -26,7 +26,7 @@
     this.$nextBtn           = document.querySelector('.next-btn');
     this.$previousBtn       = document.querySelector('.previous-btn');
     this.$mediaLinks        = Array.from(document.querySelectorAll('.media a'));
-    this.$lightboxContainer = document.querySelector(".lightbox");
+    this.$lightboxContainer = document.querySelector(".modal .lightbox");
     
     /**
      * @see nextControl()
@@ -119,7 +119,7 @@
           }
         }
     })
-  this.$lightboxContainer.prepend(slideDom);
+    this.$lightboxContainer.prepend(slideDom);
   }
 
   /**
