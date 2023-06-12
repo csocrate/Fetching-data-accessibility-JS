@@ -1,21 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Fisheye</title>
+    <meta name="description"  content="Découvrez les photographes freelances et leurs talents.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link  type="text/css" rel="stylesheet" href="css/style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&amp;display=swap">
   </head>
   <body>
     <header>
-        <img src="assets/images/logo.png" class="logo" />
+      <div class="site-header">
+        <a href="/">
+          <img src="assets/images/logo.png" class="logo" alt="FishEye Home page">
+        </a>
         <h1>Nos photographes</h1>
+      </div>
     </header>
     <main id="main">
         <div class="photographer_section"></div>
     </main>
-    <script src="scripts/factories/photographer.js"></script>
-    <script src="scripts/pages/index.js"></script>
+    <!-- Factories -->
+    <script src="scripts/factories/PhotographerFactory.js"></script>
+    <!-- Models -->
+    <script src="scripts/models/Photographer.js"></script>
+    <!-- Api -->
+    <script src="scripts/api/Api.js"></script>
+    <script src="scripts/api/DataApi.js"></script>
+    <!-- Templates -->
+    <script src="scripts/templates/PhotographerCard.js"></script>
+    <!-- Pages -->
+    <script src="scripts/pages/HomePage.js"></script>
+    <!-- Entry point -->
+    <script src="scripts/IndexApp.js"></script>
   </body>
 </html>

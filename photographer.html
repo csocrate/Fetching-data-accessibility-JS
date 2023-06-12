@@ -1,37 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fisheye - photographe</title>
+    <meta name="description"  content="Découvrez les productions de votre photographe et contactez-le pour des évènements ou des tirages.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">    
+    <link  type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&amp;display=swap">
+    <script src="https://kit.fontawesome.com/bed4092e49.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <div class="site-header">
+        <a href="/">
+          <img src="assets/images/logo.png" class="logo" alt="FishEye Home page">
+        </a>
+      </div>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" aria-label="Contactez-moi">Contactez-moi</button>
       </div>
+      <div class="filter-bar">
+        <div>
+          <label for="orderBy">
+            Trier par
+          </label>
+          <select id="orderBy" name="orderBy" class="select-native">
+            <option value="popular">
+              Popularité
+            </option>
+            <option value="date">
+              Date
+            </option>
+            <option value="title">
+              Titre
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="media_section"></div>
+      <div class="photograph-widget"></div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
+    <div id="contact_modal" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="2">
+			<div class="modal" role="document">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <div>
+            <h2 id="2">Contactez-moi</h2>
+          </div>
+          <img src="assets/icons/close.svg" class="close_modal" alt="Fermer le formzulaire de contact">
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
+				<form action="#" method="POST">
+					<div></div>
+          <button type="submit" class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <div id="lightbox_modal" role="dialog" tabindex="-1" aria-hidden="true" aria-label="image vue rapprochée">
+      <div>
+        <div class="modal">
+            <div class="lightbox">
+              <button class="previous-btn" aria-label="précédent">
+                <span></span>
+                <span></span>
+              </button>
+              <button class="next-btn" aria-label="suivant">
+                <span></span>
+                <span></span>
+              </button>
+              <div class="close_lightbox-modal" tabindex="0">
+                <svg role="img" width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="closeBtn">
+                  <title id="closeBtn">Fermer la lightbox</title>
+                  <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="#901C1C"/>
+                </svg>              
+              </div>
+            </div>
+        </div></div>
+    </div>
+    <!-- Factories -->
+    <script src="scripts/factories/PhotographerFactory.js"></script>
+    <!-- Models -->
+    <script src="scripts/models/Photographer.js"></script>
+    <script src="scripts/models/Media.js"></script>
+    <!-- Api -->
+    <script src="scripts/api/Api.js"></script>
+    <script src="scripts/api/DataApi.js"></script>
+    <!-- Templates -->
+    <script src="scripts/templates/PhotographerBanner.js"></script>
+    <script src="scripts/templates/SelectBoxes.js"></script>
+    <script src="scripts/templates/MediaPortfolio.js"></script>
+    <script src="scripts/templates/PhotographerWidget.js"></script>
+    <!-- Pages -->
+    <script src="/scripts/pages/PhotographerPage.js"></script>
+    <!-- Utils -->
+    <script src="/scripts/utils/Likes.js"></script>
+    <script src="/scripts/utils/OrderBy.js"></script>
+    <script src="/scripts/utils/Modal.js"></script>
+    <script src="/scripts/utils/ContactForm.js"></script>
+    <script src="/scripts/utils/LightboxModal.js"></script>
+    <!-- Entry point -->
+    <script src="scripts/PhotographerApp.js"></script>
   </body>
 </html>

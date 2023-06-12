@@ -1,76 +1,615 @@
-#contact_modal {
-    display: none;
+/**
+  Banner
+  */
+.photograph-header,
+.filter-bar,
+.media_section {
+  width: 90%;
+  margin: 0 auto;
 }
-
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #FAFAFA;
+  height: 300px;
 }
 
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 2rem 3rem;
+}
+
+.banner .description {
+  min-width: 33%;
+}
+
+.banner .description h1 {
+  font-size: 4em;
+  margin-bottom: .875rem;
+  color: #D3573C;
+}
+
+.banner .description h2 {
+  font-size: 1.5em;
+}
+
+.banner .description p,
+label[for="orderBy"],
+.filter-bar select {
+  font-size: 1.125em;
+}
+
+.banner .description p,
+label[for="orderBy"] {
+  color: #525252;
+}
+
+.banner .img-container {
+  margin: 0 0 0 auto;
+}
+/**
+  End Banner
+  */
+
+/**
+  Button
+  */
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 1.25em;
+  font-weight: bold;
+  width: 170px;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 1.5rem .75rem;
+  cursor: pointer;
+  transition: .3s;
+  background-color: #901C1C;
+  color: #ffffff;
 }
 
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+.contact_button:hover,
+.contact_button:focus {
+  color: #000;
+  background-color: hsl(11,63%,70%);
 }
 
-.modal header {
-    justify-content: space-between;
-    width: 100%;
+.modal .contact_button {
+  margin-left: 0;
+}
+/**
+  End Button
+  */
+
+/**
+  Filter bar
+  */
+.filter-bar {
+  position: relative;
+  margin-top: 1rem;
+  padding-top: 1.25rem;
 }
 
-.modal header img {
-    cursor: pointer;
+/* Select boxes*/
+.filter-bar > div {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 300px;
 }
 
-.modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+.filter-bar label[for="orderBy"] {
+  font-weight: 600;
+  margin-right: 1.5rem;
+}
+
+.select-native,
+.select-custom {
+  width: 170px;
+  height: 70px;
+  padding: .8rem;
+  border-radius: 5px;
+  background-color: #901C1C;
+}
+
+.select-native {
+  font-weight: 600;
+  line-height: 1.2;
+  padding-left: 1.6rem;
+  appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  color: #fff;
+}
+
+.select-custom {
+  position: absolute;
+  top: 0;
+  left: 95px;
+  z-index: 100;
+}
+
+.select-custom.overflow {
+  height: 170px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.select-custom.overflow::before {
+  content: "";
+  position: absolute;
+  top: 35%;
+  display: block;
+  width: 140px;
+  height: 1px;
+  background-color: #fff;
+}
+
+.select-custom.overflow::after {
+  content: "";
+  position: absolute;
+  bottom: 35%;
+  display: block;
+  width: 140px;
+  height: 1px;
+  background-color: #fff;
+}
+
+.custom-options  {
+  display: none;
+  /* position: relative; */
+}
+
+.select-custom.overflow .custom-options {
+  display: block;
+}
+
+.selected_custom-option,
+.custom-options div {
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.2;
+  width: 100%;
+  padding: .8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.custom-options div:last-child  {
+  margin-top: .4rem;
+}
+
+.custom-options .selected-hidden {
+  display: none;
+}
+
+.select-arrow {
+  position: absolute;
+}
+
+/* *Arrow icon for native select */
+.filter-bar > div > .select-arrow {
+  right: 54px;
+}
+
+/* *Arrow icon for custom select */
+.selected_custom-option .select-arrow {
+  top: 35px;
+  right: 20px;
+}
+
+.select-custom.overflow  .select-arrow {
+  transform: rotate(180deg);
+  top: 28px;
+}
+
+.select-arrow span {
+  display: block;
+  width: .775rem;
+  height: .175rem;
+  background-color: #fff;
+}
+
+.select-arrow span:first-child {
+  transform: rotate(45deg) translate(0, -4px);
+}
+
+.select-arrow span:last-child {
+  transform: rotate(-45deg) translate(1px, -7px);
+}
+/**
+  End Filter bar
+  */
+
+/**
+  Media
+  */
+.media_section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4rem;
+  padding-top: 3.5rem;
+  padding-bottom: 5rem;
+}
+
+.media {
+  width: 350px;
+  height: 350px;
+  position: relative;
+}
+
+.media:focus {
+  border: none;
+}
+
+.media figure {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+.media a {
+  display: inline-block;
+  cursor: pointer;
+  width: inherit;
+  height: inherit;
+}
+
+.media img,
+.media video {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.media img,
+.media video,
+.slide video {
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.media figcaption {
+  font-size: 1.35em;
+  line-height: 1.1;
+  max-width: 80%;
+  margin-top: .5rem;
+  color: #901C1C;
+}
+
+.media div {
+  position: absolute;
+  right: 0;
+  bottom: -36px;
+}
+
+.media .counter {
+  font-size: 1.2em;
+  color: #901C1C;
+}
+
+.counter  {
+  font-weight: 600;
+}
+
+.media .fa-heart {
+  font-size: 1.15em;
+  margin-left: .35rem;
+  cursor: pointer;
+  color: #901C1C;
+}
+/**
+  End Media
+  */
+
+/**
+  Photograph widget
+  */
+.photograph-widget > div {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  right: 278px;
+  bottom: 0;
+  width: 375px;
+  align-items: center;
+  background-color: hsl(11,63%,70%);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 1.25rem 1.5rem;
+  z-index: 150;
+}
+
+.photograph-widget .counter,
+.photograph-widget .fa-heart,
+.photograph-widget p {
+  font-size: 1.25em;
+}
+
+.photograph-widget .fa-heart {
+  margin-left: .5rem;
+  color: #000;
+}
+
+.photograph-widget p {
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/**
+  End Photograph widget
+  */
+
+/**
+  Modal Form
+  */
+#contact_modal,
+#lightbox_modal {
+  display: none;
+  padding: 2rem;
+}
+
+#contact_modal {
+  overflow-y: auto;
+}
+
+#lightbox_modal {
+  overflow: hidden;
+}
+
+.visible_modal body > header,
+.visible_modal body > main {
+  overflow-y: hidden;
+}
+
+.visible_modal #contact_modal,
+.visible_modal #lightbox_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: 888;
+}
+
+#contact_modal {
+  background-color: rgba(255, 255, 255, .5);
+}
+
+#contact_modal .modal {
+  min-width: 35%;
+  background-color: #DB8876;
+}
+
+#contact_modal .modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin: auto;
+  padding: 1.5rem 2.2rem;
+}
+
+#contact_modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+}
+
+#contact_modal header h2 {
+  font-size: 4em;
+  line-height: 1.1;
+  font-weight: normal;
+  text-align: left;
+  max-width: 500px;
+  margin: 0;
+}
+
+/* All closing modal */
+.close_lightbox-modal svg,
+.close_modal {
+  margin-top: .5rem;
+  cursor: pointer;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  font-size: 36px;
+  color: #312E2E;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
+}
+
+form input,
+textarea {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  height: 68px;
 }
+
+form input[type="text"],
+form input[type="email"],
+textarea {
+  font-size: 1.35em;
+}
+
+form input[data-error-visible="true"],
+form textarea[data-error-visible="true"] {
+  border: 2px solid #901C1C;
+  background: hsl(0deg 67% 95%);
+}
+
+form p {
+  display: none;
+  font-size: .975em;
+  font-weight: 600;
+  color: #901C1C;
+}
+/**
+  End Modal Form
+  */
+
+/**
+  Lightbox Form
+  */
+/* body */
+.lightbox.visible_modal {
+  overflow: hidden;
+}
+
+#lightbox_modal {
+  background-color: #ffffff;
+}
+
+#lightbox_modal > div {
+  width: 90%;
+  height: 90%;
+  max-width: 90%;
+  max-height: 90%;
+  margin: 0 auto;
+}
+
+#lightbox_modal .modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.close_lightbox-modal {
+  position: absolute;
+  top: 1%;
+  right: -4%;
+  margin-right: -1rem;
+}
+
+#lightbox_modal .modal > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  align-self: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  /* max-width: calc(100vw - 5rem); 
+  /* max-height: calc(100vh - 5rem);*/
+}
+
+.slide.show,
+.slide.showNext,
+.active {
+  display: block;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  height: 100%;
+}
+
+.slide img {
+  object-fit: contain;
+}
+
+.slide img,
+.slide video {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.slide figcaption {
+  font-size: 24px;
+  margin-top: .35rem;
+  color: #901C1C;
+}
+
+/* Previous and next controls button*/
+.previous-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  transform:  scale(.8) translate(-50px, -50px);
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.previous-btn {
+  left: -2%;
+}
+
+.next-btn {
+  right: -9%;
+}
+
+.previous-btn span,
+.next-btn span {
+  display: block;
+  width: 2rem;
+  height: .375rem;
+  cursor: pointer;
+  background-color: #901C1C;
+}
+
+.close_lightbox-modal svg {
+  transform: scale(.8);
+}
+
+.previous-btn span:first-child {
+  transform: rotate(-45deg) translate(0, -8px);
+}
+
+.previous-btn span:last-child {
+  transform: rotate(45deg) translate(1px, 9px);
+}
+
+.next-btn span:first-child {
+  transform: rotate(45deg) translate(0, -8px);
+}
+
+.next-btn span:last-child {
+  transform: rotate(-45deg) translate(-1px, 9px);
+}
+/* End Previous and next controls button*/
+
+/**
+  End Lightbox Form
+  */

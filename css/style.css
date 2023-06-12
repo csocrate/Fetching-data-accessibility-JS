@@ -1,50 +1,133 @@
 @import url("photographer.css");
 
-body {
-    font-family: "DM Sans", sans-serif;
-    margin: 0;
+html {
+  box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
+body {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+header,
+main {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 1.5rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  height: 90px;
+  margin-bottom: 1.5rem;
+}
+
+main {
+  padding-bottom: 1.5rem;
 }
 
 h1 {
-    color: #901C1C;
-    margin-right: 100px;
+  color: #901C1C;
+}
+
+h1,
+h2 {
+  font-size: 2.5em;
+  font-weight: inherit;
 }
 
 .logo {
-    height: 50px;
-    margin-left: 100px;
+  height: 50px;
+  margin-left: 0;
 }
 
 .photographer_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 100px;
 }
 
 .photographer_section article {
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+
+.photographer_section a {
+  text-decoration: none;
 }
 
 .photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
+  margin-bottom: 0;
+  color: #D3573C;
 }
 
-.photographer_section article img {
-    height: 200px;
-    width: 200px;
+.photographer_section article h3 {
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: .15rem;
+}
+
+.photographer-location {
+  margin-top: 0;
+  margin-bottom: .15rem;
+  color: #901C1C;
+}
+
+.photographer_section article p,
+.photographer_section article span {
+  font-size: .775em;
+}
+
+.photographer_section article p {
+  margin-top: 0;
+  margin-bottom: .15rem;
+  color: #000;
+}
+
+.photographer_section article span {
+  color: #525252;
+}
+
+.img-container {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+  box-shadow: 0 8px 8px 0 rgb(0 0 0 / 12%);
+  overflow: hidden;
+}
+
+.img-container img {
+  display: block;
+  position: absolute;
+  top: 18px;
+  left: 7px;
+  height: 100%;
+  width: 100%;
+  transform: scale(1.5);
+  object-fit: cover;
+}
+
+.photographer_section article:nth-child(3) img {
+  top: 10px;
+  left: 25px;
+  transform: scale(1.25);
 }
